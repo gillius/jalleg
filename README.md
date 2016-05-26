@@ -20,7 +20,7 @@ DLL/so library. The bindings were generated in part from the [JNAerator](http://
 manipulated to fit the needs and style for jalleg.
 
 Allegro was a library I originally worked with a lot when I was learning C/C++ development in DOS in the late 1990s, and
-has always a special meaning to me. Allegro 5 is a modern, cross-platform variation of the library supporting hardware
+has always had a special meaning to me. Allegro 5 is a modern, cross-platform variation of the library supporting hardware
 rendering and even mobile development. Allegro is a simple library to use and programming a game is a great way to get
 into learning programming. My hope is that jalleg expands the Allegro fun to Java and all the JVM languages.
 

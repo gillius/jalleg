@@ -1,0 +1,1 @@
+java -jar jnaerator-0.12-shaded.jar @config.jnaerator

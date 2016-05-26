@@ -1,0 +1,8 @@
+build/
+.idea/
+.gradle/
+*.iml
+*.iws
+
+jalleg-binding/include
+jalleg-binding/jnaerator*

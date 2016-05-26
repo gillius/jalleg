@@ -1,0 +1,10 @@
+-library Allegro
+-o gen
+-f
+-noComments
+-mode Directory
+-runtime JNA
+-direct
+-package org.gillius.jalleg.binding
+-I $(DIR)\include
+$(DIR)/include/allegro5/allegro.h

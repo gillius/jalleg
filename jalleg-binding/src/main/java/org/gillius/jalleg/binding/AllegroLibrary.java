@@ -1523,23 +1523,18 @@ public class AllegroLibrary implements Library {
 	public static native byte al_set_shader_bool(Pointer name, byte b);
 	public static native byte al_set_shader_bool(String name, byte b);
 	public static native Pointer al_get_default_shader_source(int platform, int type);
-	public static native byte al_install_system(int version, AllegroLibrary.al_install_system_atexit_ptr_callback atexit_ptr);
+
+	public static native boolean al_install_system(int version, al_install_system_atexit_ptr_callback atexit_ptr);
 	public static native void al_uninstall_system();
-	public static native byte al_is_system_installed();
+	public static native boolean al_is_system_installed();
 	public static native PointerByReference al_get_system_driver();
-	public static native PointerByReference al_get_system_config();
+	public static native ALLEGRO_CONFIG al_get_system_config();
 	public static native PointerByReference al_get_standard_path(int id);
-	@Deprecated 
-	public static native void al_set_exe_name(Pointer path);
 	public static native void al_set_exe_name(String path);
-	@Deprecated 
-	public static native void al_set_org_name(Pointer org_name);
 	public static native void al_set_org_name(String org_name);
-	@Deprecated 
-	public static native void al_set_app_name(Pointer app_name);
 	public static native void al_set_app_name(String app_name);
-	public static native Pointer al_get_org_name();
-	public static native Pointer al_get_app_name();
+	public static native String al_get_org_name();
+	public static native String al_get_app_name();
 	public static native byte al_inhibit_screensaver(byte inhibit);
 	public static native PointerByReference al_create_thread(AllegroLibrary.al_create_thread_proc_callback proc, Pointer arg);
 	@Deprecated 

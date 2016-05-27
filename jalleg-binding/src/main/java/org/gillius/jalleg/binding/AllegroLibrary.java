@@ -1073,57 +1073,30 @@ public class AllegroLibrary implements Library {
 	@Deprecated 
 	public static native void al_get_separate_blender(IntByReference op, IntByReference source, IntByReference dest, IntByReference alpha_op, IntByReference alpha_src, IntByReference alpha_dest);
 	public static native void al_get_separate_blender(IntBuffer op, IntBuffer source, IntBuffer dest, IntBuffer alpha_op, IntBuffer alpha_src, IntBuffer alpha_dest);
-	public static native void al_init_user_event_source(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native void al_destroy_user_event_source(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native byte al_emit_user_event(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1, ALLEGRO_EVENT ALLEGRO_EVENTPtr1, AllegroLibrary.al_emit_user_event_dtor_callback dtor);
-	public static native void al_unref_user_event(ALLEGRO_USER_EVENT ALLEGRO_USER_EVENTPtr1);
-	@Deprecated 
-	public static native void al_set_event_source_data(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1, IntByReference data);
-	public static native void al_set_event_source_data(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1, IntBuffer data);
-	public static native IntByReference al_get_event_source_data(ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native PointerByReference al_create_event_queue();
-	@Deprecated 
-	public static native void al_destroy_event_queue(Pointer ALLEGRO_EVENT_QUEUEPtr1);
-	public static native void al_destroy_event_queue(PointerByReference ALLEGRO_EVENT_QUEUEPtr1);
-	@Deprecated 
-	public static native byte al_is_event_source_registered(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native byte al_is_event_source_registered(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	@Deprecated 
-	public static native void al_register_event_source(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native void al_register_event_source(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	@Deprecated 
-	public static native void al_unregister_event_source(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	public static native void al_unregister_event_source(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT_SOURCE ALLEGRO_EVENT_SOURCEPtr1);
-	@Deprecated 
-	public static native void al_pause_event_queue(Pointer ALLEGRO_EVENT_QUEUEPtr1, byte bool1);
-	public static native void al_pause_event_queue(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, byte bool1);
-	@Deprecated 
-	public static native byte al_is_event_queue_paused(Pointer ALLEGRO_EVENT_QUEUEPtr1);
-	public static native byte al_is_event_queue_paused(PointerByReference ALLEGRO_EVENT_QUEUEPtr1);
-	@Deprecated 
-	public static native byte al_is_event_queue_empty(Pointer ALLEGRO_EVENT_QUEUEPtr1);
-	public static native byte al_is_event_queue_empty(PointerByReference ALLEGRO_EVENT_QUEUEPtr1);
-	@Deprecated 
-	public static native byte al_get_next_event(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	public static native byte al_get_next_event(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	@Deprecated 
-	public static native byte al_peek_next_event(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	public static native byte al_peek_next_event(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	@Deprecated 
-	public static native byte al_drop_next_event(Pointer ALLEGRO_EVENT_QUEUEPtr1);
-	public static native byte al_drop_next_event(PointerByReference ALLEGRO_EVENT_QUEUEPtr1);
-	@Deprecated 
-	public static native void al_flush_event_queue(Pointer ALLEGRO_EVENT_QUEUEPtr1);
-	public static native void al_flush_event_queue(PointerByReference ALLEGRO_EVENT_QUEUEPtr1);
-	@Deprecated 
-	public static native void al_wait_for_event(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	public static native void al_wait_for_event(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event);
-	@Deprecated 
-	public static native byte al_wait_for_event_timed(Pointer ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event, float secs);
-	public static native byte al_wait_for_event_timed(PointerByReference ALLEGRO_EVENT_QUEUEPtr1, ALLEGRO_EVENT ret_event, float secs);
-	@Deprecated 
-	public static native byte al_wait_for_event_until(Pointer queue, ALLEGRO_EVENT ret_event, ALLEGRO_TIMEOUT timeout);
-	public static native byte al_wait_for_event_until(PointerByReference queue, ALLEGRO_EVENT ret_event, ALLEGRO_TIMEOUT timeout);
+
+	//Timer functions
+	public static native void al_init_user_event_source(ALLEGRO_EVENT_SOURCE src);
+	public static native void al_destroy_user_event_source(ALLEGRO_EVENT_SOURCE src);
+	public static native boolean al_emit_user_event(ALLEGRO_EVENT_SOURCE src, ALLEGRO_EVENT event, al_emit_user_event_dtor_callback dtor);
+	public static native void al_unref_user_event(ALLEGRO_USER_EVENT event);
+	public static native void al_set_event_source_data(ALLEGRO_EVENT_SOURCE source, Pointer data);
+	public static native Pointer al_get_event_source_data(ALLEGRO_EVENT_SOURCE source);
+	public static native ALLEGRO_EVENT_QUEUE al_create_event_queue();
+	public static native void al_destroy_event_queue(ALLEGRO_EVENT_QUEUE queue);
+	public static native boolean al_is_event_source_registered(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT_SOURCE source);
+	public static native void al_register_event_source(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT_SOURCE source);
+	public static native void al_unregister_event_source(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT_SOURCE source);
+	public static native void al_pause_event_queue(ALLEGRO_EVENT_QUEUE queue, boolean paused);
+	public static native boolean al_is_event_queue_paused(ALLEGRO_EVENT_QUEUE queue);
+	public static native boolean al_is_event_queue_empty(ALLEGRO_EVENT_QUEUE queue);
+	public static native boolean al_get_next_event(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event);
+	public static native boolean al_peek_next_event(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event);
+	public static native boolean al_drop_next_event(ALLEGRO_EVENT_QUEUE queue);
+	public static native void al_flush_event_queue(ALLEGRO_EVENT_QUEUE queue);
+	public static native void al_wait_for_event(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event);
+	public static native byte al_wait_for_event_timed(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event, float secs);
+	public static native byte al_wait_for_event_until(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event, ALLEGRO_TIMEOUT timeout);
+
 	public static native void al_set_new_display_refresh_rate(int refresh_rate);
 	public static native void al_set_new_display_flags(int flags);
 	public static native int al_get_new_display_refresh_rate();

@@ -1097,122 +1097,58 @@ public class AllegroLibrary implements Library {
 	public static native byte al_wait_for_event_timed(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event, float secs);
 	public static native byte al_wait_for_event_until(ALLEGRO_EVENT_QUEUE queue, ALLEGRO_EVENT ret_event, ALLEGRO_TIMEOUT timeout);
 
+	//Display Functions
 	public static native void al_set_new_display_refresh_rate(int refresh_rate);
 	public static native void al_set_new_display_flags(int flags);
 	public static native int al_get_new_display_refresh_rate();
 	public static native int al_get_new_display_flags();
-	@Deprecated 
-	public static native void al_set_new_window_title(Pointer title);
 	public static native void al_set_new_window_title(String title);
-	public static native Pointer al_get_new_window_title();
-	@Deprecated 
-	public static native int al_get_display_width(Pointer display);
-	public static native int al_get_display_width(PointerByReference display);
-	@Deprecated 
-	public static native int al_get_display_height(Pointer display);
-	public static native int al_get_display_height(PointerByReference display);
-	@Deprecated 
-	public static native int al_get_display_format(Pointer display);
-	public static native int al_get_display_format(PointerByReference display);
-	@Deprecated 
-	public static native int al_get_display_refresh_rate(Pointer display);
-	public static native int al_get_display_refresh_rate(PointerByReference display);
-	@Deprecated 
-	public static native int al_get_display_flags(Pointer display);
-	public static native int al_get_display_flags(PointerByReference display);
-	@Deprecated 
-	public static native int al_get_display_orientation(Pointer display);
-	public static native int al_get_display_orientation(PointerByReference display);
-	@Deprecated 
-	public static native byte al_set_display_flag(Pointer display, int flag, byte onoff);
-	public static native byte al_set_display_flag(PointerByReference display, int flag, byte onoff);
+	public static native String al_get_new_window_title();
+	public static native int al_get_display_width(ALLEGRO_DISPLAY display);
+	public static native int al_get_display_height(ALLEGRO_DISPLAY display);
+	public static native int al_get_display_format(ALLEGRO_DISPLAY display);
+	public static native int al_get_display_refresh_rate(ALLEGRO_DISPLAY display);
+	public static native int al_get_display_flags(ALLEGRO_DISPLAY display);
+	public static native int al_get_display_orientation(ALLEGRO_DISPLAY display);
+	public static native boolean al_set_display_flag(ALLEGRO_DISPLAY display, int flag, boolean onoff);
 	public static native ALLEGRO_DISPLAY al_create_display(int w, int h);
 	public static native void al_destroy_display(ALLEGRO_DISPLAY display);
-	public static native PointerByReference al_get_current_display();
-	@Deprecated 
-	public static native void al_set_target_bitmap(Pointer bitmap);
-	public static native void al_set_target_bitmap(PointerByReference bitmap);
-	@Deprecated 
-	public static native void al_set_target_backbuffer(Pointer display);
-	public static native void al_set_target_backbuffer(PointerByReference display);
-	@Deprecated 
-	public static native PointerByReference al_get_backbuffer(Pointer display);
-	public static native PointerByReference al_get_backbuffer(PointerByReference display);
-	public static native PointerByReference al_get_target_bitmap();
-	@Deprecated 
-	public static native byte al_acknowledge_resize(Pointer display);
-	public static native byte al_acknowledge_resize(PointerByReference display);
-	@Deprecated 
-	public static native byte al_resize_display(Pointer display, int width, int height);
-	public static native byte al_resize_display(PointerByReference display, int width, int height);
+	public static native ALLEGRO_DISPLAY al_get_current_display();
+	public static native void al_set_target_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native void al_set_target_backbuffer(ALLEGRO_DISPLAY display);
+	public static native ALLEGRO_BITMAP al_get_backbuffer(ALLEGRO_DISPLAY display);
+	public static native ALLEGRO_BITMAP al_get_target_bitmap();
+	public static native boolean al_acknowledge_resize(ALLEGRO_DISPLAY display);
+	public static native boolean al_resize_display(ALLEGRO_DISPLAY display, int width, int height);
 	public static native void al_flip_display();
 	public static native void al_update_display_region(int x, int y, int width, int height);
-	@Deprecated 
-	public static native byte al_is_compatible_bitmap(Pointer bitmap);
-	public static native byte al_is_compatible_bitmap(PointerByReference bitmap);
-	public static native byte al_wait_for_vsync();
-	@Deprecated 
-	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(Pointer display);
-	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(PointerByReference display);
-	@Deprecated 
-	public static native void al_set_display_icon(Pointer display, Pointer icon);
-	public static native void al_set_display_icon(PointerByReference display, PointerByReference icon);
-	@Deprecated 
-	public static native void al_set_display_icons(Pointer display, int num_icons, PointerByReference icons);
-	public static native void al_set_display_icons(PointerByReference display, int num_icons, PointerByReference icons);
+	public static native boolean al_is_compatible_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native boolean al_wait_for_vsync();
+	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(ALLEGRO_DISPLAY display);
+	public static native void al_set_display_icon(ALLEGRO_DISPLAY display, ALLEGRO_BITMAP icon);
+	public static native void al_set_display_icons(ALLEGRO_DISPLAY display, int num_icons, ALLEGRO_BITMAP[] icons);
 	public static native int al_get_new_display_adapter();
 	public static native void al_set_new_display_adapter(int adapter);
 	public static native void al_set_new_window_position(int x, int y);
-	@Deprecated 
 	public static native void al_get_new_window_position(IntByReference x, IntByReference y);
-	public static native void al_get_new_window_position(IntBuffer x, IntBuffer y);
-	@Deprecated 
-	public static native void al_set_window_position(Pointer display, int x, int y);
-	public static native void al_set_window_position(PointerByReference display, int x, int y);
-	@Deprecated 
-	public static native void al_get_window_position(Pointer display, IntByReference x, IntByReference y);
-	public static native void al_get_window_position(PointerByReference display, IntBuffer x, IntBuffer y);
-	public static native void al_get_window_position(PointerByReference display, IntByReference x, IntByReference y);
-	@Deprecated 
-	public static native byte al_set_window_constraints(Pointer display, int min_w, int min_h, int max_w, int max_h);
-	public static native byte al_set_window_constraints(PointerByReference display, int min_w, int min_h, int max_w, int max_h);
-	@Deprecated 
-	public static native byte al_get_window_constraints(Pointer display, IntByReference min_w, IntByReference min_h, IntByReference max_w, IntByReference max_h);
-	public static native byte al_get_window_constraints(PointerByReference display, IntBuffer min_w, IntBuffer min_h, IntBuffer max_w, IntBuffer max_h);
-	public static native byte al_get_window_constraints(PointerByReference display, IntByReference min_w, IntByReference min_h, IntByReference max_w, IntByReference max_h);
-	@Deprecated 
-	public static native void al_set_window_title(Pointer display, Pointer title);
-	public static native void al_set_window_title(PointerByReference display, String title);
-	public static native void al_set_window_title(PointerByReference display, Pointer title);
+	public static native void al_set_window_position(ALLEGRO_DISPLAY display, int x, int y);
+	public static native void al_get_window_position(ALLEGRO_DISPLAY display, IntByReference x, IntByReference y);
+	public static native byte al_set_window_constraints(ALLEGRO_DISPLAY display, int min_w, int min_h, int max_w, int max_h);
+	public static native byte al_get_window_constraints(ALLEGRO_DISPLAY display, IntByReference min_w, IntByReference min_h, IntByReference max_w, IntByReference max_h);
+	public static native void al_set_window_title(ALLEGRO_DISPLAY display, String title);
 	public static native void al_set_new_display_option(int option, int value, int importance);
-	@Deprecated 
 	public static native int al_get_new_display_option(int option, IntByReference importance);
-	public static native int al_get_new_display_option(int option, IntBuffer importance);
 	public static native void al_reset_new_display_options();
-	@Deprecated 
-	public static native void al_set_display_option(Pointer display, int option, int value);
-	public static native void al_set_display_option(PointerByReference display, int option, int value);
-	@Deprecated 
-	public static native int al_get_display_option(Pointer display, int option);
-	public static native int al_get_display_option(PointerByReference display, int option);
-	public static native void al_hold_bitmap_drawing(byte hold);
-	public static native byte al_is_bitmap_drawing_held();
-	@Deprecated 
-	public static native void al_acknowledge_drawing_halt(Pointer display);
-	public static native void al_acknowledge_drawing_halt(PointerByReference display);
-	@Deprecated 
-	public static native void al_acknowledge_drawing_resume(Pointer display);
-	public static native void al_acknowledge_drawing_resume(PointerByReference display);
-	@Deprecated 
-	public static native Pointer al_get_clipboard_text(Pointer display);
-	public static native Pointer al_get_clipboard_text(PointerByReference display);
-	@Deprecated 
-	public static native byte al_set_clipboard_text(Pointer display, Pointer text);
-	public static native byte al_set_clipboard_text(PointerByReference display, String text);
-	public static native byte al_set_clipboard_text(PointerByReference display, Pointer text);
-	@Deprecated 
-	public static native byte al_clipboard_has_text(Pointer display);
-	public static native byte al_clipboard_has_text(PointerByReference display);
+	public static native void al_set_display_option(ALLEGRO_DISPLAY display, int option, int value);
+	public static native int al_get_display_option(ALLEGRO_DISPLAY display, int option);
+	public static native void al_hold_bitmap_drawing(boolean hold);
+	public static native boolean al_is_bitmap_drawing_held();
+	public static native void al_acknowledge_drawing_halt(ALLEGRO_DISPLAY display);
+	public static native void al_acknowledge_drawing_resume(ALLEGRO_DISPLAY display);
+	public static native String al_get_clipboard_text(ALLEGRO_DISPLAY display);
+	public static native boolean al_set_clipboard_text(ALLEGRO_DISPLAY display, String text);
+	public static native boolean al_clipboard_has_text(ALLEGRO_DISPLAY display);
+
 	public static native PointerByReference al_create_config();
 	@Deprecated 
 	public static native void al_add_config_section(Pointer config, Pointer name);

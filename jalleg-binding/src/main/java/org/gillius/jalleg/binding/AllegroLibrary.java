@@ -1074,7 +1074,7 @@ public class AllegroLibrary implements Library {
 	public static native void al_get_separate_blender(IntByReference op, IntByReference source, IntByReference dest, IntByReference alpha_op, IntByReference alpha_src, IntByReference alpha_dest);
 	public static native void al_get_separate_blender(IntBuffer op, IntBuffer source, IntBuffer dest, IntBuffer alpha_op, IntBuffer alpha_src, IntBuffer alpha_dest);
 
-	//Timer functions
+	//Event functions
 	public static native void al_init_user_event_source(ALLEGRO_EVENT_SOURCE src);
 	public static native void al_destroy_user_event_source(ALLEGRO_EVENT_SOURCE src);
 	public static native boolean al_emit_user_event(ALLEGRO_EVENT_SOURCE src, ALLEGRO_EVENT event, al_emit_user_event_dtor_callback dtor);
@@ -1580,40 +1580,21 @@ public class AllegroLibrary implements Library {
 	@Deprecated 
 	public static native void al_signal_cond(Pointer cond);
 	public static native void al_signal_cond(PointerByReference cond);
-	public static native PointerByReference al_create_timer(double speed_secs);
-	@Deprecated 
-	public static native void al_destroy_timer(Pointer timer);
-	public static native void al_destroy_timer(PointerByReference timer);
-	@Deprecated 
-	public static native void al_start_timer(Pointer timer);
-	public static native void al_start_timer(PointerByReference timer);
-	@Deprecated 
-	public static native void al_stop_timer(Pointer timer);
-	public static native void al_stop_timer(PointerByReference timer);
-	@Deprecated 
-	public static native void al_resume_timer(Pointer timer);
-	public static native void al_resume_timer(PointerByReference timer);
-	@Deprecated 
-	public static native byte al_get_timer_started(Pointer timer);
-	public static native byte al_get_timer_started(PointerByReference timer);
-	@Deprecated 
-	public static native double al_get_timer_speed(Pointer timer);
-	public static native double al_get_timer_speed(PointerByReference timer);
-	@Deprecated 
-	public static native void al_set_timer_speed(Pointer timer, double speed_secs);
-	public static native void al_set_timer_speed(PointerByReference timer, double speed_secs);
-	@Deprecated 
-	public static native long al_get_timer_count(Pointer timer);
-	public static native long al_get_timer_count(PointerByReference timer);
-	@Deprecated 
-	public static native void al_set_timer_count(Pointer timer, long count);
-	public static native void al_set_timer_count(PointerByReference timer, long count);
-	@Deprecated 
-	public static native void al_add_timer_count(Pointer timer, long diff);
-	public static native void al_add_timer_count(PointerByReference timer, long diff);
-	@Deprecated 
-	public static native ALLEGRO_EVENT_SOURCE al_get_timer_event_source(Pointer timer);
-	public static native ALLEGRO_EVENT_SOURCE al_get_timer_event_source(PointerByReference timer);
+
+	//Timer functions
+	public static native ALLEGRO_TIMER al_create_timer(double speed_secs);
+	public static native void al_destroy_timer(ALLEGRO_TIMER timer);
+	public static native void al_start_timer(ALLEGRO_TIMER timer);
+	public static native void al_stop_timer(ALLEGRO_TIMER timer);
+	public static native void al_resume_timer(ALLEGRO_TIMER timer);
+	public static native boolean al_get_timer_started(ALLEGRO_TIMER timer);
+	public static native double al_get_timer_speed(ALLEGRO_TIMER timer);
+	public static native void al_set_timer_speed(ALLEGRO_TIMER timer, double speed_secs);
+	public static native long al_get_timer_count(ALLEGRO_TIMER timer);
+	public static native void al_set_timer_count(ALLEGRO_TIMER timer, long count);
+	public static native void al_add_timer_count(ALLEGRO_TIMER timer, long diff);
+	public static native ALLEGRO_EVENT_SOURCE al_get_timer_event_source(ALLEGRO_TIMER timer);
+
 	public static native void al_store_state(ALLEGRO_STATE state, int flags);
 	public static native void al_restore_state(ALLEGRO_STATE state);
 	/** Pointer to unknown (opaque) type */

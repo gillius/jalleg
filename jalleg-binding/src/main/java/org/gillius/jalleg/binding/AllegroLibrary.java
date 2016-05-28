@@ -1126,10 +1126,8 @@ public class AllegroLibrary implements Library {
 	@Deprecated 
 	public static native byte al_set_display_flag(Pointer display, int flag, byte onoff);
 	public static native byte al_set_display_flag(PointerByReference display, int flag, byte onoff);
-	public static native ALLEGRO_BITMAP al_create_display(int w, int h);
-	@Deprecated 
-	public static native void al_destroy_display(Pointer display);
-	public static native void al_destroy_display(ALLEGRO_BITMAP display);
+	public static native ALLEGRO_DISPLAY al_create_display(int w, int h);
+	public static native void al_destroy_display(ALLEGRO_DISPLAY display);
 	public static native PointerByReference al_get_current_display();
 	@Deprecated 
 	public static native void al_set_target_bitmap(Pointer bitmap);

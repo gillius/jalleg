@@ -29,7 +29,7 @@ public class HelloJavaScript {
 
 		ALLEGRO_COLOR color = al_map_rgb_f(1f, 0f, 0f);
 
-		ALLEGRO_BITMAP display = al_create_display(640, 480);
+		ALLEGRO_DISPLAY display = al_create_display(640, 480);
 
 		al_clear_to_color(color);
 		al_flip_display();

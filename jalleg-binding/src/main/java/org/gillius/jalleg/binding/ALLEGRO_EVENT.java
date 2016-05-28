@@ -83,6 +83,12 @@ public class ALLEGRO_EVENT extends Union {
 	public ALLEGRO_EVENT(Pointer peer) {
 		super(peer);
 	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T asType(Class<T> type) {
+		return (T) getTypedValue(type);
+	}
+
 	public static class ByReference extends ALLEGRO_EVENT implements com.sun.jna.Structure.ByReference {
 		
 	};

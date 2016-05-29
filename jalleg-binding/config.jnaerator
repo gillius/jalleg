@@ -8,3 +8,4 @@
 -package org.gillius.jalleg.binding
 -I $(DIR)\include
 $(DIR)/include/allegro5/allegro.h
+$(DIR)/include/allegro5/allegro_primitives.h

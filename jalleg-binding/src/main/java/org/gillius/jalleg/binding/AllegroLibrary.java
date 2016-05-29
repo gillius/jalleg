@@ -1126,7 +1126,7 @@ public class AllegroLibrary implements Library {
 	public static native boolean al_wait_for_vsync();
 	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(ALLEGRO_DISPLAY display);
 	public static native void al_set_display_icon(ALLEGRO_DISPLAY display, ALLEGRO_BITMAP icon);
-	public static native void al_set_display_icons(ALLEGRO_DISPLAY display, int num_icons, ALLEGRO_BITMAP[] icons);
+	public static native void al_set_display_icons(ALLEGRO_DISPLAY display, int num_icons, Pointer icons);
 	public static native int al_get_new_display_adapter();
 	public static native void al_set_new_display_adapter(int adapter);
 	public static native void al_set_new_window_position(int x, int y);
@@ -1531,6 +1531,87 @@ public class AllegroLibrary implements Library {
 
 	public static native void al_store_state(ALLEGRO_STATE state, int flags);
 	public static native void al_restore_state(ALLEGRO_STATE state);
+
+	//Primitives addon
+	public interface al_triangulate_polygon_emit_triangle_callback extends Callback {
+		void apply(int int1, int int2, int int3, Pointer voidPtr1);
+	}
+
+	public interface al_draw_soft_triangle_init_callback extends Callback {
+		void apply(IntByReference uintptr_t1, ALLEGRO_VERTEX ALLEGRO_VERTEXPtr1, ALLEGRO_VERTEX ALLEGRO_VERTEXPtr2, ALLEGRO_VERTEX ALLEGRO_VERTEXPtr3);
+	}
+
+	public interface al_draw_soft_triangle_first_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1, int int2, int int3, int int4);
+	}
+
+	public interface al_draw_soft_triangle_step_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1);
+	}
+
+	public interface al_draw_soft_triangle_draw_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1, int int2, int int3);
+	}
+
+	public interface al_draw_soft_line_first_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1, int int2, ALLEGRO_VERTEX ALLEGRO_VERTEXPtr1, ALLEGRO_VERTEX ALLEGRO_VERTEXPtr2);
+	}
+
+	public interface al_draw_soft_line_step_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1);
+	}
+
+	public interface al_draw_soft_line_draw_callback extends Callback {
+		void apply(IntByReference uintptr_t1, int int1, int int2);
+	}
+
+	public static native int al_get_allegro_primitives_version();
+	public static native boolean al_init_primitives_addon();
+	public static native void al_shutdown_primitives_addon();
+	public static native int al_draw_prim(Pointer vtxs, ALLEGRO_VERTEX_DECL decl, ALLEGRO_BITMAP texture, int start, int end, int type);
+	public static native int al_draw_indexed_prim(Pointer vtxs, ALLEGRO_VERTEX_DECL decl, ALLEGRO_BITMAP texture, IntBuffer indices, int num_vtx, int type);
+	public static native int al_draw_vertex_buffer(ALLEGRO_VERTEX_BUFFER vertex_buffer, ALLEGRO_BITMAP texture, int start, int end, int type);
+	public static native int al_draw_indexed_buffer(ALLEGRO_VERTEX_BUFFER vertex_buffer, ALLEGRO_BITMAP texture, ALLEGRO_INDEX_BUFFER index_buffer, int start, int end, int type);
+	public static native ALLEGRO_VERTEX_DECL al_create_vertex_decl(Pointer elements, int stride);
+	public static native void al_destroy_vertex_decl(ALLEGRO_VERTEX_DECL decl);
+	public static native ALLEGRO_VERTEX_BUFFER al_create_vertex_buffer(ALLEGRO_VERTEX_DECL decl, Pointer initial_data, int num_vertices, int flags);
+	public static native void al_destroy_vertex_buffer(ALLEGRO_VERTEX_BUFFER buffer);
+	public static native Pointer al_lock_vertex_buffer(ALLEGRO_VERTEX_BUFFER buffer, int offset, int length, int flags);
+	public static native void al_unlock_vertex_buffer(ALLEGRO_VERTEX_BUFFER buffer);
+	public static native int al_get_vertex_buffer_size(ALLEGRO_VERTEX_BUFFER buffer);
+	public static native ALLEGRO_INDEX_BUFFER al_create_index_buffer(int index_size, Pointer initial_data, int num_indices, int flags);
+	public static native void al_destroy_index_buffer(ALLEGRO_INDEX_BUFFER buffer);
+	public static native Pointer al_lock_index_buffer(ALLEGRO_INDEX_BUFFER buffer, int offset, int length, int flags);
+	public static native void al_unlock_index_buffer(ALLEGRO_INDEX_BUFFER buffer);
+	public static native int al_get_index_buffer_size(ALLEGRO_INDEX_BUFFER buffer);
+	public static native byte al_triangulate_polygon(FloatBuffer vertices, size_t vertex_stride, IntBuffer vertex_counts, AllegroLibrary.al_triangulate_polygon_emit_triangle_callback emit_triangle, Pointer userdata);
+	public static native void al_draw_soft_triangle(ALLEGRO_VERTEX v1, ALLEGRO_VERTEX v2, ALLEGRO_VERTEX v3, Pointer state, AllegroLibrary.al_draw_soft_triangle_init_callback init, AllegroLibrary.al_draw_soft_triangle_first_callback first, AllegroLibrary.al_draw_soft_triangle_step_callback step, AllegroLibrary.al_draw_soft_triangle_draw_callback draw);
+	public static native void al_draw_soft_line(ALLEGRO_VERTEX v1, ALLEGRO_VERTEX v2, Pointer state, AllegroLibrary.al_draw_soft_line_first_callback first, AllegroLibrary.al_draw_soft_line_step_callback step, AllegroLibrary.al_draw_soft_line_draw_callback draw);
+	public static native void al_draw_line(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_triangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_rectangle(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_rounded_rectangle(float x1, float y1, float x2, float y2, float rx, float ry, ALLEGRO_COLOR color, float thickness);
+	public static native void al_calculate_arc(FloatBuffer dest, int stride, float cx, float cy, float rx, float ry, float start_theta, float delta_theta, float thickness, int num_points);
+	public static native void al_draw_circle(float cx, float cy, float r, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_ellipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_arc(float cx, float cy, float r, float start_theta, float delta_theta, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_elliptical_arc(float cx, float cy, float rx, float ry, float start_theta, float delta_theta, ALLEGRO_COLOR color, float thickness);
+	public static native void al_draw_pieslice(float cx, float cy, float r, float start_theta, float delta_theta, ALLEGRO_COLOR color, float thickness);
+	public static native void al_calculate_spline(FloatBuffer dest, int stride, FloatBuffer points, float thickness, int num_segments);
+	public static native void al_draw_spline(FloatBuffer points, ALLEGRO_COLOR color, float thickness);
+	public static native void al_calculate_ribbon(FloatBuffer dest, int dest_stride, FloatBuffer points, int points_stride, float thickness, int num_segments);
+	public static native void al_draw_ribbon(FloatBuffer points, int points_stride, ALLEGRO_COLOR color, float thickness, int num_segments);
+	public static native void al_draw_filled_triangle(float x1, float y1, float x2, float y2, float x3, float y3, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_rectangle(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_ellipse(float cx, float cy, float rx, float ry, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_circle(float cx, float cy, float r, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_pieslice(float cx, float cy, float r, float start_theta, float delta_theta, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_rounded_rectangle(float x1, float y1, float x2, float y2, float rx, float ry, ALLEGRO_COLOR color);
+	public static native void al_draw_polyline(FloatBuffer vertices, int vertex_stride, int vertex_count, int join_style, int cap_style, ALLEGRO_COLOR color, float thickness, float miter_limit);
+	public static native void al_draw_polygon(FloatBuffer vertices, int vertex_count, int join_style, ALLEGRO_COLOR color, float thickness, float miter_limit);
+	public static native void al_draw_filled_polygon(FloatBuffer vertices, int vertex_count, ALLEGRO_COLOR color);
+	public static native void al_draw_filled_polygon_with_holes(FloatBuffer vertices, IntBuffer vertex_counts, ALLEGRO_COLOR color);
+
 	/** Pointer to unknown (opaque) type */
 	public static class ALLEGRO_CONFIG extends PointerType {
 		public ALLEGRO_CONFIG(Pointer address) {
@@ -1737,6 +1818,36 @@ public class AllegroLibrary implements Library {
 			super(address);
 		}
 		public ALLEGRO_MOUSE_CURSOR() {
+			super();
+		}
+	}
+
+	/** Pointer to unknown (opaque) type */
+	public static class ALLEGRO_VERTEX_DECL extends PointerType {
+		public ALLEGRO_VERTEX_DECL(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_VERTEX_DECL() {
+			super();
+		}
+	}
+
+	/** Pointer to unknown (opaque) type */
+	public static class ALLEGRO_VERTEX_BUFFER extends PointerType {
+		public ALLEGRO_VERTEX_BUFFER(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_VERTEX_BUFFER() {
+			super();
+		}
+	}
+
+	/** Pointer to unknown (opaque) type */
+	public static class ALLEGRO_INDEX_BUFFER extends PointerType {
+		public ALLEGRO_INDEX_BUFFER(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_INDEX_BUFFER() {
 			super();
 		}
 	}

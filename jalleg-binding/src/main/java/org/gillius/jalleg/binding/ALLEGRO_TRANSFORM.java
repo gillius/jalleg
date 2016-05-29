@@ -26,8 +26,17 @@ import java.util.List;
  */
 public class ALLEGRO_TRANSFORM extends Structure {
 	public float[] m = new float[((4) * (4))];
+
+	/**
+	 * The default constructor builds an ALLEGRO_TRANSFORM with "autoSynch" turned off. This means that you cannot
+	 * observe the fields from the Java side (it can only be passed into Allegro methods). This is good for performance,
+	 * since normally the matrix does not need to be observed. If it does, use the {@link #ALLEGRO_TRANSFORM(float[])}
+	 * method, or call {@link #setAutoSynch(boolean)}.
+	 */
 	public ALLEGRO_TRANSFORM() {
 		super();
+		setAutoSynch(false);
+		ensureAllocated();
 	}
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("m");

@@ -1584,7 +1584,7 @@ public class AllegroLibrary implements Library {
 	public static native Pointer al_lock_index_buffer(ALLEGRO_INDEX_BUFFER buffer, int offset, int length, int flags);
 	public static native void al_unlock_index_buffer(ALLEGRO_INDEX_BUFFER buffer);
 	public static native int al_get_index_buffer_size(ALLEGRO_INDEX_BUFFER buffer);
-	public static native byte al_triangulate_polygon(FloatBuffer vertices, size_t vertex_stride, IntBuffer vertex_counts, AllegroLibrary.al_triangulate_polygon_emit_triangle_callback emit_triangle, Pointer userdata);
+	public static native boolean al_triangulate_polygon(FloatBuffer vertices, size_t vertex_stride, IntBuffer vertex_counts, AllegroLibrary.al_triangulate_polygon_emit_triangle_callback emit_triangle, Pointer userdata);
 	public static native void al_draw_soft_triangle(ALLEGRO_VERTEX v1, ALLEGRO_VERTEX v2, ALLEGRO_VERTEX v3, Pointer state, AllegroLibrary.al_draw_soft_triangle_init_callback init, AllegroLibrary.al_draw_soft_triangle_first_callback first, AllegroLibrary.al_draw_soft_triangle_step_callback step, AllegroLibrary.al_draw_soft_triangle_draw_callback draw);
 	public static native void al_draw_soft_line(ALLEGRO_VERTEX v1, ALLEGRO_VERTEX v2, Pointer state, AllegroLibrary.al_draw_soft_line_first_callback first, AllegroLibrary.al_draw_soft_line_step_callback step, AllegroLibrary.al_draw_soft_line_draw_callback draw);
 	public static native void al_draw_line(float x1, float y1, float x2, float y2, ALLEGRO_COLOR color, float thickness);

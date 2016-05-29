@@ -1382,6 +1382,8 @@ public class AllegroLibrary implements Library {
 	public static native byte al_hide_mouse_cursor(Pointer display);
 	public static native byte al_hide_mouse_cursor(PointerByReference display);
 	public static native void al_set_render_state(int state, int value);
+
+	//Transformations functions
 	public static native void al_use_transform(ALLEGRO_TRANSFORM trans);
 	public static native void al_use_projection_transform(ALLEGRO_TRANSFORM trans);
 	public static native void al_copy_transform(ALLEGRO_TRANSFORM dest, ALLEGRO_TRANSFORM src);
@@ -1394,12 +1396,8 @@ public class AllegroLibrary implements Library {
 	public static native void al_rotate_transform_3d(ALLEGRO_TRANSFORM trans, float x, float y, float z, float angle);
 	public static native void al_scale_transform(ALLEGRO_TRANSFORM trans, float sx, float sy);
 	public static native void al_scale_transform_3d(ALLEGRO_TRANSFORM trans, float sx, float sy, float sz);
-	@Deprecated 
 	public static native void al_transform_coordinates(ALLEGRO_TRANSFORM trans, FloatByReference x, FloatByReference y);
-	public static native void al_transform_coordinates(ALLEGRO_TRANSFORM trans, FloatBuffer x, FloatBuffer y);
-	@Deprecated 
 	public static native void al_transform_coordinates_3d(ALLEGRO_TRANSFORM trans, FloatByReference x, FloatByReference y, FloatByReference z);
-	public static native void al_transform_coordinates_3d(ALLEGRO_TRANSFORM trans, FloatBuffer x, FloatBuffer y, FloatBuffer z);
 	public static native void al_compose_transform(ALLEGRO_TRANSFORM trans, ALLEGRO_TRANSFORM other);
 	public static native ALLEGRO_TRANSFORM al_get_current_transform();
 	public static native ALLEGRO_TRANSFORM al_get_current_inverse_transform();
@@ -1410,6 +1408,7 @@ public class AllegroLibrary implements Library {
 	public static native void al_perspective_transform(ALLEGRO_TRANSFORM trans, float left, float top, float n, float right, float bottom, float f);
 	public static native void al_horizontal_shear_transform(ALLEGRO_TRANSFORM trans, float theta);
 	public static native void al_vertical_shear_transform(ALLEGRO_TRANSFORM trans, float theta);
+
 	public static native PointerByReference al_create_shader(int platform);
 	@Deprecated 
 	public static native byte al_attach_shader_source(Pointer shader, int type, Pointer source);

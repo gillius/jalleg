@@ -1311,14 +1311,17 @@ public class AllegroLibrary implements Library {
 	public static native void al_get_joystick_state(Pointer ALLEGRO_JOYSTICKPtr1, ALLEGRO_JOYSTICK_STATE ret_state);
 	public static native void al_get_joystick_state(PointerByReference ALLEGRO_JOYSTICKPtr1, ALLEGRO_JOYSTICK_STATE ret_state);
 	public static native ALLEGRO_EVENT_SOURCE al_get_joystick_event_source();
-	public static native byte al_is_keyboard_installed();
-	public static native byte al_install_keyboard();
+
+	//Keyboard routines
+	public static native boolean al_is_keyboard_installed();
+	public static native boolean al_install_keyboard();
 	public static native void al_uninstall_keyboard();
-	public static native byte al_set_keyboard_leds(int leds);
-	public static native Pointer al_keycode_to_name(int keycode);
+	public static native boolean al_set_keyboard_leds(int leds);
+	public static native String al_keycode_to_name(int keycode);
 	public static native void al_get_keyboard_state(ALLEGRO_KEYBOARD_STATE ret_state);
-	public static native byte al_key_down(ALLEGRO_KEYBOARD_STATE ALLEGRO_KEYBOARD_STATEPtr1, int keycode);
+	public static native boolean al_key_down(ALLEGRO_KEYBOARD_STATE state, int keycode);
 	public static native ALLEGRO_EVENT_SOURCE al_get_keyboard_event_source();
+
 	public static native byte al_is_mouse_installed();
 	public static native byte al_install_mouse();
 	public static native void al_uninstall_mouse();

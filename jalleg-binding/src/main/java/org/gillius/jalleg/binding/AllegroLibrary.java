@@ -777,119 +777,119 @@ public class AllegroLibrary implements Library {
 	public static native byte al_make_path_canonical(Pointer path);
 	public static native byte al_make_path_canonical(PointerByReference path);
 	@Deprecated 
-	public static native _al_tagbstring al_ustr_new(Pointer s);
-	public static native _al_tagbstring al_ustr_new(String s);
+	public static native ALLEGRO_USTR al_ustr_new(Pointer s);
+	public static native ALLEGRO_USTR al_ustr_new(String s);
 	@Deprecated 
-	public static native _al_tagbstring al_ustr_new_from_buffer(Pointer s, size_t size);
-	public static native _al_tagbstring al_ustr_new_from_buffer(String s, size_t size);
+	public static native ALLEGRO_USTR al_ustr_new_from_buffer(Pointer s, size_t size);
+	public static native ALLEGRO_USTR al_ustr_new_from_buffer(String s, size_t size);
 //	@Deprecated
-//	public static native _al_tagbstring al_ustr_newf(Pointer fmt, Object... varArgs1);
-//	public static native _al_tagbstring al_ustr_newf(String fmt, Object... varArgs1);
-	public static native void al_ustr_free(_al_tagbstring us);
-	public static native Pointer al_cstr(_al_tagbstring us);
+//	public static native ALLEGRO_USTR al_ustr_newf(Pointer fmt, Object... varArgs1);
+//	public static native ALLEGRO_USTR al_ustr_newf(String fmt, Object... varArgs1);
+	public static native void al_ustr_free(ALLEGRO_USTR us);
+	public static native Pointer al_cstr(ALLEGRO_USTR us);
 	@Deprecated 
-	public static native void al_ustr_to_buffer(_al_tagbstring us, Pointer buffer, int size);
-	public static native void al_ustr_to_buffer(_al_tagbstring us, ByteBuffer buffer, int size);
-	public static native Pointer al_cstr_dup(_al_tagbstring us);
-	public static native _al_tagbstring al_ustr_dup(_al_tagbstring us);
-	public static native _al_tagbstring al_ustr_dup_substr(_al_tagbstring us, int start_pos, int end_pos);
-	public static native _al_tagbstring al_ustr_empty_string();
+	public static native void al_ustr_to_buffer(ALLEGRO_USTR us, Pointer buffer, int size);
+	public static native void al_ustr_to_buffer(ALLEGRO_USTR us, ByteBuffer buffer, int size);
+	public static native Pointer al_cstr_dup(ALLEGRO_USTR us);
+	public static native ALLEGRO_USTR al_ustr_dup(ALLEGRO_USTR us);
+	public static native ALLEGRO_USTR al_ustr_dup_substr(ALLEGRO_USTR us, int start_pos, int end_pos);
+	public static native ALLEGRO_USTR al_ustr_empty_string();
 	@Deprecated 
-	public static native _al_tagbstring al_ref_cstr(_al_tagbstring info, Pointer s);
-	public static native _al_tagbstring al_ref_cstr(_al_tagbstring info, String s);
+	public static native ALLEGRO_USTR al_ref_cstr(ALLEGRO_USTR info, Pointer s);
+	public static native ALLEGRO_USTR al_ref_cstr(ALLEGRO_USTR info, String s);
 	@Deprecated 
-	public static native _al_tagbstring al_ref_buffer(_al_tagbstring info, Pointer s, size_t size);
-	public static native _al_tagbstring al_ref_buffer(_al_tagbstring info, String s, size_t size);
-	public static native _al_tagbstring al_ref_ustr(_al_tagbstring info, _al_tagbstring us, int start_pos, int end_pos);
-	public static native size_t al_ustr_size(_al_tagbstring us);
-	public static native size_t al_ustr_length(_al_tagbstring us);
-	public static native int al_ustr_offset(_al_tagbstring us, int index);
+	public static native ALLEGRO_USTR al_ref_buffer(ALLEGRO_USTR info, Pointer s, size_t size);
+	public static native ALLEGRO_USTR al_ref_buffer(ALLEGRO_USTR info, String s, size_t size);
+	public static native ALLEGRO_USTR al_ref_ustr(ALLEGRO_USTR info, ALLEGRO_USTR us, int start_pos, int end_pos);
+	public static native size_t al_ustr_size(ALLEGRO_USTR us);
+	public static native size_t al_ustr_length(ALLEGRO_USTR us);
+	public static native int al_ustr_offset(ALLEGRO_USTR us, int index);
 	@Deprecated 
-	public static native byte al_ustr_next(_al_tagbstring us, IntByReference pos);
-	public static native byte al_ustr_next(_al_tagbstring us, IntBuffer pos);
+	public static native byte al_ustr_next(ALLEGRO_USTR us, IntByReference pos);
+	public static native byte al_ustr_next(ALLEGRO_USTR us, IntBuffer pos);
 	@Deprecated 
-	public static native byte al_ustr_prev(_al_tagbstring us, IntByReference pos);
-	public static native byte al_ustr_prev(_al_tagbstring us, IntBuffer pos);
-	public static native int al_ustr_get(_al_tagbstring us, int pos);
+	public static native byte al_ustr_prev(ALLEGRO_USTR us, IntByReference pos);
+	public static native byte al_ustr_prev(ALLEGRO_USTR us, IntBuffer pos);
+	public static native int al_ustr_get(ALLEGRO_USTR us, int pos);
 	@Deprecated 
-	public static native int al_ustr_get_next(_al_tagbstring us, IntByReference pos);
-	public static native int al_ustr_get_next(_al_tagbstring us, IntBuffer pos);
+	public static native int al_ustr_get_next(ALLEGRO_USTR us, IntByReference pos);
+	public static native int al_ustr_get_next(ALLEGRO_USTR us, IntBuffer pos);
 	@Deprecated 
-	public static native int al_ustr_prev_get(_al_tagbstring us, IntByReference pos);
-	public static native int al_ustr_prev_get(_al_tagbstring us, IntBuffer pos);
-	public static native byte al_ustr_insert(_al_tagbstring us1, int pos, _al_tagbstring us2);
+	public static native int al_ustr_prev_get(ALLEGRO_USTR us, IntByReference pos);
+	public static native int al_ustr_prev_get(ALLEGRO_USTR us, IntBuffer pos);
+	public static native byte al_ustr_insert(ALLEGRO_USTR us1, int pos, ALLEGRO_USTR us2);
 	@Deprecated 
-	public static native byte al_ustr_insert_cstr(_al_tagbstring us, int pos, Pointer us2);
-	public static native byte al_ustr_insert_cstr(_al_tagbstring us, int pos, String us2);
-	public static native size_t al_ustr_insert_chr(_al_tagbstring us, int pos, int c);
-	public static native byte al_ustr_append(_al_tagbstring us1, _al_tagbstring us2);
+	public static native byte al_ustr_insert_cstr(ALLEGRO_USTR us, int pos, Pointer us2);
+	public static native byte al_ustr_insert_cstr(ALLEGRO_USTR us, int pos, String us2);
+	public static native size_t al_ustr_insert_chr(ALLEGRO_USTR us, int pos, int c);
+	public static native byte al_ustr_append(ALLEGRO_USTR us1, ALLEGRO_USTR us2);
 	@Deprecated 
-	public static native byte al_ustr_append_cstr(_al_tagbstring us, Pointer s);
-	public static native byte al_ustr_append_cstr(_al_tagbstring us, String s);
-	public static native size_t al_ustr_append_chr(_al_tagbstring us, int c);
+	public static native byte al_ustr_append_cstr(ALLEGRO_USTR us, Pointer s);
+	public static native byte al_ustr_append_cstr(ALLEGRO_USTR us, String s);
+	public static native size_t al_ustr_append_chr(ALLEGRO_USTR us, int c);
 //	@Deprecated
-//	public static native byte al_ustr_appendf(_al_tagbstring us, Pointer fmt, Object... varArgs1);
-//	public static native byte al_ustr_appendf(_al_tagbstring us, String fmt, Object... varArgs1);
+//	public static native byte al_ustr_appendf(ALLEGRO_USTR us, Pointer fmt, Object... varArgs1);
+//	public static native byte al_ustr_appendf(ALLEGRO_USTR us, String fmt, Object... varArgs1);
 //	@Deprecated
-//	public static native byte al_ustr_vappendf(_al_tagbstring us, Pointer fmt, Object... ap);
-//	public static native byte al_ustr_vappendf(_al_tagbstring us, String fmt, Object... ap);
-	public static native byte al_ustr_remove_chr(_al_tagbstring us, int pos);
-	public static native byte al_ustr_remove_range(_al_tagbstring us, int start_pos, int end_pos);
-	public static native byte al_ustr_truncate(_al_tagbstring us, int start_pos);
-	public static native byte al_ustr_ltrim_ws(_al_tagbstring us);
-	public static native byte al_ustr_rtrim_ws(_al_tagbstring us);
-	public static native byte al_ustr_trim_ws(_al_tagbstring us);
-	public static native byte al_ustr_assign(_al_tagbstring us1, _al_tagbstring us2);
-	public static native byte al_ustr_assign_substr(_al_tagbstring us1, _al_tagbstring us2, int start_pos, int end_pos);
+//	public static native byte al_ustr_vappendf(ALLEGRO_USTR us, Pointer fmt, Object... ap);
+//	public static native byte al_ustr_vappendf(ALLEGRO_USTR us, String fmt, Object... ap);
+	public static native byte al_ustr_remove_chr(ALLEGRO_USTR us, int pos);
+	public static native byte al_ustr_remove_range(ALLEGRO_USTR us, int start_pos, int end_pos);
+	public static native byte al_ustr_truncate(ALLEGRO_USTR us, int start_pos);
+	public static native byte al_ustr_ltrim_ws(ALLEGRO_USTR us);
+	public static native byte al_ustr_rtrim_ws(ALLEGRO_USTR us);
+	public static native byte al_ustr_trim_ws(ALLEGRO_USTR us);
+	public static native byte al_ustr_assign(ALLEGRO_USTR us1, ALLEGRO_USTR us2);
+	public static native byte al_ustr_assign_substr(ALLEGRO_USTR us1, ALLEGRO_USTR us2, int start_pos, int end_pos);
 	@Deprecated 
-	public static native byte al_ustr_assign_cstr(_al_tagbstring us1, Pointer s);
-	public static native byte al_ustr_assign_cstr(_al_tagbstring us1, String s);
-	public static native size_t al_ustr_set_chr(_al_tagbstring us, int pos, int c);
-	public static native byte al_ustr_replace_range(_al_tagbstring us1, int start_pos1, int end_pos1, _al_tagbstring us2);
-	public static native int al_ustr_find_chr(_al_tagbstring us, int start_pos, int c);
-	public static native int al_ustr_rfind_chr(_al_tagbstring us, int start_pos, int c);
-	public static native int al_ustr_find_set(_al_tagbstring us, int start_pos, _al_tagbstring accept);
+	public static native byte al_ustr_assign_cstr(ALLEGRO_USTR us1, Pointer s);
+	public static native byte al_ustr_assign_cstr(ALLEGRO_USTR us1, String s);
+	public static native size_t al_ustr_set_chr(ALLEGRO_USTR us, int pos, int c);
+	public static native byte al_ustr_replace_range(ALLEGRO_USTR us1, int start_pos1, int end_pos1, ALLEGRO_USTR us2);
+	public static native int al_ustr_find_chr(ALLEGRO_USTR us, int start_pos, int c);
+	public static native int al_ustr_rfind_chr(ALLEGRO_USTR us, int start_pos, int c);
+	public static native int al_ustr_find_set(ALLEGRO_USTR us, int start_pos, ALLEGRO_USTR accept);
 	@Deprecated 
-	public static native int al_ustr_find_set_cstr(_al_tagbstring us, int start_pos, Pointer accept);
-	public static native int al_ustr_find_set_cstr(_al_tagbstring us, int start_pos, String accept);
-	public static native int al_ustr_find_cset(_al_tagbstring us, int start_pos, _al_tagbstring reject);
+	public static native int al_ustr_find_set_cstr(ALLEGRO_USTR us, int start_pos, Pointer accept);
+	public static native int al_ustr_find_set_cstr(ALLEGRO_USTR us, int start_pos, String accept);
+	public static native int al_ustr_find_cset(ALLEGRO_USTR us, int start_pos, ALLEGRO_USTR reject);
 	@Deprecated 
-	public static native int al_ustr_find_cset_cstr(_al_tagbstring us, int start_pos, Pointer reject);
-	public static native int al_ustr_find_cset_cstr(_al_tagbstring us, int start_pos, String reject);
-	public static native int al_ustr_find_str(_al_tagbstring haystack, int start_pos, _al_tagbstring needle);
+	public static native int al_ustr_find_cset_cstr(ALLEGRO_USTR us, int start_pos, Pointer reject);
+	public static native int al_ustr_find_cset_cstr(ALLEGRO_USTR us, int start_pos, String reject);
+	public static native int al_ustr_find_str(ALLEGRO_USTR haystack, int start_pos, ALLEGRO_USTR needle);
 	@Deprecated 
-	public static native int al_ustr_find_cstr(_al_tagbstring haystack, int start_pos, Pointer needle);
-	public static native int al_ustr_find_cstr(_al_tagbstring haystack, int start_pos, String needle);
-	public static native int al_ustr_rfind_str(_al_tagbstring haystack, int start_pos, _al_tagbstring needle);
+	public static native int al_ustr_find_cstr(ALLEGRO_USTR haystack, int start_pos, Pointer needle);
+	public static native int al_ustr_find_cstr(ALLEGRO_USTR haystack, int start_pos, String needle);
+	public static native int al_ustr_rfind_str(ALLEGRO_USTR haystack, int start_pos, ALLEGRO_USTR needle);
 	@Deprecated 
-	public static native int al_ustr_rfind_cstr(_al_tagbstring haystack, int start_pos, Pointer needle);
-	public static native int al_ustr_rfind_cstr(_al_tagbstring haystack, int start_pos, String needle);
-	public static native byte al_ustr_find_replace(_al_tagbstring us, int start_pos, _al_tagbstring find, _al_tagbstring replace);
+	public static native int al_ustr_rfind_cstr(ALLEGRO_USTR haystack, int start_pos, Pointer needle);
+	public static native int al_ustr_rfind_cstr(ALLEGRO_USTR haystack, int start_pos, String needle);
+	public static native byte al_ustr_find_replace(ALLEGRO_USTR us, int start_pos, ALLEGRO_USTR find, ALLEGRO_USTR replace);
 	@Deprecated 
-	public static native byte al_ustr_find_replace_cstr(_al_tagbstring us, int start_pos, Pointer find, Pointer replace);
-	public static native byte al_ustr_find_replace_cstr(_al_tagbstring us, int start_pos, String find, String replace);
-	public static native byte al_ustr_equal(_al_tagbstring us1, _al_tagbstring us2);
-	public static native int al_ustr_compare(_al_tagbstring u, _al_tagbstring v);
-	public static native int al_ustr_ncompare(_al_tagbstring us1, _al_tagbstring us2, int n);
-	public static native byte al_ustr_has_prefix(_al_tagbstring u, _al_tagbstring v);
+	public static native byte al_ustr_find_replace_cstr(ALLEGRO_USTR us, int start_pos, Pointer find, Pointer replace);
+	public static native byte al_ustr_find_replace_cstr(ALLEGRO_USTR us, int start_pos, String find, String replace);
+	public static native byte al_ustr_equal(ALLEGRO_USTR us1, ALLEGRO_USTR us2);
+	public static native int al_ustr_compare(ALLEGRO_USTR u, ALLEGRO_USTR v);
+	public static native int al_ustr_ncompare(ALLEGRO_USTR us1, ALLEGRO_USTR us2, int n);
+	public static native byte al_ustr_has_prefix(ALLEGRO_USTR u, ALLEGRO_USTR v);
 	@Deprecated 
-	public static native byte al_ustr_has_prefix_cstr(_al_tagbstring u, Pointer s);
-	public static native byte al_ustr_has_prefix_cstr(_al_tagbstring u, String s);
-	public static native byte al_ustr_has_suffix(_al_tagbstring u, _al_tagbstring v);
+	public static native byte al_ustr_has_prefix_cstr(ALLEGRO_USTR u, Pointer s);
+	public static native byte al_ustr_has_prefix_cstr(ALLEGRO_USTR u, String s);
+	public static native byte al_ustr_has_suffix(ALLEGRO_USTR u, ALLEGRO_USTR v);
 	@Deprecated 
-	public static native byte al_ustr_has_suffix_cstr(_al_tagbstring us1, Pointer s);
-	public static native byte al_ustr_has_suffix_cstr(_al_tagbstring us1, String s);
+	public static native byte al_ustr_has_suffix_cstr(ALLEGRO_USTR us1, Pointer s);
+	public static native byte al_ustr_has_suffix_cstr(ALLEGRO_USTR us1, String s);
 	public static native size_t al_utf8_width(int c);
 	@Deprecated 
 	public static native size_t al_utf8_encode(Pointer s, int c);
 	public static native size_t al_utf8_encode(ByteBuffer s, int c);
 	@Deprecated 
-	public static native _al_tagbstring al_ustr_new_from_utf16(ShortByReference s);
-	public static native _al_tagbstring al_ustr_new_from_utf16(short s[]);
-	public static native size_t al_ustr_size_utf16(_al_tagbstring us);
+	public static native ALLEGRO_USTR al_ustr_new_from_utf16(ShortByReference s);
+	public static native ALLEGRO_USTR al_ustr_new_from_utf16(short s[]);
+	public static native size_t al_ustr_size_utf16(ALLEGRO_USTR us);
 	@Deprecated 
-	public static native size_t al_ustr_encode_utf16(_al_tagbstring us, ShortByReference s, size_t n);
-	public static native size_t al_ustr_encode_utf16(_al_tagbstring us, ShortBuffer s, size_t n);
+	public static native size_t al_ustr_encode_utf16(ALLEGRO_USTR us, ShortByReference s, size_t n);
+	public static native size_t al_ustr_encode_utf16(ALLEGRO_USTR us, ShortBuffer s, size_t n);
 	public static native size_t al_utf16_width(int c);
 	@Deprecated 
 	public static native size_t al_utf16_encode(ShortByReference s, int c);
@@ -972,8 +972,8 @@ public class AllegroLibrary implements Library {
 	public static native Pointer al_fgets(PointerByReference f, String p, size_t max);
 	public static native Pointer al_fgets(PointerByReference f, Pointer p, size_t max);
 	@Deprecated 
-	public static native _al_tagbstring al_fget_ustr(Pointer f);
-	public static native _al_tagbstring al_fget_ustr(PointerByReference f);
+	public static native ALLEGRO_USTR al_fget_ustr(Pointer f);
+	public static native ALLEGRO_USTR al_fget_ustr(PointerByReference f);
 	@Deprecated 
 	public static native int al_fputs(Pointer f, Pointer p);
 	public static native int al_fputs(PointerByReference f, String p);
@@ -1613,6 +1613,63 @@ public class AllegroLibrary implements Library {
 	public static native void al_draw_polygon(FloatBuffer vertices, int vertex_count, int join_style, ALLEGRO_COLOR color, float thickness, float miter_limit);
 	public static native void al_draw_filled_polygon(FloatBuffer vertices, int vertex_count, ALLEGRO_COLOR color);
 	public static native void al_draw_filled_polygon_with_holes(FloatBuffer vertices, IntBuffer vertex_counts, ALLEGRO_COLOR color);
+	
+	//Font addon
+	public static final int ALLEGRO_NO_KERNING = -1;
+	public static final int ALLEGRO_ALIGN_LEFT = 0;
+	public static final int ALLEGRO_ALIGN_CENTRE = 1;
+	public static final int ALLEGRO_ALIGN_CENTER = 1;
+	public static final int ALLEGRO_ALIGN_RIGHT = 2;
+	public static final int ALLEGRO_ALIGN_INTEGER = 4;
+
+	public interface al_register_font_loader_load_callback extends Callback {
+		ALLEGRO_FONT apply(Pointer filename, int size, int flags);
+	}
+
+	public interface al_do_multiline_text_cb_callback extends Callback {
+		byte apply(int line_num, Pointer line, int size, Pointer extra);
+	}
+
+	public interface al_do_multiline_ustr_cb_callback extends Callback {
+		byte apply(int line_num, ALLEGRO_USTR line, Pointer extra);
+	}
+
+	public static native boolean al_register_font_loader(String ext, AllegroLibrary.al_register_font_loader_load_callback load);
+	public static native ALLEGRO_FONT al_load_bitmap_font(String filename);
+	public static native ALLEGRO_FONT al_load_bitmap_font_flags(String filename, int flags);
+	public static native ALLEGRO_FONT al_load_font(String filename, int size, int flags);
+	public static native ALLEGRO_FONT al_grab_font_from_bitmap(ALLEGRO_BITMAP bmp, int n, IntBuffer ranges);
+	public static native ALLEGRO_FONT al_create_builtin_font();
+	public static native void al_draw_ustr(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, int flags, ALLEGRO_USTR ustr);
+	public static native void al_draw_text(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, int flags, String text);
+	public static native void al_draw_justified_text(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x1, float x2, float y, float diff, int flags, String text);
+	public static native void al_draw_justified_ustr(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x1, float x2, float y, float diff, int flags, ALLEGRO_USTR text);
+//	public static native void al_draw_textf(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, int flags, String format, Object... varArgs1);
+//	public static native void al_draw_justified_textf(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x1, float x2, float y, float diff, int flags, String format, Object... varArgs1);
+	public static native int al_get_text_width(ALLEGRO_FONT f, String str);
+	public static native int al_get_ustr_width(ALLEGRO_FONT f, ALLEGRO_USTR ustr);
+	public static native int al_get_font_line_height(ALLEGRO_FONT f);
+	public static native int al_get_font_ascent(ALLEGRO_FONT f);
+	public static native int al_get_font_descent(ALLEGRO_FONT f);
+	public static native void al_destroy_font(ALLEGRO_FONT f);
+	public static native void al_get_ustr_dimensions(ALLEGRO_FONT f, ALLEGRO_USTR text, IntByReference bbx, IntByReference bby, IntByReference bbw, IntByReference bbh);
+	public static native void al_get_text_dimensions(ALLEGRO_FONT f, Pointer text, IntByReference bbx, IntByReference bby, IntByReference bbw, IntByReference bbh);
+	public static native boolean al_init_font_addon();
+	public static native void al_shutdown_font_addon();
+	public static native int al_get_allegro_font_version();
+	public static native int al_get_font_ranges(ALLEGRO_FONT font, int ranges_count, IntBuffer ranges);
+	public static native void al_draw_glyph(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, int codepoint);
+	public static native int al_get_glyph_width(ALLEGRO_FONT f, int codepoint);
+	public static native boolean al_get_glyph_dimensions(ALLEGRO_FONT f, int codepoint, IntByReference bbx, IntByReference bby, IntByReference bbw, IntByReference bbh);
+	public static native int al_get_glyph_advance(ALLEGRO_FONT f, int codepoint1, int codepoint2);
+	public static native void al_draw_multiline_text(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, float max_width, float line_height, int flags, String text);
+//	public static native void al_draw_multiline_textf(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, float max_width, float line_height, int flags, String format, Object... varArgs1);
+	public static native void al_draw_multiline_ustr(ALLEGRO_FONT font, ALLEGRO_COLOR color, float x, float y, float max_width, float line_height, int flags, ALLEGRO_USTR text);
+	public static native void al_do_multiline_text(ALLEGRO_FONT font, float max_width, String text, AllegroLibrary.al_do_multiline_text_cb_callback cb, Pointer extra);
+	public static native void al_do_multiline_ustr(ALLEGRO_FONT font, float max_width, ALLEGRO_USTR ustr, AllegroLibrary.al_do_multiline_ustr_cb_callback cb, Pointer extra);
+	public static native void al_set_fallback_font(ALLEGRO_FONT font, ALLEGRO_FONT fallback);
+	public static native ALLEGRO_FONT al_get_fallback_font(ALLEGRO_FONT font);
+
 
 	/** Pointer to unknown (opaque) type */
 	public static class ALLEGRO_CONFIG extends PointerType {

@@ -16,7 +16,7 @@
 
 apply plugin: 'application'
 
-mainClassName = 'org.gillius.jalleg.example.HelloAllegro'
+mainClassName = 'org.gillius.jalleg.example.BallAndPaddleGameSingleFile'
 
 dependencies {
 	compile project(':jalleg-binding')

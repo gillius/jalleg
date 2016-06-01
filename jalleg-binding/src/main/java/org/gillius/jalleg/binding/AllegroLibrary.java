@@ -1912,6 +1912,10 @@ public class AllegroLibrary implements Library {
 		}
 	}
 
+	//Audio codecs addon
+	public static native boolean al_init_acodec_addon();
+	public static native int al_get_allegro_acodec_version();
+
 	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */

@@ -51,7 +51,7 @@ in PATH on Windows).
 If you want to run the example program:
 
 ```
-gradlew :jalleg-example:run
+gradlew :jalleg-examples:run
 ```
 
 Documentation

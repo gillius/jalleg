@@ -1,1 +1,1 @@
-include 'jalleg-binding', 'jalleg-example', 'jalleg-rt'
+include 'jalleg-binding', 'jalleg-framework', 'jalleg-examples', 'jalleg-rt'

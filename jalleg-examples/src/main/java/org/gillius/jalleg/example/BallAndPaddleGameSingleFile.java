@@ -1,6 +1,7 @@
 package org.gillius.jalleg.example;
 
 import org.gillius.jalleg.binding.*;
+import org.gillius.jalleg.framework.math.Rect;
 
 import java.util.Random;
 

@@ -1745,7 +1745,7 @@ public class AllegroLibrary implements Library {
 		PointerByReference apply(Pointer fp, size_t buffer_count, int samples);
 	}
 
-	public static native PointerByReference al_create_sample(Buffer buf, int samples, int freq, int depth, int chan_conf, byte free_buf);
+	public static native ALLEGRO_SAMPLE al_create_sample(Buffer buf, int samples, int freq, int depth, int chan_conf, boolean free_buf);
 	public static native void al_destroy_sample(ALLEGRO_SAMPLE spl);
 	public static native ALLEGRO_SAMPLE_INSTANCE al_create_sample_instance(ALLEGRO_SAMPLE data);
 	public static native void al_destroy_sample_instance(ALLEGRO_SAMPLE_INSTANCE spl);

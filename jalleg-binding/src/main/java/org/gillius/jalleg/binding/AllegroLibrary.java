@@ -1349,19 +1349,26 @@ public class AllegroLibrary implements Library {
 	public static native void al_uninstall_touch_input();
 	public static native void al_get_touch_input_state(ALLEGRO_TOUCH_INPUT_STATE ret_state);
 	public static native ALLEGRO_EVENT_SOURCE al_get_touch_input_event_source();
+
+	//Memory management routines
+	public static Pointer al_malloc(long size) {
+		return al_malloc_with_context(new size_t(size), 0, "AllegroLibrary", "al_malloc");
+	}
+	public static Pointer al_calloc(long num, long size) {
+		return al_calloc_with_context(new size_t(num), new size_t(size), 0, "AllegroLibrary", "al_calloc");
+	}
+	public static Pointer al_realloc(Pointer ptr, long size) {
+		return al_realloc_with_context(ptr, new size_t(size), 0, "AllegroLibrary", "al_realloc");
+	}
+	public static void al_free(Pointer ptr) {
+		al_free_with_context(ptr, 0, "AllegroLibrary", "al_free");
+	}
 	public static native void al_set_memory_interface(ALLEGRO_MEMORY_INTERFACE iface);
-	@Deprecated 
-	public static native Pointer al_malloc_with_context(size_t n, int line, Pointer file, Pointer func);
 	public static native Pointer al_malloc_with_context(size_t n, int line, String file, String func);
-	@Deprecated 
-	public static native void al_free_with_context(Pointer ptr, int line, Pointer file, Pointer func);
 	public static native void al_free_with_context(Pointer ptr, int line, String file, String func);
-	@Deprecated 
-	public static native Pointer al_realloc_with_context(Pointer ptr, size_t n, int line, Pointer file, Pointer func);
 	public static native Pointer al_realloc_with_context(Pointer ptr, size_t n, int line, String file, String func);
-	@Deprecated 
-	public static native Pointer al_calloc_with_context(size_t count, size_t n, int line, Pointer file, Pointer func);
 	public static native Pointer al_calloc_with_context(size_t count, size_t n, int line, String file, String func);
+
 	public static native int al_get_num_video_adapters();
 	public static native byte al_get_monitor_info(int adapter, ALLEGRO_MONITOR_INFO info);
 	@Deprecated 

@@ -35,7 +35,11 @@ Here are the changes I've made from the raw JNAerator output.
    JNA mapping
 5. For whatever reason, JNAerator generates a "Deprecated" version and non-deprecated version of the same method it
    thinks is "safer" or "better". As far as I can tell from JNA documentation, it's doing the opposite of proper advice.
-   So I have modified methods to return the best thing.
+   So I have modified methods to return the best thing. Typically this means:
+   1. Almost always Replacing "byte" with boolean
+   2. Almost always replacing PointerByReference with a proper typed pointer like ALLEGRO_BITMAP
+   3. Changing Pointer to String where strings are used
+   4. Changing Pointer to Buffer as appropriate where user-generated data is fed into Allegro
 6. JNAerator interpreted the typed pointers like void\*\* (JNA PointerByReference). I am manually replacing these with
    their typed equivalents like ALLEGRO\_BITMAP.
 7. Created size_t class.

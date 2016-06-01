@@ -25,10 +25,8 @@ import com.sun.jna.ptr.FloatByReference;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import com.sun.jna.ptr.ShortByReference;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+
+import java.nio.*;
 
 /**
  * JNA Wrapper for library <b>Allegro</b><br>
@@ -1670,6 +1668,251 @@ public class AllegroLibrary implements Library {
 	public static native void al_set_fallback_font(ALLEGRO_FONT font, ALLEGRO_FONT fallback);
 	public static native ALLEGRO_FONT al_get_fallback_font(ALLEGRO_FONT font);
 
+	
+	//Audio addon
+	public interface ALLEGRO_AUDIO_DEPTH {
+		int ALLEGRO_AUDIO_DEPTH_INT8 = 0x00;
+		int ALLEGRO_AUDIO_DEPTH_INT16 = 0x01;
+		int ALLEGRO_AUDIO_DEPTH_INT24 = 0x02;
+		int ALLEGRO_AUDIO_DEPTH_FLOAT32 = 0x03;
+		int ALLEGRO_AUDIO_DEPTH_UNSIGNED = 0x08;
+		int ALLEGRO_AUDIO_DEPTH_UINT8 = ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_INT8 | ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_UNSIGNED;
+		int ALLEGRO_AUDIO_DEPTH_UINT16 = ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_INT16 | ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_UNSIGNED;
+		int ALLEGRO_AUDIO_DEPTH_UINT24 = ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_INT24 | ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_UNSIGNED;
+	}
+
+	public interface ALLEGRO_CHANNEL_CONF {
+		int ALLEGRO_CHANNEL_CONF_1 = 0x10;
+		int ALLEGRO_CHANNEL_CONF_2 = 0x20;
+		int ALLEGRO_CHANNEL_CONF_3 = 0x30;
+		int ALLEGRO_CHANNEL_CONF_4 = 0x40;
+		int ALLEGRO_CHANNEL_CONF_5_1 = 0x51;
+		int ALLEGRO_CHANNEL_CONF_6_1 = 0x61;
+		int ALLEGRO_CHANNEL_CONF_7_1 = 0x71;
+	}
+
+	public interface ALLEGRO_PLAYMODE {
+		int ALLEGRO_PLAYMODE_ONCE = 0x100;
+		int ALLEGRO_PLAYMODE_LOOP = 0x101;
+		int ALLEGRO_PLAYMODE_BIDIR = 0x102;
+		int _ALLEGRO_PLAYMODE_STREAM_ONCE = 0x103;
+		int _ALLEGRO_PLAYMODE_STREAM_ONEDIR = 0x104;
+	}
+
+	public interface ALLEGRO_MIXER_QUALITY {
+		int ALLEGRO_MIXER_QUALITY_POINT = 0x110;
+		int ALLEGRO_MIXER_QUALITY_LINEAR = 0x111;
+		int ALLEGRO_MIXER_QUALITY_CUBIC = 0x112;
+	}
+
+	public static final int ALLEGRO_EVENT_AUDIO_STREAM_FRAGMENT = (int)(513);
+	public static final int ALLEGRO_EVENT_AUDIO_STREAM_FINISHED = (int)(514);
+	public static final int ALLEGRO_EVENT_AUDIO_RECORDER_FRAGMENT = (int)(515);
+	public static final int ALLEGRO_MAX_CHANNELS = (int)8;
+	public static final float ALLEGRO_AUDIO_PAN_NONE = (float)(-1000.0f);
+	public interface al_set_mixer_postprocess_callback_cb_callback extends Callback {
+		void apply(Pointer buf, int samples, Pointer data);
+	}
+
+	public interface al_register_sample_loader_loader_callback extends Callback {
+		PointerByReference apply(Pointer filename);
+	}
+
+	public interface al_register_sample_saver_saver_callback extends Callback {
+		byte apply(Pointer filename, Pointer spl);
+	}
+
+	public interface al_register_audio_stream_loader_stream_loader_callback extends Callback {
+		PointerByReference apply(Pointer filename, size_t buffer_count, int samples);
+	}
+
+	public interface al_register_sample_loader_f_loader_callback extends Callback {
+		PointerByReference apply(Pointer fp);
+	}
+
+	public interface al_register_sample_saver_f_saver_callback extends Callback {
+		byte apply(Pointer fp, Pointer spl);
+	}
+
+	public interface al_register_audio_stream_loader_f_stream_loader_callback extends Callback {
+		PointerByReference apply(Pointer fp, size_t buffer_count, int samples);
+	}
+
+	public static native PointerByReference al_create_sample(Buffer buf, int samples, int freq, int depth, int chan_conf, byte free_buf);
+	public static native void al_destroy_sample(ALLEGRO_SAMPLE spl);
+	public static native ALLEGRO_SAMPLE_INSTANCE al_create_sample_instance(ALLEGRO_SAMPLE data);
+	public static native void al_destroy_sample_instance(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_frequency(PointerByReference spl);
+	public static native int al_get_sample_length(ALLEGRO_SAMPLE spl);
+	public static native int al_get_sample_depth(ALLEGRO_SAMPLE spl);
+	public static native int al_get_sample_channels(ALLEGRO_SAMPLE spl);
+	public static native Pointer al_get_sample_data(ALLEGRO_SAMPLE spl);
+
+	public static native int al_get_sample_instance_frequency(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_instance_length(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_instance_position(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native float al_get_sample_instance_speed(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native float al_get_sample_instance_gain(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native float al_get_sample_instance_pan(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native float al_get_sample_instance_time(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_instance_depth(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_instance_channels(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native int al_get_sample_instance_playmode(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_get_sample_instance_playing(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_get_sample_instance_attached(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_set_sample_instance_position(ALLEGRO_SAMPLE_INSTANCE spl, int val);
+	public static native boolean al_set_sample_instance_length(ALLEGRO_SAMPLE_INSTANCE spl, int val);
+	public static native boolean al_set_sample_instance_speed(ALLEGRO_SAMPLE_INSTANCE spl, float val);
+	public static native boolean al_set_sample_instance_gain(ALLEGRO_SAMPLE_INSTANCE spl, float val);
+	public static native boolean al_set_sample_instance_pan(ALLEGRO_SAMPLE_INSTANCE spl, float val);
+	public static native boolean al_set_sample_instance_playmode(ALLEGRO_SAMPLE_INSTANCE spl, int val);
+	public static native boolean al_set_sample_instance_playing(ALLEGRO_SAMPLE_INSTANCE spl, boolean val);
+	public static native boolean al_detach_sample_instance(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_set_sample(ALLEGRO_SAMPLE_INSTANCE spl, ALLEGRO_SAMPLE data);
+	public static native ALLEGRO_SAMPLE al_get_sample(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_play_sample_instance(ALLEGRO_SAMPLE_INSTANCE spl);
+	public static native boolean al_stop_sample_instance(ALLEGRO_SAMPLE_INSTANCE spl);
+
+	public static native ALLEGRO_AUDIO_STREAM al_create_audio_stream(size_t buffer_count, int samples, int freq, int depth, int chan_conf);
+	public static native void al_destroy_audio_stream(ALLEGRO_AUDIO_STREAM stream);
+	public static native void al_drain_audio_stream(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_frequency(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_length(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_fragments(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_available_audio_stream_fragments(ALLEGRO_AUDIO_STREAM stream);
+	public static native float al_get_audio_stream_speed(ALLEGRO_AUDIO_STREAM stream);
+	public static native float al_get_audio_stream_gain(ALLEGRO_AUDIO_STREAM stream);
+	public static native float al_get_audio_stream_pan(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_channels(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_depth(ALLEGRO_AUDIO_STREAM stream);
+	public static native int al_get_audio_stream_playmode(ALLEGRO_AUDIO_STREAM stream);
+	public static native boolean al_get_audio_stream_playing(ALLEGRO_AUDIO_STREAM spl);
+	public static native boolean al_get_audio_stream_attached(ALLEGRO_AUDIO_STREAM spl);
+	public static native long al_get_audio_stream_played_samples(ALLEGRO_AUDIO_STREAM stream);
+	public static native Pointer al_get_audio_stream_fragment(ALLEGRO_AUDIO_STREAM stream);
+	public static native boolean al_set_audio_stream_speed(ALLEGRO_AUDIO_STREAM stream, float val);
+	public static native boolean al_set_audio_stream_gain(ALLEGRO_AUDIO_STREAM stream, float val);
+	public static native boolean al_set_audio_stream_pan(ALLEGRO_AUDIO_STREAM stream, float val);
+	public static native boolean al_set_audio_stream_playmode(ALLEGRO_AUDIO_STREAM stream, int val);
+	public static native boolean al_set_audio_stream_playing(ALLEGRO_AUDIO_STREAM stream, boolean val);
+	public static native boolean al_detach_audio_stream(ALLEGRO_AUDIO_STREAM stream);
+	public static native boolean al_set_audio_stream_fragment(ALLEGRO_AUDIO_STREAM stream, Pointer val);
+	public static native boolean al_rewind_audio_stream(ALLEGRO_AUDIO_STREAM stream);
+	public static native boolean al_seek_audio_stream_secs(ALLEGRO_AUDIO_STREAM stream, double time);
+	public static native double al_get_audio_stream_position_secs(ALLEGRO_AUDIO_STREAM stream);
+	public static native double al_get_audio_stream_length_secs(ALLEGRO_AUDIO_STREAM stream);
+	public static native boolean al_set_audio_stream_loop_secs(ALLEGRO_AUDIO_STREAM stream, double start, double end);
+	public static native ALLEGRO_EVENT_SOURCE al_get_audio_stream_event_source(ALLEGRO_AUDIO_STREAM stream);
+	
+	public static native ALLEGRO_MIXER al_create_mixer(int freq, int depth, int chan_conf);
+	public static native void al_destroy_mixer(ALLEGRO_MIXER mixer);
+	public static native boolean al_attach_sample_instance_to_mixer(ALLEGRO_SAMPLE_INSTANCE stream, ALLEGRO_MIXER mixer);
+	public static native boolean al_attach_audio_stream_to_mixer(ALLEGRO_AUDIO_STREAM stream, ALLEGRO_MIXER mixer);
+	public static native boolean al_attach_mixer_to_mixer(ALLEGRO_MIXER stream, ALLEGRO_MIXER mixer);
+	public static native boolean al_set_mixer_postprocess_callback(ALLEGRO_MIXER mixer, AllegroLibrary.al_set_mixer_postprocess_callback_cb_callback cb, Pointer data);
+	public static native int al_get_mixer_frequency(ALLEGRO_MIXER mixer);
+	public static native int al_get_mixer_channels(ALLEGRO_MIXER mixer);
+	public static native int al_get_mixer_depth(ALLEGRO_MIXER mixer);
+	public static native int al_get_mixer_quality(ALLEGRO_MIXER mixer);
+	public static native float al_get_mixer_gain(ALLEGRO_MIXER mixer);
+	public static native boolean al_get_mixer_playing(ALLEGRO_MIXER mixer);
+	public static native boolean al_get_mixer_attached(ALLEGRO_MIXER mixer);
+	public static native boolean al_set_mixer_frequency(ALLEGRO_MIXER mixer, int val);
+	public static native boolean al_set_mixer_quality(ALLEGRO_MIXER mixer, int val);
+	public static native boolean al_set_mixer_gain(ALLEGRO_MIXER mixer, float gain);
+	public static native boolean al_set_mixer_playing(ALLEGRO_MIXER mixer, boolean val);
+	public static native boolean al_detach_mixer(ALLEGRO_MIXER mixer);
+	
+	public static native ALLEGRO_VOICE al_create_voice(int freq, int depth, int chan_conf);
+	public static native void al_destroy_voice(ALLEGRO_VOICE voice);
+	public static native boolean al_attach_sample_instance_to_voice(ALLEGRO_SAMPLE_INSTANCE stream, ALLEGRO_VOICE voice);
+	public static native boolean al_attach_audio_stream_to_voice(ALLEGRO_AUDIO_STREAM stream, ALLEGRO_VOICE voice);
+	public static native boolean al_attach_mixer_to_voice(ALLEGRO_MIXER mixer, ALLEGRO_VOICE voice);
+	public static native void al_detach_voice(ALLEGRO_VOICE voice);
+	public static native int al_get_voice_frequency(ALLEGRO_VOICE voice);
+	public static native int al_get_voice_position(ALLEGRO_VOICE voice);
+	public static native int al_get_voice_channels(ALLEGRO_VOICE voice);
+	public static native int al_get_voice_depth(ALLEGRO_VOICE voice);
+	public static native boolean al_get_voice_playing(ALLEGRO_VOICE voice);
+	public static native boolean al_set_voice_position(ALLEGRO_VOICE voice, int val);
+	public static native boolean al_set_voice_playing(ALLEGRO_VOICE voice, boolean val);
+	
+	public static native boolean al_install_audio();
+	public static native void al_uninstall_audio();
+	public static native boolean al_is_audio_installed();
+	public static native int al_get_allegro_audio_version();
+	public static native size_t al_get_channel_count(int conf);
+	public static native size_t al_get_audio_depth_size(int conf);
+	public static native void al_fill_silence(ByteBuffer buf, int samples, int depth, int chan_conf);
+	public static native boolean al_reserve_samples(int reserve_samples);
+	public static native ALLEGRO_MIXER al_get_default_mixer();
+	public static native boolean al_set_default_mixer(ALLEGRO_MIXER mixer);
+	public static native boolean al_restore_default_mixer();
+	public static native boolean al_play_sample(ALLEGRO_SAMPLE data, float gain, float pan, float speed, int loop, ALLEGRO_SAMPLE_ID ret_id);
+	public static native void al_stop_sample(ALLEGRO_SAMPLE_ID spl_id);
+	public static native void al_stop_samples();
+	public static native ALLEGRO_VOICE al_get_default_voice();
+	public static native void al_set_default_voice(ALLEGRO_VOICE voice);
+	public static native boolean al_register_sample_loader(String ext, AllegroLibrary.al_register_sample_loader_loader_callback loader);
+	public static native boolean al_register_sample_saver(String ext, AllegroLibrary.al_register_sample_saver_saver_callback saver);
+	public static native boolean al_register_audio_stream_loader(String ext, AllegroLibrary.al_register_audio_stream_loader_stream_loader_callback stream_loader);
+	public static native boolean al_register_sample_loader_f(String ext, AllegroLibrary.al_register_sample_loader_f_loader_callback loader);
+	public static native boolean al_register_sample_saver_f(String ext, AllegroLibrary.al_register_sample_saver_f_saver_callback saver);
+	public static native boolean al_register_audio_stream_loader_f(String ext, AllegroLibrary.al_register_audio_stream_loader_f_stream_loader_callback stream_loader);
+	
+	public static native ALLEGRO_SAMPLE al_load_sample(String filename);
+	public static native byte al_save_sample(String filename, ALLEGRO_SAMPLE spl);
+	public static native ALLEGRO_AUDIO_STREAM al_load_audio_stream(String filename, size_t buffer_count, int samples);
+	public static native ALLEGRO_SAMPLE al_load_sample_f(ALLEGRO_FILE fp, String ident);
+	public static native byte al_save_sample_f(ALLEGRO_FILE fp, String ident, ALLEGRO_SAMPLE spl);
+	public static native ALLEGRO_AUDIO_STREAM al_load_audio_stream_f(ALLEGRO_FILE fp, String ident, size_t buffer_count, int samples);
+
+	public static class ALLEGRO_SAMPLE extends PointerType {
+		public ALLEGRO_SAMPLE(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_SAMPLE() {
+			super();
+		}
+	}
+
+	public static class ALLEGRO_AUDIO_STREAM extends PointerType {
+		public ALLEGRO_AUDIO_STREAM(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_AUDIO_STREAM() {
+			super();
+		}
+	}
+
+	public static class ALLEGRO_MIXER extends PointerType {
+		public ALLEGRO_MIXER(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_MIXER() {
+			super();
+		}
+	}
+
+	public static class ALLEGRO_VOICE extends PointerType {
+		public ALLEGRO_VOICE(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_VOICE() {
+			super();
+		}
+	}
+
+	public static class ALLEGRO_SAMPLE_INSTANCE extends PointerType {
+		public ALLEGRO_SAMPLE_INSTANCE(Pointer address) {
+			super(address);
+		}
+		public ALLEGRO_SAMPLE_INSTANCE() {
+			super();
+		}
+	}
+
+	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */
 	public static class ALLEGRO_CONFIG extends PointerType {

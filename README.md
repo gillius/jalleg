@@ -41,7 +41,8 @@ There are 3 libraries built by the project:
 1. **jalleg-binding:** Contains the JNA-based bindings themselves to load and use the Allegro library.
 2. **jalleg-rt:** Optional, contains within a Windows 64-bit pre-built Allegro DLL. If this JAR is included in your
    project, JNA will automatically unpack the DLL and use it when on Windows. Other OS may be added in the future.
-3. **jalleg-example:** An example project using jalleg-binding and jalleg-rt.
+3. **jalleg-framework:** framework to make using the binding from Java easier and to support the examples.
+4. **jalleg-examples:** An example project using jalleg-binding and jalleg-rt.
 
 Currently since jalleg-rt is supporting Windows 64 bit only at this time, if you want to run jalleg on another OS, you
 need to have `allegro_monolith-5.2.dll` or `liballegro_monolith-5.2.so` in a location where the OS can load it (such as

@@ -20,6 +20,7 @@ public abstract class Game implements Runnable {
 	private EnumSet<AllegroAddon> initializedAddons = EnumSet.noneOf(AllegroAddon.class);
 
 	private double targetFrameRate = 60.0;
+	private String newWindowTitle = getClass().getSimpleName();
 
 	public double getTargetFrameRate() {
 		return targetFrameRate;
@@ -29,12 +30,21 @@ public abstract class Game implements Runnable {
 		this.targetFrameRate = targetFrameRate;
 	}
 
+	public String getNewWindowTitle() {
+		return newWindowTitle;
+	}
+
+	public void setNewWindowTitle(String newWindowTitle) {
+		this.newWindowTitle = newWindowTitle;
+	}
+
 	@Override
 	public void run() {
 		al_install_system(ALLEGRO_VERSION_INT, null);
 
 		eventQueue = al_create_event_queue();
 		mainTimer = al_create_timer(1.0 / targetFrameRate);
+		al_set_new_window_title(newWindowTitle);
 		mainDisplay = createDisplay();
 		if (mainDisplay == null)
 			throw new AllegroException("Unable to create display");

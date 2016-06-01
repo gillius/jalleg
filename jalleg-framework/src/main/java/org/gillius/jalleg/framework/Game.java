@@ -107,6 +107,14 @@ public abstract class Game implements Runnable {
 					checkInstall(al_init_font_addon(), addon);
 					break;
 
+				case Audio:
+					al_install_audio();
+					break;
+
+				case AudioCodecs:
+					al_init_acodec_addon();
+					break;
+
 				default:
 					throw new AssertionError("Unknown addon " + addon);
 			}
@@ -132,6 +140,14 @@ public abstract class Game implements Runnable {
 
 				case Font:
 					al_shutdown_font_addon();
+					break;
+
+				case Audio:
+					al_uninstall_audio();
+					break;
+
+				case AudioCodecs:
+					//There is no shutdown step for audio codecs
 					break;
 
 				default:

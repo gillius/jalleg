@@ -5,6 +5,7 @@ import org.gillius.jalleg.binding.ALLEGRO_FONT;
 import org.gillius.jalleg.binding.ALLEGRO_TRANSFORM;
 import org.gillius.jalleg.framework.AllegroAddon;
 import org.gillius.jalleg.framework.Game;
+import org.gillius.jalleg.framework.audio.SquareWave;
 import org.gillius.jalleg.framework.math.Rect;
 
 import java.util.Random;
@@ -34,9 +35,12 @@ public class BallAndPaddleGame extends Game {
 	private int leftScore;
 	private int rightScore;
 
+	private SquareWave squareWave;
+
 	@Override
 	protected void onAllegroStarted() {
-		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard);
+		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Audio);
+		al_reserve_samples(1);
 
 		black = al_map_rgb_f(0f, 0f, 0f);
 		white = al_map_rgb_f(1f, 1f, 1f);
@@ -46,6 +50,8 @@ public class BallAndPaddleGame extends Game {
 		rightPlayer = new Rect(94.5f, 45, 1, 10);
 
 		board = new Rect(0, 0, 100, 100);
+
+		squareWave = new SquareWave();
 
 		resetBall();
 	}
@@ -71,13 +77,19 @@ public class BallAndPaddleGame extends Game {
 
 		ball.move(balldX, balldY);
 
-		if (ball.collidesWith(rightPlayer) ||
-		    ball.collidesWith(leftPlayer))
+		if (ball.collidesWith(rightPlayer)) {
+			squareWave.play(0.1f, 200, gameTime + 0.1);
 			balldX *= -1.2f;
+		} else if (ball.collidesWith(leftPlayer)) {
+			squareWave.play(0.1f, 150, gameTime + 0.1);
+			balldX *= -1.2f;
+		}
 
 		if (ball.y <= board.y ||
-				ball.bottom() >= board.bottom())
+				ball.bottom() >= board.bottom()) {
 			balldY *= -1;
+			squareWave.play(0.1f, 125, gameTime + 0.1);
+		}
 
 		if (ball.right() > board.right()) {
 			leftScore++;
@@ -91,6 +103,8 @@ public class BallAndPaddleGame extends Game {
 
 		leftPlayer.constrain(board);
 		rightPlayer.constrain(board);
+
+		squareWave.update(gameTime);
 	}
 
 	@Override

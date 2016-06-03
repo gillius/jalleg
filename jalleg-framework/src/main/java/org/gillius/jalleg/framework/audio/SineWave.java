@@ -1,6 +1,8 @@
 package org.gillius.jalleg.framework.audio;
 
 public class SineWave implements MonoWaveform {
+	public static final SineWave INSTANCE = new SineWave();
+
 	@Override
 	public int getSamples() {
 		return 1000;

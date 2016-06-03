@@ -1,6 +1,8 @@
 package org.gillius.jalleg.framework.audio;
 
 public class TriangleWave implements MonoWaveform {
+	public static final TriangleWave INSTANCE = new TriangleWave();
+
 	@Override
 	public int getSamples() {
 		return 1000;

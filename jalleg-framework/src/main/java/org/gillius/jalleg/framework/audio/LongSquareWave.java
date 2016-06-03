@@ -5,7 +5,7 @@ package org.gillius.jalleg.framework.audio;
  * it still preserves its square shape.
  */
 public class LongSquareWave implements MonoWaveform {
-	public static LongSquareWave INSTANCE = new LongSquareWave();
+	public static final LongSquareWave INSTANCE = new LongSquareWave();
 
 	@Override
 	public int getSamples() {

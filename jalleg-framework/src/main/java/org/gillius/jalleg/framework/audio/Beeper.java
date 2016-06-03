@@ -5,7 +5,7 @@ package org.gillius.jalleg.framework.audio;
  */
 public class Beeper extends LoopingSingleInstanceSample {
 	public Beeper() {
-		super(new WaveformSample(LongSquareWave.INSTANCE));
+		super(new WaveformSample(SquareWave.INSTANCE));
 	}
 
 	public void beep(float frequency, double endTime) {

@@ -5,7 +5,7 @@ import org.gillius.jalleg.binding.ALLEGRO_FONT;
 import org.gillius.jalleg.binding.ALLEGRO_TRANSFORM;
 import org.gillius.jalleg.framework.AllegroAddon;
 import org.gillius.jalleg.framework.Game;
-import org.gillius.jalleg.framework.audio.SquareWave;
+import org.gillius.jalleg.framework.audio.Beeper;
 import org.gillius.jalleg.framework.math.Rect;
 
 import java.util.Random;
@@ -35,7 +35,7 @@ public class BallAndPaddleGame extends Game {
 	private int leftScore;
 	private int rightScore;
 
-	private SquareWave squareWave;
+	private Beeper beeper;
 
 	@Override
 	protected void onAllegroStarted() {
@@ -51,7 +51,8 @@ public class BallAndPaddleGame extends Game {
 
 		board = new Rect(0, 0, 100, 100);
 
-		squareWave = new SquareWave();
+		beeper = new Beeper();
+		beeper.setGain(0.1f);
 
 		resetBall();
 	}
@@ -78,17 +79,17 @@ public class BallAndPaddleGame extends Game {
 		ball.move(balldX, balldY);
 
 		if (ball.collidesWith(rightPlayer)) {
-			squareWave.play(0.1f, 200, gameTime + 0.1);
+			beeper.beep(200, gameTime + 0.1);
 			balldX *= -1.2f;
 		} else if (ball.collidesWith(leftPlayer)) {
-			squareWave.play(0.1f, 150, gameTime + 0.1);
+			beeper.beep(150, gameTime + 0.1);
 			balldX *= -1.2f;
 		}
 
 		if (ball.y <= board.y ||
 				ball.bottom() >= board.bottom()) {
 			balldY *= -1;
-			squareWave.play(0.1f, 125, gameTime + 0.1);
+			beeper.beep(125, gameTime + 0.1);
 		}
 
 		if (ball.right() > board.right()) {
@@ -104,7 +105,7 @@ public class BallAndPaddleGame extends Game {
 		leftPlayer.constrain(board);
 		rightPlayer.constrain(board);
 
-		squareWave.update(gameTime);
+		beeper.update(gameTime);
 	}
 
 	@Override
@@ -130,6 +131,15 @@ public class BallAndPaddleGame extends Game {
 
 	private void draw(Rect rect) {
 		al_draw_filled_rectangle(rect.left(), rect.top(), rect.right(), rect.bottom(), white);
+	}
+
+	@Override
+	protected void onStopped() {
+		try {
+			beeper.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void main(String[] args) {

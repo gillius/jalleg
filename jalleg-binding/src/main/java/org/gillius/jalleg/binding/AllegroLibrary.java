@@ -21,10 +21,7 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import com.sun.jna.Pointer;
 import com.sun.jna.PointerType;
-import com.sun.jna.ptr.FloatByReference;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import com.sun.jna.ptr.ShortByReference;
+import com.sun.jna.ptr.*;
 
 import java.nio.*;
 
@@ -584,121 +581,66 @@ public class AllegroLibrary implements Library {
 	public static native double al_get_time();
 	public static native void al_rest(double seconds);
 	public static native void al_init_timeout(ALLEGRO_TIMEOUT timeout, double seconds);
+
+	//Graphics routines
+	//Colors
 	public static native ALLEGRO_COLOR al_map_rgb(byte r, byte g, byte b);
 	public static native ALLEGRO_COLOR al_map_rgba(byte r, byte g, byte b, byte a);
 	public static native ALLEGRO_COLOR al_map_rgb_f(float r, float g, float b);
 	public static native ALLEGRO_COLOR al_map_rgba_f(float r, float g, float b, float a);
 	public static native ALLEGRO_COLOR al_premul_rgba(byte r, byte g, byte b, byte a);
 	public static native ALLEGRO_COLOR al_premul_rgba_f(float r, float g, float b, float a);
-	@Deprecated 
-	public static native void al_unmap_rgb(ALLEGRO_COLOR color, Pointer r, Pointer g, Pointer b);
-	public static native void al_unmap_rgb(ALLEGRO_COLOR color, ByteBuffer r, ByteBuffer g, ByteBuffer b);
-	@Deprecated 
-	public static native void al_unmap_rgba(ALLEGRO_COLOR color, Pointer r, Pointer g, Pointer b, Pointer a);
-	public static native void al_unmap_rgba(ALLEGRO_COLOR color, ByteBuffer r, ByteBuffer g, ByteBuffer b, ByteBuffer a);
-	@Deprecated 
+	public static native void al_unmap_rgb(ALLEGRO_COLOR color, ByteByReference r, ByteByReference g, ByteByReference b);
+	public static native void al_unmap_rgba(ALLEGRO_COLOR color, ByteByReference r, ByteByReference g, ByteByReference b, ByteByReference a);
 	public static native void al_unmap_rgb_f(ALLEGRO_COLOR color, FloatByReference r, FloatByReference g, FloatByReference b);
-	public static native void al_unmap_rgb_f(ALLEGRO_COLOR color, FloatBuffer r, FloatBuffer g, FloatBuffer b);
-	@Deprecated 
 	public static native void al_unmap_rgba_f(ALLEGRO_COLOR color, FloatByReference r, FloatByReference g, FloatByReference b, FloatByReference a);
-	public static native void al_unmap_rgba_f(ALLEGRO_COLOR color, FloatBuffer r, FloatBuffer g, FloatBuffer b, FloatBuffer a);
+	//Locking and pixel formats
 	public static native int al_get_pixel_size(int format);
 	public static native int al_get_pixel_format_bits(int format);
 	public static native int al_get_pixel_block_size(int format);
 	public static native int al_get_pixel_block_width(int format);
 	public static native int al_get_pixel_block_height(int format);
+	//Other
 	public static native void al_set_new_bitmap_format(int format);
 	public static native void al_set_new_bitmap_flags(int flags);
 	public static native int al_get_new_bitmap_format();
 	public static native int al_get_new_bitmap_flags();
 	public static native void al_add_new_bitmap_flag(int flag);
-	@Deprecated 
-	public static native int al_get_bitmap_width(Pointer bitmap);
-	public static native int al_get_bitmap_width(PointerByReference bitmap);
-	@Deprecated 
-	public static native int al_get_bitmap_height(Pointer bitmap);
-	public static native int al_get_bitmap_height(PointerByReference bitmap);
-	@Deprecated 
-	public static native int al_get_bitmap_format(Pointer bitmap);
-	public static native int al_get_bitmap_format(PointerByReference bitmap);
-	@Deprecated 
-	public static native int al_get_bitmap_flags(Pointer bitmap);
-	public static native int al_get_bitmap_flags(PointerByReference bitmap);
-	public static native PointerByReference al_create_bitmap(int w, int h);
-	@Deprecated 
-	public static native void al_destroy_bitmap(Pointer bitmap);
-	public static native void al_destroy_bitmap(PointerByReference bitmap);
+	public static native int al_get_bitmap_width(ALLEGRO_BITMAP bitmap);
+	public static native int al_get_bitmap_height(ALLEGRO_BITMAP bitmap);
+	public static native int al_get_bitmap_format(ALLEGRO_BITMAP bitmap);
+	public static native int al_get_bitmap_flags(ALLEGRO_BITMAP bitmap);
+	public static native ALLEGRO_BITMAP al_create_bitmap(int w, int h);
+	public static native void al_destroy_bitmap(ALLEGRO_BITMAP bitmap);
 	public static native void al_put_pixel(int x, int y, ALLEGRO_COLOR color);
 	public static native void al_put_blended_pixel(int x, int y, ALLEGRO_COLOR color);
-	@Deprecated 
-	public static native ALLEGRO_COLOR al_get_pixel(Pointer bitmap, int x, int y);
-	public static native ALLEGRO_COLOR al_get_pixel(PointerByReference bitmap, int x, int y);
-	@Deprecated 
-	public static native void al_convert_mask_to_alpha(Pointer bitmap, ALLEGRO_COLOR mask_color);
-	public static native void al_convert_mask_to_alpha(PointerByReference bitmap, ALLEGRO_COLOR mask_color);
+	public static native ALLEGRO_COLOR al_get_pixel(ALLEGRO_BITMAP bitmap, int x, int y);
+	public static native void al_convert_mask_to_alpha(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR mask_color);
 	public static native void al_set_clipping_rectangle(int x, int y, int width, int height);
 	public static native void al_reset_clipping_rectangle();
-	@Deprecated 
 	public static native void al_get_clipping_rectangle(IntByReference x, IntByReference y, IntByReference w, IntByReference h);
-	public static native void al_get_clipping_rectangle(IntBuffer x, IntBuffer y, IntBuffer w, IntBuffer h);
-	@Deprecated 
-	public static native PointerByReference al_create_sub_bitmap(Pointer parent, int x, int y, int w, int h);
-	public static native PointerByReference al_create_sub_bitmap(PointerByReference parent, int x, int y, int w, int h);
-	@Deprecated 
-	public static native byte al_is_sub_bitmap(Pointer bitmap);
-	public static native byte al_is_sub_bitmap(PointerByReference bitmap);
-	@Deprecated 
-	public static native PointerByReference al_get_parent_bitmap(Pointer bitmap);
-	public static native PointerByReference al_get_parent_bitmap(PointerByReference bitmap);
-	@Deprecated 
-	public static native int al_get_bitmap_x(Pointer bitmap);
-	public static native int al_get_bitmap_x(PointerByReference bitmap);
-	@Deprecated 
-	public static native int al_get_bitmap_y(Pointer bitmap);
-	public static native int al_get_bitmap_y(PointerByReference bitmap);
-	@Deprecated 
-	public static native void al_reparent_bitmap(Pointer bitmap, Pointer parent, int x, int y, int w, int h);
-	public static native void al_reparent_bitmap(PointerByReference bitmap, PointerByReference parent, int x, int y, int w, int h);
-	@Deprecated 
-	public static native PointerByReference al_clone_bitmap(Pointer bitmap);
-	public static native PointerByReference al_clone_bitmap(PointerByReference bitmap);
-	@Deprecated 
-	public static native void al_convert_bitmap(Pointer bitmap);
-	public static native void al_convert_bitmap(PointerByReference bitmap);
+	public static native ALLEGRO_BITMAP al_create_sub_bitmap(ALLEGRO_BITMAP parent, int x, int y, int w, int h);
+	public static native boolean al_is_sub_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native ALLEGRO_BITMAP al_get_parent_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native int al_get_bitmap_x(ALLEGRO_BITMAP bitmap);
+	public static native int al_get_bitmap_y(ALLEGRO_BITMAP bitmap);
+	public static native void al_reparent_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_BITMAP parent, int x, int y, int w, int h);
+	public static native ALLEGRO_BITMAP al_clone_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native void al_convert_bitmap(ALLEGRO_BITMAP bitmap);
 	public static native void al_convert_memory_bitmaps();
-	@Deprecated 
-	public static native void al_draw_bitmap(Pointer bitmap, float dx, float dy, int flags);
-	public static native void al_draw_bitmap(PointerByReference bitmap, float dx, float dy, int flags);
-	@Deprecated 
-	public static native void al_draw_bitmap_region(Pointer bitmap, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
-	public static native void al_draw_bitmap_region(PointerByReference bitmap, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
-	@Deprecated 
-	public static native void al_draw_scaled_bitmap(Pointer bitmap, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
-	public static native void al_draw_scaled_bitmap(PointerByReference bitmap, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
-	@Deprecated 
-	public static native void al_draw_rotated_bitmap(Pointer bitmap, float cx, float cy, float dx, float dy, float angle, int flags);
-	public static native void al_draw_rotated_bitmap(PointerByReference bitmap, float cx, float cy, float dx, float dy, float angle, int flags);
-	@Deprecated 
-	public static native void al_draw_scaled_rotated_bitmap(Pointer bitmap, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
-	public static native void al_draw_scaled_rotated_bitmap(PointerByReference bitmap, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_bitmap(Pointer bitmap, ALLEGRO_COLOR tint, float dx, float dy, int flags);
-	public static native void al_draw_tinted_bitmap(PointerByReference bitmap, ALLEGRO_COLOR tint, float dx, float dy, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_bitmap_region(Pointer bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
-	public static native void al_draw_tinted_bitmap_region(PointerByReference bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_scaled_bitmap(Pointer bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
-	public static native void al_draw_tinted_scaled_bitmap(PointerByReference bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_rotated_bitmap(Pointer bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float angle, int flags);
-	public static native void al_draw_tinted_rotated_bitmap(PointerByReference bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float angle, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_scaled_rotated_bitmap(Pointer bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
-	public static native void al_draw_tinted_scaled_rotated_bitmap(PointerByReference bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
-	@Deprecated 
-	public static native void al_draw_tinted_scaled_rotated_bitmap_region(Pointer bitmap, float sx, float sy, float sw, float sh, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
-	public static native void al_draw_tinted_scaled_rotated_bitmap_region(PointerByReference bitmap, float sx, float sy, float sw, float sh, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
+	//Drawing operations
+	public static native void al_draw_bitmap(ALLEGRO_BITMAP bitmap, float dx, float dy, int flags);
+	public static native void al_draw_bitmap_region(ALLEGRO_BITMAP bitmap, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
+	public static native void al_draw_scaled_bitmap(ALLEGRO_BITMAP bitmap, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
+	public static native void al_draw_rotated_bitmap(ALLEGRO_BITMAP bitmap, float cx, float cy, float dx, float dy, float angle, int flags);
+	public static native void al_draw_scaled_rotated_bitmap(ALLEGRO_BITMAP bitmap, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
+	public static native void al_draw_tinted_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float dx, float dy, int flags);
+	public static native void al_draw_tinted_bitmap_region(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, int flags);
+	public static native void al_draw_tinted_scaled_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh, int flags);
+	public static native void al_draw_tinted_rotated_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float angle, int flags);
+	public static native void al_draw_tinted_scaled_rotated_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
+	public static native void al_draw_tinted_scaled_rotated_bitmap_region(ALLEGRO_BITMAP bitmap, float sx, float sy, float sw, float sh, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
+
 	@Deprecated 
 	public static native PointerByReference al_create_path(Pointer str);
 	public static native PointerByReference al_create_path(String str);

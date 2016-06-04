@@ -892,114 +892,49 @@ public class AllegroLibrary implements Library {
 	@Deprecated 
 	public static native size_t al_utf16_encode(ShortByReference s, int c);
 	public static native size_t al_utf16_encode(ShortBuffer s, int c);
-	@Deprecated 
-	public static native PointerByReference al_fopen(Pointer path, Pointer mode);
-	public static native PointerByReference al_fopen(String path, String mode);
-	@Deprecated 
-	public static native PointerByReference al_fopen_interface(ALLEGRO_FILE_INTERFACE vt, Pointer path, Pointer mode);
-	public static native PointerByReference al_fopen_interface(ALLEGRO_FILE_INTERFACE vt, String path, String mode);
-	public static native PointerByReference al_create_file_handle(ALLEGRO_FILE_INTERFACE vt, Pointer userdata);
-	@Deprecated 
-	public static native byte al_fclose(Pointer f);
-	public static native byte al_fclose(PointerByReference f);
-	@Deprecated 
-	public static native size_t al_fread(Pointer f, Pointer ptr, size_t size);
-	public static native size_t al_fread(PointerByReference f, Pointer ptr, size_t size);
-	@Deprecated 
-	public static native size_t al_fwrite(Pointer f, Pointer ptr, size_t size);
-	public static native size_t al_fwrite(PointerByReference f, Pointer ptr, size_t size);
-	@Deprecated 
-	public static native byte al_fflush(Pointer f);
-	public static native byte al_fflush(PointerByReference f);
-	@Deprecated 
-	public static native long al_ftell(Pointer f);
-	public static native long al_ftell(PointerByReference f);
-	@Deprecated 
-	public static native byte al_fseek(Pointer f, long offset, int whence);
-	public static native byte al_fseek(PointerByReference f, long offset, int whence);
-	@Deprecated 
-	public static native byte al_feof(Pointer f);
-	public static native byte al_feof(PointerByReference f);
-	@Deprecated 
-	public static native int al_ferror(Pointer f);
-	public static native int al_ferror(PointerByReference f);
-	@Deprecated 
-	public static native Pointer al_ferrmsg(Pointer f);
-	public static native Pointer al_ferrmsg(PointerByReference f);
-	@Deprecated 
-	public static native void al_fclearerr(Pointer f);
-	public static native void al_fclearerr(PointerByReference f);
-	@Deprecated 
-	public static native int al_fungetc(Pointer f, int c);
-	public static native int al_fungetc(PointerByReference f, int c);
-	@Deprecated 
-	public static native long al_fsize(Pointer f);
-	public static native long al_fsize(PointerByReference f);
-	@Deprecated 
-	public static native int al_fgetc(Pointer f);
-	public static native int al_fgetc(PointerByReference f);
-	@Deprecated 
-	public static native int al_fputc(Pointer f, int c);
-	public static native int al_fputc(PointerByReference f, int c);
-	@Deprecated 
-	public static native short al_fread16le(Pointer f);
-	public static native short al_fread16le(PointerByReference f);
-	@Deprecated 
-	public static native short al_fread16be(Pointer f);
-	public static native short al_fread16be(PointerByReference f);
-	@Deprecated 
-	public static native size_t al_fwrite16le(Pointer f, short w);
-	public static native size_t al_fwrite16le(PointerByReference f, short w);
-	@Deprecated 
-	public static native size_t al_fwrite16be(Pointer f, short w);
-	public static native size_t al_fwrite16be(PointerByReference f, short w);
-	@Deprecated 
-	public static native int al_fread32le(Pointer f);
-	public static native int al_fread32le(PointerByReference f);
-	@Deprecated 
-	public static native int al_fread32be(Pointer f);
-	public static native int al_fread32be(PointerByReference f);
-	@Deprecated 
-	public static native size_t al_fwrite32le(Pointer f, int l);
-	public static native size_t al_fwrite32le(PointerByReference f, int l);
-	@Deprecated 
-	public static native size_t al_fwrite32be(Pointer f, int l);
-	public static native size_t al_fwrite32be(PointerByReference f, int l);
-	@Deprecated 
-	public static native Pointer al_fgets(Pointer f, Pointer p, size_t max);
-	public static native Pointer al_fgets(PointerByReference f, String p, size_t max);
-	public static native Pointer al_fgets(PointerByReference f, Pointer p, size_t max);
-	@Deprecated 
-	public static native ALLEGRO_USTR al_fget_ustr(Pointer f);
-	public static native ALLEGRO_USTR al_fget_ustr(PointerByReference f);
-	@Deprecated 
-	public static native int al_fputs(Pointer f, Pointer p);
-	public static native int al_fputs(PointerByReference f, String p);
-	public static native int al_fputs(PointerByReference f, Pointer p);
-//	@Deprecated
-//	public static native int al_fprintf(Pointer f, Pointer format, Object... varArgs1);
-//	public static native int al_fprintf(PointerByReference f, String format, Object... varArgs1);
-//	public static native int al_fprintf(PointerByReference f, Pointer format, Object... varArgs1);
-//	@Deprecated
-//	public static native int al_vfprintf(Pointer f, Pointer format, Object... args);
-//	public static native int al_vfprintf(PointerByReference f, String format, Object... args);
-//	public static native int al_vfprintf(PointerByReference f, Pointer format, Object... args);
-	@Deprecated 
-	public static native PointerByReference al_fopen_fd(int fd, Pointer mode);
-	public static native PointerByReference al_fopen_fd(int fd, String mode);
-	@Deprecated 
-	public static native PointerByReference al_make_temp_file(Pointer tmpl, PointerByReference ret_path);
-	public static native PointerByReference al_make_temp_file(String tmpl, PointerByReference ret_path);
-	@Deprecated 
-	public static native PointerByReference al_fopen_slice(Pointer fp, size_t initial_size, Pointer mode);
-	public static native PointerByReference al_fopen_slice(PointerByReference fp, size_t initial_size, String mode);
-	public static native PointerByReference al_fopen_slice(PointerByReference fp, size_t initial_size, Pointer mode);
+
+	//File I/O
+	public static native ALLEGRO_FILE al_fopen(String path, String mode);
+	public static native ALLEGRO_FILE al_fopen_interface(ALLEGRO_FILE_INTERFACE vt, String path, String mode);
+	public static native ALLEGRO_FILE al_create_file_handle(ALLEGRO_FILE_INTERFACE vt, Pointer userdata);
+	public static native boolean al_fclose(ALLEGRO_FILE f);
+	public static native size_t al_fread(ALLEGRO_FILE f, Pointer ptr, size_t size);
+	public static native size_t al_fread(ALLEGRO_FILE f, Buffer ptr, size_t size);
+	public static native size_t al_fwrite(ALLEGRO_FILE f, Pointer ptr, size_t size);
+	public static native size_t al_fwrite(ALLEGRO_FILE f, Buffer ptr, size_t size);
+	public static native boolean al_fflush(ALLEGRO_FILE f);
+	public static native long al_ftell(ALLEGRO_FILE f);
+	public static native boolean al_fseek(ALLEGRO_FILE f, long offset, int whence);
+	public static native boolean al_feof(ALLEGRO_FILE f);
+	public static native int al_ferror(ALLEGRO_FILE f);
+	public static native Pointer al_ferrmsg(ALLEGRO_FILE f);
+	public static native void al_fclearerr(ALLEGRO_FILE f);
+	public static native int al_fungetc(ALLEGRO_FILE f, int c);
+	public static native long al_fsize(ALLEGRO_FILE f);
+	public static native int al_fgetc(ALLEGRO_FILE f);
+	public static native int al_fputc(ALLEGRO_FILE f, int c);
+	public static native short al_fread16le(ALLEGRO_FILE f);
+	public static native short al_fread16be(ALLEGRO_FILE f);
+	public static native size_t al_fwrite16le(ALLEGRO_FILE f, short w);
+	public static native size_t al_fwrite16be(ALLEGRO_FILE f, short w);
+	public static native int al_fread32le(ALLEGRO_FILE f);
+	public static native int al_fread32be(ALLEGRO_FILE f);
+	public static native size_t al_fwrite32le(ALLEGRO_FILE f, int l);
+	public static native size_t al_fwrite32be(ALLEGRO_FILE f, int l);
+	public static native Pointer al_fgets(ALLEGRO_FILE f, Pointer p, size_t max);
+	public static native ALLEGRO_USTR al_fget_ustr(ALLEGRO_FILE f);
+	public static native int al_fputs(ALLEGRO_FILE f, Pointer p);
+	//TODO: how to map the following in JNA direct mapping, which can't handle arrays or varargs?
+//	public static native int al_fprintf(ALLEGRO_FILE f, Pointer format, Object... varArgs1);
+//	public static native int al_vfprintf(ALLEGRO_FILE f, Pointer format, Object... args);
+	public static native ALLEGRO_FILE al_fopen_fd(int fd, String mode);
+//	public static native ALLEGRO_FILE al_make_temp_file(String tmpl, ALLEGRO_PATH[] ret_path);
+	public static native ALLEGRO_FILE al_fopen_slice(ALLEGRO_FILE fp, size_t initial_size, String mode);
 	public static native ALLEGRO_FILE_INTERFACE al_get_new_file_interface();
 	public static native void al_set_new_file_interface(ALLEGRO_FILE_INTERFACE file_interface);
 	public static native void al_set_standard_file_interface();
-	@Deprecated 
-	public static native Pointer al_get_file_userdata(Pointer f);
-	public static native Pointer al_get_file_userdata(PointerByReference f);
+	public static native Pointer al_get_file_userdata(ALLEGRO_FILE f);
+
 	@Deprecated 
 	public static native byte al_register_bitmap_loader(Pointer ext, AllegroLibrary.ALLEGRO_IIO_LOADER_FUNCTION loader);
 	public static native byte al_register_bitmap_loader(String ext, AllegroLibrary.ALLEGRO_IIO_LOADER_FUNCTION loader);

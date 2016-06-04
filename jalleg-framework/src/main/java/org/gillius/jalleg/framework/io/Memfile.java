@@ -42,6 +42,7 @@ public class Memfile implements AutoCloseable {
 	 * Creates a Memfile by copying the given data.
 	 */
 	public Memfile(byte[] data, int offset, int length) {
+		this.length = length;
 		memory = al_malloc(length);
 		memory.write(0, data, offset, length);
 		file = al_open_memfile(memory, length, "rw");
@@ -51,6 +52,7 @@ public class Memfile implements AutoCloseable {
 	 * Creates a Memfile of a fixed size for writing.
 	 */
 	public Memfile(int size) {
+		length = size;
 		memory = al_malloc(length);
 		file = al_open_memfile(memory, length, "w");
 	}

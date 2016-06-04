@@ -25,20 +25,48 @@ public class Rect {
 		y += dy;
 	}
 
-	public void constrain(Rect other) {
+	public void constrainWithin(Rect other) {
 		float dx = 0f;
 		float dy = 0f;
-		if (x < other.x)
+		if (leftOf(other))
 			dx = other.x - x;
-		else if (right() > other.right())
+		else if (rightOf(other))
 			dx = other.right() - right();
 
-		if (y < other.y)
+		if (above(other))
 			dy = other.y - y;
-		else if (bottom() > other.bottom())
+		else if (below(other))
 			dy = other.bottom() - bottom();
 
 		move(dx, dy);
+	}
+
+	public boolean leftOf(Rect other) {
+		return x < other.x;
+	}
+
+	public boolean rightOf(Rect other) {
+		return right() > other.right();
+	}
+
+	public boolean outsideX(Rect other) {
+		return leftOf(other) || rightOf(other);
+	}
+
+	public boolean above(Rect other) {
+		return y < other.y;
+	}
+
+	public boolean below(Rect other) {
+		return bottom() > other.bottom();
+	}
+
+	public boolean outsideY(Rect other) {
+		return above(other) || below(other);
+	}
+
+	public boolean outside(Rect other) {
+		return outsideX(other) || outsideY(other);
 	}
 
 	public float left() {

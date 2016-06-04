@@ -100,8 +100,8 @@ public class BallAndPaddleGame extends Game {
 			resetBall();
 		}
 
-		leftPlayer.constrain(board);
-		rightPlayer.constrain(board);
+		leftPlayer.constrainWithin(board);
+		rightPlayer.constrainWithin(board);
 
 		beeper.update(gameTime);
 	}

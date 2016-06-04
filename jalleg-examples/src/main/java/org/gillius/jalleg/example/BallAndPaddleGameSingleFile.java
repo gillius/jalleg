@@ -133,8 +133,8 @@ public class BallAndPaddleGameSingleFile {
 			resetBall();
 		}
 
-		leftPlayer.constrain(board);
-		rightPlayer.constrain(board);
+		leftPlayer.constrainWithin(board);
+		rightPlayer.constrainWithin(board);
 	}
 
 	static void render() {

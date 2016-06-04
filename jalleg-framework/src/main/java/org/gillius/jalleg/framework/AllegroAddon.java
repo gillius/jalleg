@@ -5,5 +5,6 @@ public enum AllegroAddon {
 	Primitives,
 	Font,
 	Audio,
-	AudioCodecs
+	AudioCodecs,
+	Image
 }

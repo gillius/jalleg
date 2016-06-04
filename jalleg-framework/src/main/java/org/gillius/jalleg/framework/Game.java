@@ -115,6 +115,10 @@ public abstract class Game implements Runnable {
 					al_init_acodec_addon();
 					break;
 
+				case Image:
+					al_init_image_addon();
+					break;
+
 				default:
 					throw new AssertionError("Unknown addon " + addon);
 			}
@@ -148,6 +152,10 @@ public abstract class Game implements Runnable {
 
 				case AudioCodecs:
 					//There is no shutdown step for audio codecs
+					break;
+
+				case Image:
+					al_shutdown_image_addon();
 					break;
 
 				default:

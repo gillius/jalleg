@@ -1924,6 +1924,11 @@ public class AllegroLibrary implements Library {
 	public static native boolean al_init_acodec_addon();
 	public static native int al_get_allegro_acodec_version();
 
+	//Image I/O addon
+	public static native boolean al_init_image_addon();
+	public static native void al_shutdown_image_addon();
+	public static native int al_get_allegro_image_version();
+
 	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */

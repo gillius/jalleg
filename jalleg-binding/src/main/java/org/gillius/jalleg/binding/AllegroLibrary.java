@@ -935,67 +935,26 @@ public class AllegroLibrary implements Library {
 	public static native void al_set_standard_file_interface();
 	public static native Pointer al_get_file_userdata(ALLEGRO_FILE f);
 
-	@Deprecated 
-	public static native byte al_register_bitmap_loader(Pointer ext, AllegroLibrary.ALLEGRO_IIO_LOADER_FUNCTION loader);
-	public static native byte al_register_bitmap_loader(String ext, AllegroLibrary.ALLEGRO_IIO_LOADER_FUNCTION loader);
-	@Deprecated 
-	public static native byte al_register_bitmap_saver(Pointer ext, AllegroLibrary.ALLEGRO_IIO_SAVER_FUNCTION saver);
-	public static native byte al_register_bitmap_saver(String ext, AllegroLibrary.ALLEGRO_IIO_SAVER_FUNCTION saver);
-	@Deprecated 
-	public static native byte al_register_bitmap_loader_f(Pointer ext, AllegroLibrary.ALLEGRO_IIO_FS_LOADER_FUNCTION fs_loader);
-	public static native byte al_register_bitmap_loader_f(String ext, AllegroLibrary.ALLEGRO_IIO_FS_LOADER_FUNCTION fs_loader);
-	@Deprecated 
-	public static native byte al_register_bitmap_saver_f(Pointer ext, AllegroLibrary.ALLEGRO_IIO_FS_SAVER_FUNCTION fs_saver);
-	public static native byte al_register_bitmap_saver_f(String ext, AllegroLibrary.ALLEGRO_IIO_FS_SAVER_FUNCTION fs_saver);
-	@Deprecated 
-	public static native byte al_register_bitmap_identifier(Pointer ext, AllegroLibrary.ALLEGRO_IIO_IDENTIFIER_FUNCTION identifier);
-	public static native byte al_register_bitmap_identifier(String ext, AllegroLibrary.ALLEGRO_IIO_IDENTIFIER_FUNCTION identifier);
-	@Deprecated 
-	public static native PointerByReference al_load_bitmap(Pointer filename);
-	public static native PointerByReference al_load_bitmap(String filename);
-	@Deprecated 
-	public static native PointerByReference al_load_bitmap_flags(Pointer filename, int flags);
-	public static native PointerByReference al_load_bitmap_flags(String filename, int flags);
-	@Deprecated 
-	public static native PointerByReference al_load_bitmap_f(Pointer fp, Pointer ident);
-	public static native PointerByReference al_load_bitmap_f(PointerByReference fp, String ident);
-	public static native PointerByReference al_load_bitmap_f(PointerByReference fp, Pointer ident);
-	@Deprecated 
-	public static native PointerByReference al_load_bitmap_flags_f(Pointer fp, Pointer ident, int flags);
-	public static native PointerByReference al_load_bitmap_flags_f(PointerByReference fp, String ident, int flags);
-	public static native PointerByReference al_load_bitmap_flags_f(PointerByReference fp, Pointer ident, int flags);
-	@Deprecated 
-	public static native byte al_save_bitmap(Pointer filename, Pointer bitmap);
-	public static native byte al_save_bitmap(String filename, PointerByReference bitmap);
-	public static native byte al_save_bitmap(Pointer filename, PointerByReference bitmap);
-	@Deprecated 
-	public static native byte al_save_bitmap_f(Pointer fp, Pointer ident, Pointer bitmap);
-	public static native byte al_save_bitmap_f(PointerByReference fp, String ident, PointerByReference bitmap);
-	public static native byte al_save_bitmap_f(PointerByReference fp, Pointer ident, PointerByReference bitmap);
-	@Deprecated 
-	public static native Pointer al_identify_bitmap_f(Pointer fp);
-	public static native Pointer al_identify_bitmap_f(PointerByReference fp);
-	@Deprecated 
-	public static native Pointer al_identify_bitmap(Pointer filename);
-	public static native Pointer al_identify_bitmap(String filename);
-	@Deprecated 
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap(Pointer bitmap, int format, int flags);
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap(PointerByReference bitmap, int format, int flags);
-	@Deprecated 
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region(Pointer bitmap, int x, int y, int width, int height, int format, int flags);
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region(PointerByReference bitmap, int x, int y, int width, int height, int format, int flags);
-	@Deprecated 
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_blocked(Pointer bitmap, int flags);
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_blocked(PointerByReference bitmap, int flags);
-	@Deprecated 
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region_blocked(Pointer bitmap, int x_block, int y_block, int width_block, int height_block, int flags);
-	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region_blocked(PointerByReference bitmap, int x_block, int y_block, int width_block, int height_block, int flags);
-	@Deprecated 
-	public static native void al_unlock_bitmap(Pointer bitmap);
-	public static native void al_unlock_bitmap(PointerByReference bitmap);
-	@Deprecated 
-	public static native byte al_is_bitmap_locked(Pointer bitmap);
-	public static native byte al_is_bitmap_locked(PointerByReference bitmap);
+	public static native boolean al_register_bitmap_loader(String ext, AllegroLibrary.ALLEGRO_IIO_LOADER_FUNCTION loader);
+	public static native boolean al_register_bitmap_saver(String ext, AllegroLibrary.ALLEGRO_IIO_SAVER_FUNCTION saver);
+	public static native boolean al_register_bitmap_loader_f(String ext, AllegroLibrary.ALLEGRO_IIO_FS_LOADER_FUNCTION fs_loader);
+	public static native boolean al_register_bitmap_saver_f(String ext, AllegroLibrary.ALLEGRO_IIO_FS_SAVER_FUNCTION fs_saver);
+	public static native boolean al_register_bitmap_identifier(String ext, AllegroLibrary.ALLEGRO_IIO_IDENTIFIER_FUNCTION identifier);
+	public static native ALLEGRO_BITMAP al_load_bitmap(String filename);
+	public static native ALLEGRO_BITMAP al_load_bitmap_flags(String filename, int flags);
+	public static native ALLEGRO_BITMAP al_load_bitmap_f(ALLEGRO_FILE fp, Pointer ident);
+	public static native ALLEGRO_BITMAP al_load_bitmap_flags_f(ALLEGRO_FILE fp, Pointer ident, int flags);
+	public static native boolean al_save_bitmap(Pointer filename, ALLEGRO_BITMAP bitmap);
+	public static native boolean al_save_bitmap_f(ALLEGRO_FILE fp, Pointer ident, ALLEGRO_BITMAP bitmap);
+	public static native String al_identify_bitmap_f(ALLEGRO_FILE fp);
+	public static native String al_identify_bitmap(String filename);
+	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap(ALLEGRO_BITMAP bitmap, int format, int flags);
+	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region(ALLEGRO_BITMAP bitmap, int x, int y, int width, int height, int format, int flags);
+	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_blocked(ALLEGRO_BITMAP bitmap, int flags);
+	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap_region_blocked(ALLEGRO_BITMAP bitmap, int x_block, int y_block, int width_block, int height_block, int flags);
+	public static native void al_unlock_bitmap(ALLEGRO_BITMAP bitmap);
+	public static native boolean al_is_bitmap_locked(ALLEGRO_BITMAP bitmap);
+	
 	public static native void al_set_blender(int op, int source, int dest);
 	public static native void al_set_blend_color(ALLEGRO_COLOR color);
 	@Deprecated 

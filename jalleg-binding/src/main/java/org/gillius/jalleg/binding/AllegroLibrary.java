@@ -1929,6 +1929,11 @@ public class AllegroLibrary implements Library {
 	public static native void al_shutdown_image_addon();
 	public static native int al_get_allegro_image_version();
 
+	//Memfile addon
+	public static native ALLEGRO_FILE al_open_memfile(Pointer mem, long size, String mode);
+	public static native ALLEGRO_FILE al_open_memfile(ByteBuffer mem, long size, String mode);
+	public static native int al_get_allegro_memfile_version();
+
 	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */

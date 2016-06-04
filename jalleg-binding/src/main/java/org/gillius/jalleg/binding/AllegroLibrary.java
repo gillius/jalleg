@@ -942,10 +942,10 @@ public class AllegroLibrary implements Library {
 	public static native boolean al_register_bitmap_identifier(String ext, AllegroLibrary.ALLEGRO_IIO_IDENTIFIER_FUNCTION identifier);
 	public static native ALLEGRO_BITMAP al_load_bitmap(String filename);
 	public static native ALLEGRO_BITMAP al_load_bitmap_flags(String filename, int flags);
-	public static native ALLEGRO_BITMAP al_load_bitmap_f(ALLEGRO_FILE fp, Pointer ident);
-	public static native ALLEGRO_BITMAP al_load_bitmap_flags_f(ALLEGRO_FILE fp, Pointer ident, int flags);
+	public static native ALLEGRO_BITMAP al_load_bitmap_f(ALLEGRO_FILE fp, String ident);
+	public static native ALLEGRO_BITMAP al_load_bitmap_flags_f(ALLEGRO_FILE fp, String ident, int flags);
 	public static native boolean al_save_bitmap(Pointer filename, ALLEGRO_BITMAP bitmap);
-	public static native boolean al_save_bitmap_f(ALLEGRO_FILE fp, Pointer ident, ALLEGRO_BITMAP bitmap);
+	public static native boolean al_save_bitmap_f(ALLEGRO_FILE fp, String ident, ALLEGRO_BITMAP bitmap);
 	public static native String al_identify_bitmap_f(ALLEGRO_FILE fp);
 	public static native String al_identify_bitmap(String filename);
 	public static native ALLEGRO_LOCKED_REGION al_lock_bitmap(ALLEGRO_BITMAP bitmap, int format, int flags);

@@ -1,5 +1,6 @@
 package org.gillius.jalleg.framework;
 
+import org.gillius.jalleg.binding.ALLEGRO_COLOR;
 import org.gillius.jalleg.binding.ALLEGRO_EVENT;
 import org.gillius.jalleg.binding.ALLEGRO_KEYBOARD_STATE;
 import org.gillius.jalleg.binding.ALLEGRO_TIMER_EVENT;
@@ -22,6 +23,8 @@ public abstract class Game implements Runnable {
 	private double targetFrameRate = 60.0;
 	private String newWindowTitle = getClass().getSimpleName();
 
+	private ALLEGRO_COLOR clearColor = null;
+
 	public double getTargetFrameRate() {
 		return targetFrameRate;
 	}
@@ -38,6 +41,14 @@ public abstract class Game implements Runnable {
 		this.newWindowTitle = newWindowTitle;
 	}
 
+	public ALLEGRO_COLOR getClearColor() {
+		return clearColor;
+	}
+
+	public void setClearColor(ALLEGRO_COLOR clearColor) {
+		this.clearColor = clearColor;
+	}
+
 	@Override
 	public void run() {
 		al_install_system(ALLEGRO_VERSION_INT, null);
@@ -48,11 +59,19 @@ public abstract class Game implements Runnable {
 		mainDisplay = createDisplay();
 		if (mainDisplay == null)
 			throw new AllegroException("Unable to create display");
+		clearColor = al_map_rgb((byte)0, (byte)0, (byte)0);
 
 		al_register_event_source(eventQueue, al_get_timer_event_source(mainTimer));
 		al_register_event_source(eventQueue, al_get_display_event_source(mainDisplay));
 
-		onAllegroStarted();
+		try {
+			onAllegroStarted();
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			//Have a better handing for game startup issues
+			throw new RuntimeException(e);
+		}
 
 		ALLEGRO_EVENT event = new ALLEGRO_EVENT();
 		keys = new ALLEGRO_KEYBOARD_STATE();
@@ -78,6 +97,8 @@ public abstract class Game implements Runnable {
 			}
 
 			if (al_is_event_queue_empty(eventQueue)) {
+				if (clearColor != null)
+					al_clear_to_color(clearColor);
 				render();
 				al_flip_display();
 			}
@@ -165,7 +186,7 @@ public abstract class Game implements Runnable {
 		initializedAddons.clear();
 	}
 
-	protected void onAllegroStarted() {}
+	protected void onAllegroStarted() throws Exception {}
 
 	protected ALLEGRO_DISPLAY createDisplay() {
 		return al_create_display(640, 480);

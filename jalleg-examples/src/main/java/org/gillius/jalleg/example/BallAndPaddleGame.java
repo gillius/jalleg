@@ -18,7 +18,6 @@ import static org.gillius.jalleg.binding.AllegroLibrary.*;
  */
 public class BallAndPaddleGame extends Game {
 
-	private ALLEGRO_COLOR black;
 	private ALLEGRO_COLOR white;
 	private ALLEGRO_FONT font;
 
@@ -42,7 +41,6 @@ public class BallAndPaddleGame extends Game {
 		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Audio);
 		al_reserve_samples(1);
 
-		black = al_map_rgb_f(0f, 0f, 0f);
 		white = al_map_rgb_f(1f, 1f, 1f);
 		font = al_create_builtin_font();
 
@@ -114,8 +112,6 @@ public class BallAndPaddleGame extends Game {
 		al_identity_transform(t);
 		al_scale_transform(t, getDisplayWidth() / 100f, getDisplayHeight() / 100f);
 		al_use_transform(t);
-
-		al_clear_to_color(black);
 
 		draw(leftPlayer);
 		draw(rightPlayer);

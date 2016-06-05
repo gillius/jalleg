@@ -1,11 +1,16 @@
 package org.gillius.jalleg.framework;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.gillius.jalleg.binding.ALLEGRO_COLOR;
 import org.gillius.jalleg.binding.ALLEGRO_EVENT;
 import org.gillius.jalleg.binding.ALLEGRO_KEYBOARD_STATE;
 import org.gillius.jalleg.binding.ALLEGRO_TIMER_EVENT;
+import org.gillius.jalleg.framework.stats.GameState;
+import org.gillius.jalleg.framework.stats.GameStats;
+import org.gillius.jalleg.framework.stats.GameStatsRecorder;
 
 import java.util.EnumSet;
+import java.util.concurrent.TimeUnit;
 
 import static org.gillius.jalleg.binding.AllegroLibrary.*;
 
@@ -17,11 +22,13 @@ public abstract class Game implements Runnable {
 
 	protected double gameTime;
 	protected ALLEGRO_KEYBOARD_STATE keys;
+	protected GameStats lastStats;
 
 	private EnumSet<AllegroAddon> initializedAddons = EnumSet.noneOf(AllegroAddon.class);
 
 	private double targetFrameRate = 60.0;
 	private String newWindowTitle = getClass().getSimpleName();
+	private GameStatsRecorder statsRecorder = null;
 
 	private ALLEGRO_COLOR clearColor = null;
 
@@ -39,6 +46,19 @@ public abstract class Game implements Runnable {
 
 	public void setNewWindowTitle(String newWindowTitle) {
 		this.newWindowTitle = newWindowTitle;
+	}
+
+	public boolean isCollectingStats() {
+		return statsRecorder != null;
+	}
+
+	public void initStatsCollection(long duration, TimeUnit unit) {
+		statsRecorder = new GameStatsRecorder(unit.toNanos(duration));
+	}
+
+	public void stopStatsCollection() {
+		statsRecorder = null;
+		lastStats = null;
 	}
 
 	public ALLEGRO_COLOR getClearColor() {
@@ -82,9 +102,11 @@ public abstract class Game implements Runnable {
 
 		while(run) {
 			event.setType(Integer.TYPE);
+			if (isCollectingStats()) statsRecorder.startLoop();
 			al_wait_for_event(eventQueue, event);
 
 			if (event.type == ALLEGRO_EVENT_TIMER) {
+				transition(GameState.Update);
 				ALLEGRO_TIMER_EVENT timerEvent = event.asType(ALLEGRO_TIMER_EVENT.class);
 				gameTime = timerEvent.timestamp;
 				if (initializedAddons.contains(AllegroAddon.Keyboard))
@@ -92,15 +114,24 @@ public abstract class Game implements Runnable {
 
 				update();
 
-			} else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-				run = false;
+			} else {
+				transition(GameState.Event);
+				if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+					run = false;
+				}
 			}
 
 			if (al_is_event_queue_empty(eventQueue)) {
+				transition(GameState.Render);
 				if (clearColor != null)
 					al_clear_to_color(clearColor);
 				render();
+				transition(GameState.Flip);
 				al_flip_display();
+			}
+
+			if (isCollectingStats() && statsRecorder.endLoop()) {
+				lastStats = statsRecorder.collectAndResetStats();
 			}
 		}
 
@@ -111,6 +142,11 @@ public abstract class Game implements Runnable {
 		al_destroy_display(mainDisplay);
 		uninstallAddons();
 		al_uninstall_system();
+	}
+
+	private void transition(GameState state) {
+		if (isCollectingStats())
+			statsRecorder.transition(state);
 	}
 
 	protected void initAddons(AllegroAddon... addons) {

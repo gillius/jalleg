@@ -129,15 +129,15 @@ public abstract class Game implements Runnable {
 					break;
 
 				case Audio:
-					al_install_audio();
+					checkInstall(al_install_audio(), addon);
 					break;
 
 				case AudioCodecs:
-					al_init_acodec_addon();
+					checkInstall(al_init_acodec_addon(), addon);
 					break;
 
 				case Image:
-					al_init_image_addon();
+					checkInstall(al_init_image_addon(), addon);
 					break;
 
 				default:

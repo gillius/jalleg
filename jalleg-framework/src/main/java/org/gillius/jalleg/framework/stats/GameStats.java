@@ -53,6 +53,10 @@ public class GameStats {
 		return getTimeInState(state) / getStateCount(state);
 	}
 
+	public double getPercentTimeInState(GameState state) {
+		return getTimeInState(state) / (double)totalTime;
+	}
+
 	/**
 	 * The number of times the game entered the given state in the measured period.
 	 */
@@ -80,6 +84,7 @@ public class GameStats {
 	public String getStatsString() {
 		return "FPS: " + (int) getAverageFps() + ", LPS: " + (int)getAverageLps() +
 		       ", flip: " + TimeUnit.NANOSECONDS.toMicros(getAverageTimeInState(GameState.Flip)) + " us" +
-		       ", idle: " + TimeUnit.NANOSECONDS.toMicros(getAverageTimeInState(GameState.Idle)) + " us";
+		       ", idle: " + TimeUnit.NANOSECONDS.toMicros(getAverageTimeInState(GameState.Idle)) + " us " +
+		       "(" + (int)(getPercentTimeInState(GameState.Idle) * 100.0) + "%)";
 	}
 }

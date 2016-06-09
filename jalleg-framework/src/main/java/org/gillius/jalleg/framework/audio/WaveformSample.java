@@ -2,14 +2,16 @@ package org.gillius.jalleg.framework.audio;
 
 import org.gillius.jalleg.framework.AllegroException;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 
 import static org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_AUDIO_DEPTH.ALLEGRO_AUDIO_DEPTH_FLOAT32;
 import static org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_CHANNEL_CONF.ALLEGRO_CHANNEL_CONF_1;
 import static org.gillius.jalleg.binding.AllegroLibrary.*;
 
+/**
+ * WaveformSample generates an Allegro sample from a {@link MonoWaveform} and exposes it as {@link SampleData}, managing
+ * the memory while open.
+ */
 public class WaveformSample implements SampleData, AutoCloseable {
 	private ALLEGRO_SAMPLE sample;
 
@@ -24,7 +26,7 @@ public class WaveformSample implements SampleData, AutoCloseable {
 		FloatBuffer buf = al_malloc(bytes).getByteBuffer(0, bytes).asFloatBuffer();
 
 		for (int i=0; i < numSamples; ++i) {
-			buf.put(i, waveform.getSample(i, (float)numSamples / i));
+			buf.put(i, waveform.getSample(i, (float)i / numSamples));
 		}
 
 		sample = al_create_sample(buf, numSamples, waveform.getFrequency(),

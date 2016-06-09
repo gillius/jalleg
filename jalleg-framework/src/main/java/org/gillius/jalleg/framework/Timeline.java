@@ -23,6 +23,14 @@ public class Timeline<T> {
 		return event != null && event.getTime() <= (currentTime - start);
 	}
 
+	public double getTimeToNextEvent(double currentTime) {
+		TimelineEvent<T> event = queue.peek();
+		if (event != null)
+			return event.getTime() - (currentTime - start);
+		else
+			return Double.POSITIVE_INFINITY;
+	}
+
 	public T getEvent() {
 		return queue.poll().getData();
 	}

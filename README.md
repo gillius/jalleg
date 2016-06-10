@@ -24,6 +24,78 @@ has always had a special meaning to me. Allegro 5 is a modern, cross-platform va
 rendering and even mobile development. Allegro is a simple library to use and programming a game is a great way to get
 into learning programming. My hope is that jalleg expands the Allegro fun to Java and all the JVM languages.
 
+Features / Status
+-----------------
+
+Besides the direct binding, jalleg provides a framework around Allegro with the following currently implemented features:
+* Automatically unpack and load Allegro DLL for you (Win64 only currently)
+* Basic game loop / initialization
+* Statistics tracking (rendered frames/sec, logic frames/etc, percentage idle time, etc.)
+* Ability to load Allegro resources and create memfiles from JARs and Java byte arrays
+* "Retro" audio system capable of generating and playing square, triangle, sawtooth, sine waves or user-defined waveforms
+
+### How you can help
+
+The main thing I need help with is pre-built Linux "portable" (i.e. static linked) versions of Allegro to include in the
+auto-loader. It also would be nice if someone can demonstrate that jalleg can work on Android as I suspect it should.
+
+I also currently do not know how to bind to varargs methods when using the "Direct Method Optimization" mode of JNA. A
+few methods like al_draw_textf are not available. However, Java has String.format you can use to do a printf-style
+formatting and pass into al_draw_text and similar methods.
+
+### Binding Status
+
+I first started out auto-generating all of the core API. The auto-generation works but does not pick the most ideal Java
+types for use and in some cases just uses "Pointer" type instead of String or ALLEGRO_BITMAP for example. So I've been
+going through and fixing up the API. Anything not marked as "hand-tuned" is definitely subject to change.
+
+The priority will be on APIs that don't already exist in Java. For example in Java there is not much use for a Unicode
+strings API since that is already native to Java. Likewise for files, path handling, threads, etc. If developing with
+jalleg, I suggest using Java-provided features where possible.
+
+* Core API
+  * Configuration files   - auto-generated only
+  * Displays              - :+1: hand-tuned
+  * Events                - :+1: hand-tuned
+  * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)
+  * Filesystem            - auto-generated only (suggest Java native)
+  * Fixed point math      - auto-generated only
+  * Fullscreen modes      - auto-generated only
+  * Graphics routines     - :+1: hand-tuned
+  * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API)
+  * Joystick routines     - auto-generated only
+  * Keyboard routines     - :+1: hand-tuned
+  * Memory management     - :+1: hand-tuned
+  * Monitors              - auto-generated only
+  * Mouse routines        - auto-generated only
+  * Path structures       - auto-generated only (suggest Java native)
+  * Shader                - auto-generated only
+  * State                 - auto-generated only
+  * System routines       - :+1: hand-tuned
+  * Threads               - auto-generated only (suggest Java native)
+  * Time                  - auto-generated only (suggest Java native)
+  * Timer                 - :+1: hand-tuned
+  * Touch input           - auto-generated only
+  * Transformations       - :+1: hand-tuned
+  * UTF-8 string routines - auto-generated only (varargs methods missing)
+  * Miscellaneous         - auto-generated only
+  * Platform-specific     - auto-generated only
+  * Direct3D integration  - auto-generated only
+  * OpenGL integration    - auto-generated only
+
+* Addons
+  * Audio addon           - :+1: hand-tuned
+  * Audio codecs          - :+1: hand-tuned
+  * Color addon           - no binding yet
+  * Font addons           - :+1: hand-tuned (varargs methods missing)
+  * Image I/O addon       - :+1: hand-tuned
+  * Main addon            - n/a
+  * Memfile addon         - :+1: hand-tuned
+  * Native dialogs addon  - no binding yet (suggest Java native)
+  * PhysicsFS addon       - no binding yet
+  * Primitives addon      - :+1: hand-tuned
+
+
 Getting Started
 ---------------
 

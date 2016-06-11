@@ -73,7 +73,7 @@ jalleg, I suggest using Java-provided features where possible.
   * State                 - auto-generated only
   * System routines       - :+1: hand-tuned
   * Threads               - auto-generated only (suggest Java native)
-  * Time                  - auto-generated only (suggest Java native)
+  * Time                  - :+1: hand-tuned
   * Timer                 - :+1: hand-tuned
   * Touch input           - auto-generated only
   * Transformations       - :+1: hand-tuned

@@ -578,6 +578,8 @@ public class AllegroLibrary implements Library {
 
 	public static native int al_get_allegro_version();
 	public static native int al_run_main(int argc, PointerByReference argv, AllegroLibrary.al_run_main_arg1_callback arg1);
+
+	//Time routines
 	public static native double al_get_time();
 	public static native void al_rest(double seconds);
 	public static native void al_init_timeout(ALLEGRO_TIMEOUT timeout, double seconds);

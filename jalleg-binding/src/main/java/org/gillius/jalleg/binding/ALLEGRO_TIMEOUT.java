@@ -29,22 +29,15 @@ public class ALLEGRO_TIMEOUT extends Structure {
 	public long __pad2__;
 	public ALLEGRO_TIMEOUT() {
 		super();
+		setAutoSynch(false);
 	}
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("__pad1__", "__pad2__");
 	}
-	public ALLEGRO_TIMEOUT(long __pad1__, long __pad2__) {
-		super();
-		this.__pad1__ = __pad1__;
-		this.__pad2__ = __pad2__;
-	}
 	public ALLEGRO_TIMEOUT(Pointer peer) {
 		super(peer);
+		setAutoSynch(false);
 	}
-	public static class ByReference extends ALLEGRO_TIMEOUT implements Structure.ByReference {
-		
-	};
-	public static class ByValue extends ALLEGRO_TIMEOUT implements Structure.ByValue {
-		
-	};
+	public static class ByReference extends ALLEGRO_TIMEOUT implements Structure.ByReference { }
+	public static class ByValue extends ALLEGRO_TIMEOUT implements Structure.ByValue { }
 }

@@ -63,7 +63,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Fullscreen modes      - auto-generated only
   * Graphics routines     - :+1: hand-tuned
   * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API)
-  * Joystick routines     - auto-generated only
+  * Joystick routines     - :+1: hand-tuned
   * Keyboard routines     - :+1: hand-tuned
   * Memory management     - :+1: hand-tuned
   * Monitors              - auto-generated only

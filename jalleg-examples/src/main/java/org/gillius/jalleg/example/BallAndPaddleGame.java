@@ -4,6 +4,7 @@ import org.gillius.jalleg.binding.ALLEGRO_COLOR;
 import org.gillius.jalleg.binding.ALLEGRO_FONT;
 import org.gillius.jalleg.binding.ALLEGRO_TRANSFORM;
 import org.gillius.jalleg.framework.AllegroAddon;
+import org.gillius.jalleg.framework.Direction;
 import org.gillius.jalleg.framework.Game;
 import org.gillius.jalleg.framework.audio.Beeper;
 import org.gillius.jalleg.framework.math.Rect;
@@ -38,7 +39,7 @@ public class BallAndPaddleGame extends Game {
 
 	@Override
 	protected void onAllegroStarted() {
-		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Audio);
+		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Joystick, AllegroAddon.Audio);
 		al_reserve_samples(1);
 
 		white = al_map_rgb_f(1f, 1f, 1f);
@@ -69,9 +70,9 @@ public class BallAndPaddleGame extends Game {
 		if (isKeyDown(ALLEGRO_KEY_Z))
 			leftPlayer.move(0f, PADDLE_SPEED);
 
-		if (isKeyDown(ALLEGRO_KEY_UP))
+		if (isKeyDown(ALLEGRO_KEY_UP) || isJoyDirection(Direction.Up))
 			rightPlayer.move(0f, -PADDLE_SPEED);
-		if (isKeyDown(ALLEGRO_KEY_DOWN))
+		if (isKeyDown(ALLEGRO_KEY_DOWN) || isJoyDirection(Direction.Down))
 			rightPlayer.move(0f, PADDLE_SPEED);
 
 		ball.move(balldX, balldY);

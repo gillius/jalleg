@@ -1,10 +1,7 @@
 package org.gillius.jalleg.framework;
 
 import com.sun.org.apache.regexp.internal.RE;
-import org.gillius.jalleg.binding.ALLEGRO_COLOR;
-import org.gillius.jalleg.binding.ALLEGRO_EVENT;
-import org.gillius.jalleg.binding.ALLEGRO_KEYBOARD_STATE;
-import org.gillius.jalleg.binding.ALLEGRO_TIMER_EVENT;
+import org.gillius.jalleg.binding.*;
 import org.gillius.jalleg.framework.stats.GameState;
 import org.gillius.jalleg.framework.stats.GameStats;
 import org.gillius.jalleg.framework.stats.GameStatsRecorder;
@@ -31,6 +28,9 @@ public abstract class Game implements Runnable {
 	private GameStatsRecorder statsRecorder = null;
 
 	private ALLEGRO_COLOR clearColor = null;
+
+	protected ALLEGRO_JOYSTICK_STATE joy1;
+	private ALLEGRO_JOYSTICK joyHandle;
 
 	public double getTargetFrameRate() {
 		return targetFrameRate;
@@ -94,7 +94,14 @@ public abstract class Game implements Runnable {
 		}
 
 		ALLEGRO_EVENT event = new ALLEGRO_EVENT();
-		keys = new ALLEGRO_KEYBOARD_STATE();
+		if (initializedAddons.contains(AllegroAddon.Keyboard))
+			keys = new ALLEGRO_KEYBOARD_STATE();
+
+		if (initializedAddons.contains(AllegroAddon.Joystick) &&
+				al_get_num_joysticks() > 0) {
+			joyHandle = al_get_joystick(0);
+			joy1 = new ALLEGRO_JOYSTICK_STATE();
+		}
 
 		al_start_timer(mainTimer);
 
@@ -109,8 +116,10 @@ public abstract class Game implements Runnable {
 				transition(GameState.Update);
 				ALLEGRO_TIMER_EVENT timerEvent = event.asType(ALLEGRO_TIMER_EVENT.class);
 				gameTime = timerEvent.timestamp;
-				if (initializedAddons.contains(AllegroAddon.Keyboard))
+				if (keys != null)
 					al_get_keyboard_state(keys);
+				if (joyHandle != null)
+					al_get_joystick_state(joyHandle, joy1);
 
 				update();
 
@@ -156,6 +165,10 @@ public abstract class Game implements Runnable {
 					checkInstall(al_install_keyboard(), addon);
 					break;
 
+				case Joystick:
+					checkInstall(al_install_joystick(), addon);
+					break;
+
 				case Primitives:
 					checkInstall(al_init_primitives_addon(), addon);
 					break;
@@ -193,6 +206,10 @@ public abstract class Game implements Runnable {
 			switch (addon) {
 				case Keyboard:
 					al_uninstall_keyboard();
+					break;
+
+				case Joystick:
+					al_uninstall_joystick();
 					break;
 
 				case Primitives:
@@ -244,7 +261,31 @@ public abstract class Game implements Runnable {
 		return al_get_display_width(mainDisplay);
 	}
 
+	/**
+	 * If the keyboard addon is installed, return if the given key pressed at the start of the update call.
+	 */
 	protected boolean isKeyDown(int keyCode) {
 		return keys.isKeyDown(keyCode);
+	}
+
+	/**
+	 * If the joystick addon is installed and at least one joystick was plugged in, returns true if the joystick
+	 * being pressed in the given direction. This method is used for simple "d-pad" like functionality. Always returns
+	 * false if joystick addon is not installed or no joystick is connected.
+	 *
+	 * @see #joy1
+	 */
+	protected boolean isJoyDirection(Direction direction) {
+		if (joy1 != null) {
+			switch (direction) {
+				case Up:    return joy1.stick[0].axis[1] < -0.5f;
+				case Right: return joy1.stick[0].axis[0] > 0.5f;
+				case Down:  return joy1.stick[0].axis[1] > 0.5f;
+				case Left:  return joy1.stick[0].axis[0] < -0.5f;
+				default:    return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }

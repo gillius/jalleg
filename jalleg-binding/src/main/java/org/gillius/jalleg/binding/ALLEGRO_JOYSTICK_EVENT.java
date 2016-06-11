@@ -18,6 +18,8 @@ package org.gillius.jalleg.binding;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 import com.sun.jna.ptr.PointerByReference;
+import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_JOYSTICK;
+
 import java.util.Arrays;
 import java.util.List;
 /**
@@ -29,7 +31,7 @@ public class ALLEGRO_JOYSTICK_EVENT extends Structure {
 	public int type;
 	public PointerByReference source;
 	public double timestamp;
-	public PointerByReference id;
+	public ALLEGRO_JOYSTICK id;
 	public int stick;
 	public int axis;
 	public float pos;
@@ -40,7 +42,7 @@ public class ALLEGRO_JOYSTICK_EVENT extends Structure {
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("type", "source", "timestamp", "id", "stick", "axis", "pos", "button");
 	}
-	public ALLEGRO_JOYSTICK_EVENT(int type, PointerByReference source, double timestamp, PointerByReference id, int stick, int axis, float pos, int button) {
+	public ALLEGRO_JOYSTICK_EVENT(int type, PointerByReference source, double timestamp, ALLEGRO_JOYSTICK id, int stick, int axis, float pos, int button) {
 		super();
 		this.type = type;
 		this.source = source;
@@ -54,10 +56,7 @@ public class ALLEGRO_JOYSTICK_EVENT extends Structure {
 	public ALLEGRO_JOYSTICK_EVENT(Pointer peer) {
 		super(peer);
 	}
-	public static class ByReference extends ALLEGRO_JOYSTICK_EVENT implements Structure.ByReference {
-		
-	};
-	public static class ByValue extends ALLEGRO_JOYSTICK_EVENT implements Structure.ByValue {
-		
-	};
+
+	public static class ByReference extends ALLEGRO_JOYSTICK_EVENT implements Structure.ByReference { }
+	public static class ByValue extends ALLEGRO_JOYSTICK_EVENT implements Structure.ByValue { }
 }

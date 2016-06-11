@@ -1105,45 +1105,25 @@ public class AllegroLibrary implements Library {
 	public static native void al_set_standard_fs_interface();
 	public static native int al_get_num_display_modes();
 	public static native ALLEGRO_DISPLAY_MODE al_get_display_mode(int index, ALLEGRO_DISPLAY_MODE mode);
-	public static native byte al_install_joystick();
+	
+	//Joystick routines
+	public static native boolean al_install_joystick();
 	public static native void al_uninstall_joystick();
-	public static native byte al_is_joystick_installed();
-	public static native byte al_reconfigure_joysticks();
+	public static native boolean al_is_joystick_installed();
+	public static native boolean al_reconfigure_joysticks();
 	public static native int al_get_num_joysticks();
-	public static native PointerByReference al_get_joystick(int joyn);
-	@Deprecated 
-	public static native void al_release_joystick(Pointer ALLEGRO_JOYSTICKPtr1);
-	public static native void al_release_joystick(PointerByReference ALLEGRO_JOYSTICKPtr1);
-	@Deprecated 
-	public static native byte al_get_joystick_active(Pointer ALLEGRO_JOYSTICKPtr1);
-	public static native byte al_get_joystick_active(PointerByReference ALLEGRO_JOYSTICKPtr1);
-	@Deprecated 
-	public static native Pointer al_get_joystick_name(Pointer ALLEGRO_JOYSTICKPtr1);
-	public static native Pointer al_get_joystick_name(PointerByReference ALLEGRO_JOYSTICKPtr1);
-	@Deprecated 
-	public static native int al_get_joystick_num_sticks(Pointer ALLEGRO_JOYSTICKPtr1);
-	public static native int al_get_joystick_num_sticks(PointerByReference ALLEGRO_JOYSTICKPtr1);
-	@Deprecated 
-	public static native int al_get_joystick_stick_flags(Pointer ALLEGRO_JOYSTICKPtr1, int stick);
-	public static native int al_get_joystick_stick_flags(PointerByReference ALLEGRO_JOYSTICKPtr1, int stick);
-	@Deprecated 
-	public static native Pointer al_get_joystick_stick_name(Pointer ALLEGRO_JOYSTICKPtr1, int stick);
-	public static native Pointer al_get_joystick_stick_name(PointerByReference ALLEGRO_JOYSTICKPtr1, int stick);
-	@Deprecated 
-	public static native int al_get_joystick_num_axes(Pointer ALLEGRO_JOYSTICKPtr1, int stick);
-	public static native int al_get_joystick_num_axes(PointerByReference ALLEGRO_JOYSTICKPtr1, int stick);
-	@Deprecated 
-	public static native Pointer al_get_joystick_axis_name(Pointer ALLEGRO_JOYSTICKPtr1, int stick, int axis);
-	public static native Pointer al_get_joystick_axis_name(PointerByReference ALLEGRO_JOYSTICKPtr1, int stick, int axis);
-	@Deprecated 
-	public static native int al_get_joystick_num_buttons(Pointer ALLEGRO_JOYSTICKPtr1);
-	public static native int al_get_joystick_num_buttons(PointerByReference ALLEGRO_JOYSTICKPtr1);
-	@Deprecated 
-	public static native Pointer al_get_joystick_button_name(Pointer ALLEGRO_JOYSTICKPtr1, int buttonn);
-	public static native Pointer al_get_joystick_button_name(PointerByReference ALLEGRO_JOYSTICKPtr1, int buttonn);
-	@Deprecated 
-	public static native void al_get_joystick_state(Pointer ALLEGRO_JOYSTICKPtr1, ALLEGRO_JOYSTICK_STATE ret_state);
-	public static native void al_get_joystick_state(PointerByReference ALLEGRO_JOYSTICKPtr1, ALLEGRO_JOYSTICK_STATE ret_state);
+	public static native ALLEGRO_JOYSTICK al_get_joystick(int joyn);
+	public static native void al_release_joystick(ALLEGRO_JOYSTICK joy);
+	public static native boolean al_get_joystick_active(ALLEGRO_JOYSTICK joy);
+	public static native String al_get_joystick_name(ALLEGRO_JOYSTICK joy);
+	public static native int al_get_joystick_num_sticks(ALLEGRO_JOYSTICK joy);
+	public static native int al_get_joystick_stick_flags(ALLEGRO_JOYSTICK joy, int stick);
+	public static native String al_get_joystick_stick_name(ALLEGRO_JOYSTICK joy, int stick);
+	public static native int al_get_joystick_num_axes(ALLEGRO_JOYSTICK joy, int stick);
+	public static native String al_get_joystick_axis_name(ALLEGRO_JOYSTICK joy, int stick, int axis);
+	public static native int al_get_joystick_num_buttons(ALLEGRO_JOYSTICK joy);
+	public static native String al_get_joystick_button_name(ALLEGRO_JOYSTICK joy, int buttonn);
+	public static native void al_get_joystick_state(ALLEGRO_JOYSTICK joy, ALLEGRO_JOYSTICK_STATE ret_state);
 	public static native ALLEGRO_EVENT_SOURCE al_get_joystick_event_source();
 
 	//Keyboard routines

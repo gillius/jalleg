@@ -1056,10 +1056,13 @@ public class AllegroLibrary implements Library {
 	public static native void al_draw_pixel(float x, float y, ALLEGRO_COLOR color);
 	public static native int al_get_errno();
 	public static native void al_set_errno(int errnum);
+
+	//Fixed point math routines
 	public static native int al_fixsqrt(int x);
 	public static native int al_fixhypot(int x, int y);
 	public static native int al_fixatan(int x);
 	public static native int al_fixatan2(int y, int x);
+
 	@Deprecated 
 	public static native ALLEGRO_FS_ENTRY al_create_fs_entry(Pointer path);
 	public static native ALLEGRO_FS_ENTRY al_create_fs_entry(String path);

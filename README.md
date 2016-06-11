@@ -59,7 +59,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Events                - :+1: hand-tuned
   * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)
   * Filesystem            - auto-generated only (suggest Java native)
-  * Fixed point math      - auto-generated only
+  * Fixed point math      - No plans to port -- most calls are macros anyway; could be easily re-implemented in Java.
   * Fullscreen modes      - auto-generated only
   * Graphics routines     - :+1: hand-tuned
   * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API)

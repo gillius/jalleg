@@ -67,7 +67,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Keyboard routines     - :+1: hand-tuned
   * Memory management     - :+1: hand-tuned
   * Monitors              - auto-generated only
-  * Mouse routines        - auto-generated only
+  * Mouse routines        - :+1: hand-tuned (no example/testing yet)
   * Path structures       - auto-generated only (suggest Java native)
   * Shader                - auto-generated only
   * State                 - auto-generated only

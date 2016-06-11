@@ -18,6 +18,8 @@ package org.gillius.jalleg.binding;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 import com.sun.jna.ptr.PointerByReference;
+import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_DISPLAY;
+
 import java.util.Arrays;
 import java.util.List;
 /**
@@ -33,14 +35,14 @@ public class ALLEGRO_MOUSE_STATE extends Structure {
 	public int[] more_axes = new int[4];
 	public int buttons;
 	public float pressure;
-	public PointerByReference display;
+	public ALLEGRO_DISPLAY display;
 	public ALLEGRO_MOUSE_STATE() {
 		super();
 	}
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("x", "y", "z", "w", "more_axes", "buttons", "pressure", "display");
 	}
-	public ALLEGRO_MOUSE_STATE(int x, int y, int z, int w, int more_axes[], int buttons, float pressure, PointerByReference display) {
+	public ALLEGRO_MOUSE_STATE(int x, int y, int z, int w, int more_axes[], int buttons, float pressure, ALLEGRO_DISPLAY display) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -56,10 +58,6 @@ public class ALLEGRO_MOUSE_STATE extends Structure {
 	public ALLEGRO_MOUSE_STATE(Pointer peer) {
 		super(peer);
 	}
-	public static class ByReference extends ALLEGRO_MOUSE_STATE implements Structure.ByReference {
-		
-	};
-	public static class ByValue extends ALLEGRO_MOUSE_STATE implements Structure.ByValue {
-		
-	};
+	public static class ByReference extends ALLEGRO_MOUSE_STATE implements Structure.ByReference { }
+	public static class ByValue extends ALLEGRO_MOUSE_STATE implements Structure.ByValue { }
 }

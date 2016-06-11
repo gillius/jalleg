@@ -1136,32 +1136,35 @@ public class AllegroLibrary implements Library {
 	public static native boolean al_key_down(ALLEGRO_KEYBOARD_STATE state, int keycode);
 	public static native ALLEGRO_EVENT_SOURCE al_get_keyboard_event_source();
 
-	public static native byte al_is_mouse_installed();
-	public static native byte al_install_mouse();
+	//Mouse routines
+	public static native boolean al_is_mouse_installed();
+	public static native boolean al_install_mouse();
 	public static native void al_uninstall_mouse();
 	public static native int al_get_mouse_num_buttons();
 	public static native int al_get_mouse_num_axes();
-	@Deprecated 
-	public static native byte al_set_mouse_xy(Pointer display, int x, int y);
-	public static native byte al_set_mouse_xy(PointerByReference display, int x, int y);
-	public static native byte al_set_mouse_z(int z);
-	public static native byte al_set_mouse_w(int w);
-	public static native byte al_set_mouse_axis(int axis, int value);
+	public static native boolean al_set_mouse_xy(ALLEGRO_DISPLAY display, int x, int y);
+	public static native boolean al_set_mouse_z(int z);
+	public static native boolean al_set_mouse_w(int w);
+	public static native boolean al_set_mouse_axis(int axis, int value);
 	public static native void al_get_mouse_state(ALLEGRO_MOUSE_STATE ret_state);
-	public static native byte al_mouse_button_down(ALLEGRO_MOUSE_STATE state, int button);
+	public static native boolean al_mouse_button_down(ALLEGRO_MOUSE_STATE state, int button);
 	public static native int al_get_mouse_state_axis(ALLEGRO_MOUSE_STATE state, int axis);
-	@Deprecated 
-	public static native byte al_get_mouse_cursor_position(IntByReference ret_x, IntByReference ret_y);
-	public static native byte al_get_mouse_cursor_position(IntBuffer ret_x, IntBuffer ret_y);
-	@Deprecated 
-	public static native byte al_grab_mouse(Pointer display);
-	public static native byte al_grab_mouse(PointerByReference display);
-	public static native byte al_ungrab_mouse();
+	public static native boolean al_get_mouse_cursor_position(IntByReference ret_x, IntByReference ret_y);
+	public static native boolean al_grab_mouse(ALLEGRO_DISPLAY display);
+	public static native boolean al_ungrab_mouse();
 	public static native void al_set_mouse_wheel_precision(int precision);
 	public static native int al_get_mouse_wheel_precision();
 	public static native ALLEGRO_EVENT_SOURCE al_get_mouse_event_source();
-	public static native byte al_is_touch_input_installed();
-	public static native byte al_install_touch_input();
+	//Mouse cursors
+	public static native ALLEGRO_MOUSE_CURSOR al_create_mouse_cursor(ALLEGRO_BITMAP bmp, int xfocus, int yfocus);
+	public static native void al_destroy_mouse_cursor(ALLEGRO_MOUSE_CURSOR cursor);
+	public static native boolean al_set_mouse_cursor(ALLEGRO_DISPLAY display, ALLEGRO_MOUSE_CURSOR cursor);
+	public static native boolean al_set_system_mouse_cursor(ALLEGRO_DISPLAY display, int cursor_id);
+	public static native boolean al_show_mouse_cursor(ALLEGRO_DISPLAY display);
+	public static native boolean al_hide_mouse_cursor(ALLEGRO_DISPLAY display);
+
+	public static native boolean al_is_touch_input_installed();
+	public static native boolean al_install_touch_input();
 	public static native void al_uninstall_touch_input();
 	public static native void al_get_touch_input_state(ALLEGRO_TOUCH_INPUT_STATE ret_state);
 	public static native ALLEGRO_EVENT_SOURCE al_get_touch_input_event_source();
@@ -1187,24 +1190,6 @@ public class AllegroLibrary implements Library {
 
 	public static native int al_get_num_video_adapters();
 	public static native byte al_get_monitor_info(int adapter, ALLEGRO_MONITOR_INFO info);
-	@Deprecated 
-	public static native PointerByReference al_create_mouse_cursor(Pointer sprite, int xfocus, int yfocus);
-	public static native PointerByReference al_create_mouse_cursor(PointerByReference sprite, int xfocus, int yfocus);
-	@Deprecated 
-	public static native void al_destroy_mouse_cursor(Pointer ALLEGRO_MOUSE_CURSORPtr1);
-	public static native void al_destroy_mouse_cursor(PointerByReference ALLEGRO_MOUSE_CURSORPtr1);
-	@Deprecated 
-	public static native byte al_set_mouse_cursor(Pointer display, Pointer cursor);
-	public static native byte al_set_mouse_cursor(PointerByReference display, PointerByReference cursor);
-	@Deprecated 
-	public static native byte al_set_system_mouse_cursor(Pointer display, int cursor_id);
-	public static native byte al_set_system_mouse_cursor(PointerByReference display, int cursor_id);
-	@Deprecated 
-	public static native byte al_show_mouse_cursor(Pointer display);
-	public static native byte al_show_mouse_cursor(PointerByReference display);
-	@Deprecated 
-	public static native byte al_hide_mouse_cursor(Pointer display);
-	public static native byte al_hide_mouse_cursor(PointerByReference display);
 	public static native void al_set_render_state(int state, int value);
 
 	//Transformations functions

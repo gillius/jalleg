@@ -1106,6 +1106,8 @@ public class AllegroLibrary implements Library {
 	public static native ALLEGRO_FS_INTERFACE al_get_fs_interface();
 	public static native void al_set_fs_interface(ALLEGRO_FS_INTERFACE vtable);
 	public static native void al_set_standard_fs_interface();
+
+	//Fullscreen modes
 	public static native int al_get_num_display_modes();
 	public static native ALLEGRO_DISPLAY_MODE al_get_display_mode(int index, ALLEGRO_DISPLAY_MODE mode);
 	

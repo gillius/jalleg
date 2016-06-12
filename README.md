@@ -55,7 +55,7 @@ jalleg, I suggest using Java-provided features where possible.
 
 * Core API
   * Configuration files   - auto-generated only
-  * Displays              - :+1: hand-tuned
+  * Displays              - auto-generated; partly hand-tuned
   * Events                - :+1: hand-tuned
   * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)
   * Filesystem            - auto-generated only (suggest Java native)

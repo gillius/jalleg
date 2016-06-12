@@ -28,23 +28,15 @@ public class ALLEGRO_STATE extends Structure {
 	public byte[] _tls = new byte[1024];
 	public ALLEGRO_STATE() {
 		super();
+		setAutoSynch(false);
 	}
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("_tls");
 	}
-	public ALLEGRO_STATE(byte _tls[]) {
-		super();
-		if ((_tls.length != this._tls.length)) 
-			throw new IllegalArgumentException("Wrong array size !");
-		this._tls = _tls;
-	}
 	public ALLEGRO_STATE(Pointer peer) {
 		super(peer);
+		setAutoSynch(false);
 	}
-	public static class ByReference extends ALLEGRO_STATE implements Structure.ByReference {
-		
-	};
-	public static class ByValue extends ALLEGRO_STATE implements Structure.ByValue {
-		
-	};
+	public static class ByReference extends ALLEGRO_STATE implements Structure.ByReference { }
+	public static class ByValue extends ALLEGRO_STATE implements Structure.ByValue { }
 }

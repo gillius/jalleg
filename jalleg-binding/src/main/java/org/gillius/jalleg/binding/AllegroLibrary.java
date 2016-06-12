@@ -1054,8 +1054,6 @@ public class AllegroLibrary implements Library {
 	public static native void al_clear_to_color(ALLEGRO_COLOR color);
 	public static native void al_clear_depth_buffer(float x);
 	public static native void al_draw_pixel(float x, float y, ALLEGRO_COLOR color);
-	public static native int al_get_errno();
-	public static native void al_set_errno(int errnum);
 
 	//Fixed point math routines
 	public static native int al_fixsqrt(int x);
@@ -1342,8 +1340,11 @@ public class AllegroLibrary implements Library {
 	public static native void al_add_timer_count(ALLEGRO_TIMER timer, long diff);
 	public static native ALLEGRO_EVENT_SOURCE al_get_timer_event_source(ALLEGRO_TIMER timer);
 
+	//State functions
 	public static native void al_store_state(ALLEGRO_STATE state, int flags);
 	public static native void al_restore_state(ALLEGRO_STATE state);
+	public static native int al_get_errno();
+	public static native void al_set_errno(int errnum);
 
 	//Primitives addon
 	public interface al_triangulate_polygon_emit_triangle_callback extends Callback {

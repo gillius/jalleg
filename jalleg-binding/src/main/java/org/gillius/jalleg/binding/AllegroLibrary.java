@@ -963,8 +963,13 @@ public class AllegroLibrary implements Library {
 	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(ALLEGRO_DISPLAY display);
 	public static native void al_set_display_icon(ALLEGRO_DISPLAY display, ALLEGRO_BITMAP icon);
 	public static native void al_set_display_icons(ALLEGRO_DISPLAY display, int num_icons, Pointer icons);
+
+	//Monitors functions
 	public static native int al_get_new_display_adapter();
 	public static native void al_set_new_display_adapter(int adapter);
+	public static native int al_get_num_video_adapters();
+	public static native boolean al_get_monitor_info(int adapter, ALLEGRO_MONITOR_INFO info);
+
 	public static native void al_set_new_window_position(int x, int y);
 	public static native void al_get_new_window_position(IntByReference x, IntByReference y);
 	public static native void al_set_window_position(ALLEGRO_DISPLAY display, int x, int y);
@@ -1193,8 +1198,6 @@ public class AllegroLibrary implements Library {
 	public static native Pointer al_realloc_with_context(Pointer ptr, size_t n, int line, String file, String func);
 	public static native Pointer al_calloc_with_context(size_t count, size_t n, int line, String file, String func);
 
-	public static native int al_get_num_video_adapters();
-	public static native byte al_get_monitor_info(int adapter, ALLEGRO_MONITOR_INFO info);
 	public static native void al_set_render_state(int state, int value);
 
 	//Transformations functions

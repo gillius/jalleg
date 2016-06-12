@@ -1,12 +1,15 @@
 package org.gillius.jalleg.example;
 
+import com.sun.jna.ptr.FloatByReference;
 import org.gillius.jalleg.binding.ALLEGRO_COLOR;
 import org.gillius.jalleg.binding.ALLEGRO_FONT;
+import org.gillius.jalleg.binding.ALLEGRO_MOUSE_STATE;
 import org.gillius.jalleg.binding.ALLEGRO_TRANSFORM;
 import org.gillius.jalleg.framework.AllegroAddon;
 import org.gillius.jalleg.framework.Direction;
 import org.gillius.jalleg.framework.Game;
 import org.gillius.jalleg.framework.audio.Beeper;
+import org.gillius.jalleg.framework.math.Point;
 import org.gillius.jalleg.framework.math.Rect;
 
 import java.util.Random;
@@ -21,6 +24,9 @@ public class BallAndPaddleGame extends Game {
 
 	private ALLEGRO_COLOR white;
 	private ALLEGRO_FONT font;
+
+	private ALLEGRO_TRANSFORM worldTransform;
+	private ALLEGRO_TRANSFORM worldInverseTransform;
 
 	private Rect leftPlayer;
 	private Rect rightPlayer;
@@ -39,7 +45,8 @@ public class BallAndPaddleGame extends Game {
 
 	@Override
 	protected void onAllegroStarted() {
-		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Joystick, AllegroAddon.Audio);
+		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Joystick,
+		           AllegroAddon.Mouse, AllegroAddon.Audio);
 		al_reserve_samples(1);
 
 		white = al_map_rgb_f(1f, 1f, 1f);
@@ -53,6 +60,9 @@ public class BallAndPaddleGame extends Game {
 		beeper = new Beeper();
 		beeper.setGain(0.1f);
 
+		worldTransform = new ALLEGRO_TRANSFORM();
+		worldInverseTransform = new ALLEGRO_TRANSFORM();
+
 		resetBall();
 	}
 
@@ -65,14 +75,22 @@ public class BallAndPaddleGame extends Game {
 	@Override
 	protected void update() {
 		float PADDLE_SPEED = 1f;
-		if (isKeyDown(ALLEGRO_KEY_A))
+		boolean useMouse = isMouseButtonDown(0);
+		Point mousePos = null;
+		if (useMouse) {
+			al_copy_transform(worldInverseTransform, worldTransform);
+			al_invert_transform(worldInverseTransform);
+			mousePos = getMousePosTransformed(worldInverseTransform);
+		}
+
+		if (isKeyDown(ALLEGRO_KEY_A) || (useMouse && mousePos.x < 50 && mousePos.y < leftPlayer.centerY()))
 			leftPlayer.move(0f, -PADDLE_SPEED);
-		if (isKeyDown(ALLEGRO_KEY_Z))
+		if (isKeyDown(ALLEGRO_KEY_Z) || (useMouse && mousePos.x < 50 && mousePos.y > leftPlayer.centerY()))
 			leftPlayer.move(0f, PADDLE_SPEED);
 
-		if (isKeyDown(ALLEGRO_KEY_UP) || isJoyDirection(Direction.Up))
+		if (isKeyDown(ALLEGRO_KEY_UP) || isJoyDirection(Direction.Up) || (useMouse && mousePos.x > 50 && mousePos.y < rightPlayer.centerY()))
 			rightPlayer.move(0f, -PADDLE_SPEED);
-		if (isKeyDown(ALLEGRO_KEY_DOWN) || isJoyDirection(Direction.Down))
+		if (isKeyDown(ALLEGRO_KEY_DOWN) || isJoyDirection(Direction.Down) || (useMouse && mousePos.x > 50 && mousePos.y > rightPlayer.centerY()))
 			rightPlayer.move(0f, PADDLE_SPEED);
 
 		ball.move(balldX, balldY);
@@ -109,10 +127,9 @@ public class BallAndPaddleGame extends Game {
 
 	@Override
 	protected void render() {
-		ALLEGRO_TRANSFORM t = new ALLEGRO_TRANSFORM();
-		al_identity_transform(t);
-		al_scale_transform(t, getDisplayWidth() / 100f, getDisplayHeight() / 100f);
-		al_use_transform(t);
+		al_identity_transform(worldTransform);
+		al_scale_transform(worldTransform, getDisplayWidth() / 100f, getDisplayHeight() / 100f);
+		al_use_transform(worldTransform);
 
 		draw(leftPlayer);
 		draw(rightPlayer);

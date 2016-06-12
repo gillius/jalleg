@@ -1,7 +1,8 @@
 package org.gillius.jalleg.framework;
 
-import com.sun.org.apache.regexp.internal.RE;
+import com.sun.jna.ptr.FloatByReference;
 import org.gillius.jalleg.binding.*;
+import org.gillius.jalleg.framework.math.Point;
 import org.gillius.jalleg.framework.stats.GameState;
 import org.gillius.jalleg.framework.stats.GameStats;
 import org.gillius.jalleg.framework.stats.GameStatsRecorder;
@@ -18,7 +19,8 @@ public abstract class Game implements Runnable {
 	protected ALLEGRO_DISPLAY mainDisplay;
 
 	protected double gameTime;
-	protected ALLEGRO_KEYBOARD_STATE keys;
+	protected ALLEGRO_KEYBOARD_STATE keyState;
+	protected ALLEGRO_MOUSE_STATE mouseState;
 	protected GameStats lastStats;
 
 	private EnumSet<AllegroAddon> initializedAddons = EnumSet.noneOf(AllegroAddon.class);
@@ -95,7 +97,10 @@ public abstract class Game implements Runnable {
 
 		ALLEGRO_EVENT event = new ALLEGRO_EVENT();
 		if (initializedAddons.contains(AllegroAddon.Keyboard))
-			keys = new ALLEGRO_KEYBOARD_STATE();
+			keyState = new ALLEGRO_KEYBOARD_STATE();
+
+		if (initializedAddons.contains(AllegroAddon.Mouse))
+			mouseState = new ALLEGRO_MOUSE_STATE();
 
 		if (initializedAddons.contains(AllegroAddon.Joystick) &&
 				al_get_num_joysticks() > 0) {
@@ -116,10 +121,12 @@ public abstract class Game implements Runnable {
 				transition(GameState.Update);
 				ALLEGRO_TIMER_EVENT timerEvent = event.asType(ALLEGRO_TIMER_EVENT.class);
 				gameTime = timerEvent.timestamp;
-				if (keys != null)
-					al_get_keyboard_state(keys);
+				if (keyState != null)
+					al_get_keyboard_state(keyState);
 				if (joyHandle != null)
 					al_get_joystick_state(joyHandle, joy1);
+				if (mouseState != null)
+					al_get_mouse_state(mouseState);
 
 				update();
 
@@ -169,6 +176,10 @@ public abstract class Game implements Runnable {
 					checkInstall(al_install_joystick(), addon);
 					break;
 
+				case Mouse:
+					checkInstall(al_install_mouse(), addon);
+					break;
+
 				case Primitives:
 					checkInstall(al_init_primitives_addon(), addon);
 					break;
@@ -210,6 +221,10 @@ public abstract class Game implements Runnable {
 
 				case Joystick:
 					al_uninstall_joystick();
+					break;
+
+				case Mouse:
+					al_uninstall_mouse();
 					break;
 
 				case Primitives:
@@ -265,7 +280,43 @@ public abstract class Game implements Runnable {
 	 * If the keyboard addon is installed, return if the given key pressed at the start of the update call.
 	 */
 	protected boolean isKeyDown(int keyCode) {
-		return keys.isKeyDown(keyCode);
+		return keyState.isKeyDown(keyCode);
+	}
+
+	/**
+	 * If the mouse addon is installed, return the current mouse position in screen coordinates.
+	 */
+	protected Point getMousePos() {
+		return new Point(mouseState.x, mouseState.y);
+	}
+
+	/**
+	 * If the mouse addon is installed, return the current mouse position transformed by the inverse of the current
+	 * target bitmap transform (al_transform_coordinates(al_get_current_inverse_transform(), mouseX, mouseY)).
+	 */
+	protected Point getMousePosTransformed() {
+		return getMousePosTransformed(al_get_current_inverse_transform());
+	}
+
+	/**
+	 * If the mouse addon is installed, return the current mouse position transformed by the given transform.
+	 */
+	protected Point getMousePosTransformed(ALLEGRO_TRANSFORM transform) {
+		FloatByReference mouseX = new FloatByReference(mouseState.x);
+		FloatByReference mouseY = new FloatByReference(mouseState.y);
+
+		al_transform_coordinates(transform, mouseX, mouseY);
+
+		return new Point(mouseX.getValue(), mouseY.getValue());
+	}
+
+	/**
+	 * If the mouse addon is installed, return if the designated mouse button is pressed.
+	 *
+	 * @param button 0 for primary button, 1 for secondary button, 2 for middle, etc.
+	 */
+	protected boolean isMouseButtonDown(int button) {
+		return (mouseState.buttons & (1 << button)) != 0;
 	}
 
 	/**

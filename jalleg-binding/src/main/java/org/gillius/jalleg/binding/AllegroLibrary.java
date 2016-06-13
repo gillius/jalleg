@@ -1010,62 +1010,26 @@ public class AllegroLibrary implements Library {
 	public static native void al_hold_bitmap_drawing(boolean hold);
 	public static native boolean al_is_bitmap_drawing_held();
 
-	public static native PointerByReference al_create_config();
-	@Deprecated 
-	public static native void al_add_config_section(Pointer config, Pointer name);
-	public static native void al_add_config_section(PointerByReference config, String name);
-	public static native void al_add_config_section(PointerByReference config, Pointer name);
-	@Deprecated 
-	public static native void al_set_config_value(Pointer config, Pointer section, Pointer key, Pointer value);
-	public static native void al_set_config_value(PointerByReference config, String section, String key, String value);
-	public static native void al_set_config_value(PointerByReference config, Pointer section, Pointer key, Pointer value);
-	@Deprecated 
-	public static native void al_add_config_comment(Pointer config, Pointer section, Pointer comment);
-	public static native void al_add_config_comment(PointerByReference config, String section, String comment);
-	public static native void al_add_config_comment(PointerByReference config, Pointer section, Pointer comment);
-	@Deprecated 
-	public static native Pointer al_get_config_value(Pointer config, Pointer section, Pointer key);
-	public static native Pointer al_get_config_value(PointerByReference config, String section, String key);
-	public static native Pointer al_get_config_value(PointerByReference config, Pointer section, Pointer key);
-	@Deprecated 
-	public static native PointerByReference al_load_config_file(Pointer filename);
-	public static native PointerByReference al_load_config_file(String filename);
-	@Deprecated 
-	public static native PointerByReference al_load_config_file_f(Pointer filename);
-	public static native PointerByReference al_load_config_file_f(PointerByReference filename);
-	@Deprecated 
-	public static native byte al_save_config_file(Pointer filename, Pointer config);
-	public static native byte al_save_config_file(String filename, PointerByReference config);
-	public static native byte al_save_config_file(Pointer filename, PointerByReference config);
-	@Deprecated 
-	public static native byte al_save_config_file_f(Pointer file, Pointer config);
-	public static native byte al_save_config_file_f(PointerByReference file, PointerByReference config);
-	@Deprecated 
-	public static native void al_merge_config_into(Pointer master, Pointer add);
-	public static native void al_merge_config_into(PointerByReference master, PointerByReference add);
-	@Deprecated 
-	public static native PointerByReference al_merge_config(Pointer cfg1, Pointer cfg2);
-	public static native PointerByReference al_merge_config(PointerByReference cfg1, PointerByReference cfg2);
-	@Deprecated 
-	public static native void al_destroy_config(Pointer config);
-	public static native void al_destroy_config(PointerByReference config);
-	@Deprecated 
-	public static native byte al_remove_config_section(Pointer config, Pointer section);
-	public static native byte al_remove_config_section(PointerByReference config, String section);
-	public static native byte al_remove_config_section(PointerByReference config, Pointer section);
-	@Deprecated 
-	public static native byte al_remove_config_key(Pointer config, Pointer section, Pointer key);
-	public static native byte al_remove_config_key(PointerByReference config, String section, String key);
-	public static native byte al_remove_config_key(PointerByReference config, Pointer section, Pointer key);
-	@Deprecated 
-	public static native Pointer al_get_first_config_section(Pointer config, PointerByReference iterator);
-	public static native Pointer al_get_first_config_section(PointerByReference config, PointerByReference iterator);
-	public static native Pointer al_get_next_config_section(PointerByReference iterator);
-	@Deprecated 
-	public static native Pointer al_get_first_config_entry(Pointer config, Pointer section, PointerByReference iterator);
-	public static native Pointer al_get_first_config_entry(PointerByReference config, String section, PointerByReference iterator);
-	public static native Pointer al_get_first_config_entry(PointerByReference config, Pointer section, PointerByReference iterator);
-	public static native Pointer al_get_next_config_entry(PointerByReference iterator);
+	//Configuration Files functions
+	public static native ALLEGRO_CONFIG al_create_config();
+	public static native void al_add_config_section(ALLEGRO_CONFIG config, String name);
+	public static native void al_set_config_value(ALLEGRO_CONFIG config, String section, String key, String value);
+	public static native void al_add_config_comment(ALLEGRO_CONFIG config, String section, String comment);
+	public static native String al_get_config_value(ALLEGRO_CONFIG config, String section, String key);
+	public static native ALLEGRO_CONFIG al_load_config_file(String filename);
+	public static native ALLEGRO_CONFIG al_load_config_file_f(ALLEGRO_FILE file);
+	public static native boolean al_save_config_file(String filename, ALLEGRO_CONFIG config);
+	public static native boolean al_save_config_file_f(ALLEGRO_FILE file, ALLEGRO_CONFIG config);
+	public static native void al_merge_config_into(ALLEGRO_CONFIG master, ALLEGRO_CONFIG add);
+	public static native ALLEGRO_CONFIG al_merge_config(ALLEGRO_CONFIG cfg1, ALLEGRO_CONFIG cfg2);
+	public static native void al_destroy_config(ALLEGRO_CONFIG config);
+	public static native boolean al_remove_config_section(ALLEGRO_CONFIG config, String section);
+	public static native boolean al_remove_config_key(ALLEGRO_CONFIG config, String section, String key);
+	public static native String al_get_first_config_section(ALLEGRO_CONFIG config, PointerByReference iterator);
+	public static native String al_get_next_config_section(PointerByReference iterator);
+	public static native String al_get_first_config_entry(ALLEGRO_CONFIG config, String section, PointerByReference iterator);
+	public static native String al_get_next_config_entry(PointerByReference iterator);
+
 	public static native int al_get_cpu_count();
 	public static native int al_get_ram_size();
 	@Deprecated 

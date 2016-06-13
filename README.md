@@ -54,7 +54,7 @@ strings API since that is already native to Java. Likewise for files, path handl
 jalleg, I suggest using Java-provided features where possible.
 
 * Core API
-  * Configuration files   - auto-generated only
+  * Configuration files   - hand-tuned (but not tested yet and need to revisit use of ALLEGRO_CONFIG_SECTION)
   * Displays              - :+1: hand-tuned
   * Events                - :+1: hand-tuned
   * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)

@@ -963,6 +963,43 @@ public class AllegroLibrary implements Library {
 	public static native ALLEGRO_EVENT_SOURCE al_get_display_event_source(ALLEGRO_DISPLAY display);
 	public static native void al_set_display_icon(ALLEGRO_DISPLAY display, ALLEGRO_BITMAP icon);
 	public static native void al_set_display_icons(ALLEGRO_DISPLAY display, int num_icons, Pointer icons);
+	public static native void al_set_new_window_position(int x, int y);
+	public static native void al_get_new_window_position(IntByReference x, IntByReference y);
+	public static native void al_set_window_position(ALLEGRO_DISPLAY display, int x, int y);
+	public static native void al_get_window_position(ALLEGRO_DISPLAY display, IntByReference x, IntByReference y);
+	public static native boolean al_set_window_constraints(ALLEGRO_DISPLAY display, int min_w, int min_h, int max_w, int max_h);
+	public static native boolean al_get_window_constraints(ALLEGRO_DISPLAY display, IntByReference min_w, IntByReference min_h, IntByReference max_w, IntByReference max_h);
+	public static native void al_set_window_title(ALLEGRO_DISPLAY display, String title);
+	public static native void al_set_new_display_option(int option, int value, int importance);
+	public static native int al_get_new_display_option(int option, IntByReference importance);
+	public static native void al_reset_new_display_options();
+	public static native void al_set_display_option(ALLEGRO_DISPLAY display, int option, int value);
+	public static native int al_get_display_option(ALLEGRO_DISPLAY display, int option);
+	public static native void al_acknowledge_drawing_halt(ALLEGRO_DISPLAY display);
+	public static native void al_acknowledge_drawing_resume(ALLEGRO_DISPLAY display);
+	/**
+	 * al_get_clipboard_text returns the text on the clipboard. Allegro has called {@link #al_malloc(long)} on this
+	 * string, and expects you to call {@link #al_free(Pointer)} on it. That is why the binding can not return String, as
+	 * it would copy the string and leak memory. Use {@link #jalleg_get_clipboard_text(ALLEGRO_DISPLAY)} to copy to a
+	 * String and free the native memory.
+	 */
+	public static native Pointer al_get_clipboard_text(ALLEGRO_DISPLAY display);
+	/**
+	 * Makes a direct call to {@link #al_get_clipboard_text(ALLEGRO_DISPLAY)} and transforms the results into a Java
+	 * String without a memory leak.
+	 */
+	public static String jalleg_get_clipboard_text(ALLEGRO_DISPLAY display) {
+		Pointer p = al_get_clipboard_text(display);
+		if (p != null) {
+			String ret = p.getString(0);
+			al_free(p);
+			return ret;
+		} else {
+			return null;
+		}
+	}
+	public static native boolean al_set_clipboard_text(ALLEGRO_DISPLAY display, String text);
+	public static native boolean al_clipboard_has_text(ALLEGRO_DISPLAY display);
 
 	//Monitors functions
 	public static native int al_get_new_display_adapter();
@@ -970,25 +1007,8 @@ public class AllegroLibrary implements Library {
 	public static native int al_get_num_video_adapters();
 	public static native boolean al_get_monitor_info(int adapter, ALLEGRO_MONITOR_INFO info);
 
-	public static native void al_set_new_window_position(int x, int y);
-	public static native void al_get_new_window_position(IntByReference x, IntByReference y);
-	public static native void al_set_window_position(ALLEGRO_DISPLAY display, int x, int y);
-	public static native void al_get_window_position(ALLEGRO_DISPLAY display, IntByReference x, IntByReference y);
-	public static native byte al_set_window_constraints(ALLEGRO_DISPLAY display, int min_w, int min_h, int max_w, int max_h);
-	public static native byte al_get_window_constraints(ALLEGRO_DISPLAY display, IntByReference min_w, IntByReference min_h, IntByReference max_w, IntByReference max_h);
-	public static native void al_set_window_title(ALLEGRO_DISPLAY display, String title);
-	public static native void al_set_new_display_option(int option, int value, int importance);
-	public static native int al_get_new_display_option(int option, IntByReference importance);
-	public static native void al_reset_new_display_options();
-	public static native void al_set_display_option(ALLEGRO_DISPLAY display, int option, int value);
-	public static native int al_get_display_option(ALLEGRO_DISPLAY display, int option);
 	public static native void al_hold_bitmap_drawing(boolean hold);
 	public static native boolean al_is_bitmap_drawing_held();
-	public static native void al_acknowledge_drawing_halt(ALLEGRO_DISPLAY display);
-	public static native void al_acknowledge_drawing_resume(ALLEGRO_DISPLAY display);
-	public static native String al_get_clipboard_text(ALLEGRO_DISPLAY display);
-	public static native boolean al_set_clipboard_text(ALLEGRO_DISPLAY display, String text);
-	public static native boolean al_clipboard_has_text(ALLEGRO_DISPLAY display);
 
 	public static native PointerByReference al_create_config();
 	@Deprecated 

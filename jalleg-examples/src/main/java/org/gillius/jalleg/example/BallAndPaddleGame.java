@@ -43,6 +43,10 @@ public class BallAndPaddleGame extends Game {
 
 	private Beeper beeper;
 
+	public BallAndPaddleGame() {
+		setAutoResize(true);
+	}
+
 	@Override
 	protected void onAllegroStarted() {
 		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Joystick,

@@ -28,6 +28,10 @@ public class ImageExample extends Game {
 
 	private List<ImageInstance> images = new ArrayList<>();
 
+	public ImageExample() {
+		setAutoResize(true);
+	}
+
 	@Override
 	protected void onAllegroStarted() throws IOException {
 		initAddons(AllegroAddon.Image, AllegroAddon.Keyboard);

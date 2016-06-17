@@ -120,7 +120,7 @@ Currently since jalleg-rt is supporting Windows 64 bit only at this time, if you
 need to have `allegro_monolith-5.2.dll` or `liballegro_monolith-5.2.so` in a location where the OS can load it (such as
 in PATH on Windows).
 
-If you want to run the example program:
+If you want to run the example "ball and paddle" game:
 
 ```
 gradlew run
@@ -136,8 +136,8 @@ Another good place to go for help is the [Allegro.cc](https://www.allegro.cc/) c
 communities I've ever seen on the Internet and a great help and inspiration to my own learning when I started many
 years ago.
 
-Example
--------
+Examples
+--------
 
 Here is a very simple example showing how to open a display and clear it to a color:
 
@@ -163,3 +163,14 @@ public class HelloAllegro {
 	}
 }
 ```
+
+A more complicated example can be found for a ball and paddle game, there are two forms, one
+[using only Allegro API](https://github.com/gillius/jalleg/blob/master/jalleg-examples/src/main/java/org/gillius/jalleg/example/BallAndPaddleGameSingleFile.java)
+and another
+[using jalleg-framework](https://github.com/gillius/jalleg/blob/master/jalleg-examples/src/main/java/org/gillius/jalleg/example/BallAndPaddleGame.java)
+and having some more features. The game uses A and Z to control the left player and up and down arrows to control the
+right player. In the jalleg-framework version, joystick control is supported for the right player and mouse control
+works for both players by clicking and holding where you want the paddle to be. The framework version also has sound
+effects through generating square waves.
+
+![Ball and Paddle Screenshot](BallAndPaddleExample.png)

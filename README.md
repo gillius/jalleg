@@ -108,7 +108,7 @@ If you've cloned from git or run `chmod u+x gradlew` then you can just use `./gr
 invocation examples from onward will use `gradlew` as example, but replace with `sh gradlew` or `./gradlew` as
 appropriate.
 
-There are 3 libraries built by the project:
+There are 4 libraries built by the project:
 
 1. **jalleg-binding:** Contains the JNA-based bindings themselves to load and use the Allegro library.
 2. **jalleg-rt:** Optional, contains within a Windows 64-bit pre-built Allegro DLL. If this JAR is included in your
@@ -123,7 +123,7 @@ in PATH on Windows).
 If you want to run the example program:
 
 ```
-gradlew :jalleg-examples:run
+gradlew run
 ```
 
 Documentation
@@ -151,7 +151,7 @@ public class HelloAllegro {
 	public static void main(String[] args) throws Exception {
 		al_install_system(ALLEGRO_VERSION_INT, null);
 
-		ALLEGRO_BITMAP display = al_create_display(640, 480);
+		ALLEGRO_DISPLAY display = al_create_display(640, 480);
 
 		al_clear_to_color(al_map_rgb_f(1f, 0f, 0f));
 		al_flip_display();

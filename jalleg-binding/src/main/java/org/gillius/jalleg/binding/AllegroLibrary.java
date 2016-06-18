@@ -1210,53 +1210,23 @@ public class AllegroLibrary implements Library {
 	public static native void al_horizontal_shear_transform(ALLEGRO_TRANSFORM trans, float theta);
 	public static native void al_vertical_shear_transform(ALLEGRO_TRANSFORM trans, float theta);
 
-	public static native PointerByReference al_create_shader(int platform);
-	@Deprecated 
-	public static native byte al_attach_shader_source(Pointer shader, int type, Pointer source);
-	public static native byte al_attach_shader_source(PointerByReference shader, int type, String source);
-	public static native byte al_attach_shader_source(PointerByReference shader, int type, Pointer source);
-	@Deprecated 
-	public static native byte al_attach_shader_source_file(Pointer shader, int type, Pointer filename);
-	public static native byte al_attach_shader_source_file(PointerByReference shader, int type, String filename);
-	public static native byte al_attach_shader_source_file(PointerByReference shader, int type, Pointer filename);
-	@Deprecated 
-	public static native byte al_build_shader(Pointer shader);
-	public static native byte al_build_shader(PointerByReference shader);
-	@Deprecated 
-	public static native Pointer al_get_shader_log(Pointer shader);
-	public static native Pointer al_get_shader_log(PointerByReference shader);
-	@Deprecated 
-	public static native int al_get_shader_platform(Pointer shader);
-	public static native int al_get_shader_platform(PointerByReference shader);
-	@Deprecated 
-	public static native byte al_use_shader(Pointer shader);
-	public static native byte al_use_shader(PointerByReference shader);
-	@Deprecated 
-	public static native void al_destroy_shader(Pointer shader);
-	public static native void al_destroy_shader(PointerByReference shader);
-	@Deprecated 
-	public static native byte al_set_shader_sampler(Pointer name, Pointer bitmap, int unit);
-	public static native byte al_set_shader_sampler(String name, PointerByReference bitmap, int unit);
-	public static native byte al_set_shader_sampler(Pointer name, PointerByReference bitmap, int unit);
-	@Deprecated 
-	public static native byte al_set_shader_matrix(Pointer name, ALLEGRO_TRANSFORM matrix);
-	public static native byte al_set_shader_matrix(String name, ALLEGRO_TRANSFORM matrix);
-	@Deprecated 
-	public static native byte al_set_shader_int(Pointer name, int i);
-	public static native byte al_set_shader_int(String name, int i);
-	@Deprecated 
-	public static native byte al_set_shader_float(Pointer name, float f);
-	public static native byte al_set_shader_float(String name, float f);
-	@Deprecated 
-	public static native byte al_set_shader_int_vector(Pointer name, int num_components, IntByReference i, int num_elems);
-	public static native byte al_set_shader_int_vector(String name, int num_components, IntBuffer i, int num_elems);
-	@Deprecated 
-	public static native byte al_set_shader_float_vector(Pointer name, int num_components, FloatByReference f, int num_elems);
-	public static native byte al_set_shader_float_vector(String name, int num_components, FloatBuffer f, int num_elems);
-	@Deprecated 
-	public static native byte al_set_shader_bool(Pointer name, byte b);
-	public static native byte al_set_shader_bool(String name, byte b);
-	public static native Pointer al_get_default_shader_source(int platform, int type);
+	//Shader routines
+	public static native ALLEGRO_SHADER al_create_shader(int platform);
+	public static native boolean al_attach_shader_source(ALLEGRO_SHADER shader, int type, String source);
+	public static native boolean al_attach_shader_source_file(ALLEGRO_SHADER shader, int type, String filename);
+	public static native boolean al_build_shader(ALLEGRO_SHADER shader);
+	public static native String al_get_shader_log(ALLEGRO_SHADER shader);
+	public static native int al_get_shader_platform(ALLEGRO_SHADER shader);
+	public static native boolean al_use_shader(ALLEGRO_SHADER shader);
+	public static native void al_destroy_shader(ALLEGRO_SHADER shader);
+	public static native boolean al_set_shader_sampler(String name, ALLEGRO_BITMAP bitmap, int unit);
+	public static native boolean al_set_shader_matrix(String name, ALLEGRO_TRANSFORM matrix);
+	public static native boolean al_set_shader_int(String name, int i);
+	public static native boolean al_set_shader_float(String name, float f);
+	public static native boolean al_set_shader_int_vector(String name, int num_components, IntBuffer i, int num_elems);
+	public static native boolean al_set_shader_float_vector(String name, int num_components, FloatBuffer f, int num_elems);
+	public static native boolean al_set_shader_bool(String name, boolean b);
+	public static native String al_get_default_shader_source(int platform, int type);
 
 	public static native boolean al_install_system(int version, al_install_system_atexit_ptr_callback atexit_ptr);
 	public static native void al_uninstall_system();

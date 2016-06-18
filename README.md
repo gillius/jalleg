@@ -69,7 +69,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Monitors              - :+1: hand-tuned
   * Mouse routines        - :+1: hand-tuned
   * Path structures       - auto-generated only (suggest Java native)
-  * Shader                - auto-generated only
+  * Shader                - hand-tuned (not tested yet)
   * State                 - :+1: hand-tuned
   * System routines       - :+1: hand-tuned
   * Threads               - auto-generated only (suggest Java native)

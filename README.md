@@ -62,7 +62,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Fixed point math      - No plans to port -- most calls are macros anyway; could be easily re-implemented in Java.
   * Fullscreen modes      - :+1: hand-tuned
   * Graphics routines     - :+1: hand-tuned
-  * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API)
+  * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API), will port on request
   * Joystick routines     - :+1: hand-tuned
   * Keyboard routines     - :+1: hand-tuned
   * Memory management     - :+1: hand-tuned
@@ -79,9 +79,9 @@ jalleg, I suggest using Java-provided features where possible.
   * Transformations       - :+1: hand-tuned
   * UTF-8 string routines - auto-generated only (varargs methods missing)
   * Miscellaneous         - need to determine if al_run_main is needed
-  * Platform-specific     - auto-generated only
-  * Direct3D integration  - auto-generated only
-  * OpenGL integration    - auto-generated only
+  * Platform-specific     - cannot implement these yet, may find workaround for Android methods if someone trys jalleg there
+  * Direct3D integration  - no current plan to implement unless a D3D Java binding is found and use case
+  * OpenGL integration    - no current plan to implement unless there is a use case
 
 * Addons
   * Audio addon           - :+1: hand-tuned

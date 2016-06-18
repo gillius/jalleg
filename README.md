@@ -94,7 +94,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Main addon            - n/a
   * Memfile addon         - :+1: hand-tuned
   * Native dialogs addon  - no binding yet (suggest Java native)
-  * PhysicsFS addon       - no binding yet
+  * PhysicsFS addon       - :+1: hand-tuned
   * Primitives addon      - :+1: hand-tuned
 
 

@@ -1573,6 +1573,10 @@ public class AllegroLibrary implements Library {
 	public static native ALLEGRO_FILE al_open_memfile(ByteBuffer mem, long size, String mode);
 	public static native int al_get_allegro_memfile_version();
 
+	//PhysicsFS integration addon
+	public static native void al_set_physfs_file_interface();
+	public static native int al_get_allegro_physfs_version();
+
 	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */

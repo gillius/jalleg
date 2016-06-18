@@ -79,7 +79,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Timer                 - :+1: hand-tuned
   * Touch input           - hand-tuned (not tested yet)
   * Transformations       - :+1: hand-tuned
-  * UTF-8 string routines - auto-generated only (varargs methods missing)
+  * UTF-8 string routines - hand-tuned (not tested yet) (varargs methods missing) (**highly** suggest Java String)
   * Miscellaneous         - need to determine if al_run_main is needed
   * Platform-specific     - cannot implement these yet, may find workaround for Android methods if someone trys jalleg there
   * Direct3D integration  - no current plan to implement unless a D3D Java binding is found and use case

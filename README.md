@@ -77,7 +77,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Threads               - hand-tuned (not tested yet) (**highly** suggest Java native threads)
   * Time                  - :+1: hand-tuned
   * Timer                 - :+1: hand-tuned
-  * Touch input           - auto-generated only
+  * Touch input           - hand-tuned (not tested yet)
   * Transformations       - :+1: hand-tuned
   * UTF-8 string routines - auto-generated only (varargs methods missing)
   * Miscellaneous         - need to determine if al_run_main is needed

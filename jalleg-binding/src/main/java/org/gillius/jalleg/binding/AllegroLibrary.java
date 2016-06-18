@@ -1105,6 +1105,7 @@ public class AllegroLibrary implements Library {
 	public static native boolean al_show_mouse_cursor(ALLEGRO_DISPLAY display);
 	public static native boolean al_hide_mouse_cursor(ALLEGRO_DISPLAY display);
 
+	//Touch input
 	public static native boolean al_is_touch_input_installed();
 	public static native boolean al_install_touch_input();
 	public static native void al_uninstall_touch_input();

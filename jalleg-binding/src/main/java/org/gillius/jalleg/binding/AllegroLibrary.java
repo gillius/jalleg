@@ -1050,47 +1050,45 @@ public class AllegroLibrary implements Library {
 	public static native int al_fixatan(int x);
 	public static native int al_fixatan2(int y, int x);
 
-	@Deprecated 
-	public static native ALLEGRO_FS_ENTRY al_create_fs_entry(Pointer path);
+	//File system routines
+	public static class ALLEGRO_FS_ENTRY extends PointerType {
+		public ALLEGRO_FS_ENTRY(Pointer address) { super(address); }
+		public ALLEGRO_FS_ENTRY() { super(); }
+	}
 	public static native ALLEGRO_FS_ENTRY al_create_fs_entry(String path);
 	public static native void al_destroy_fs_entry(ALLEGRO_FS_ENTRY e);
-	public static native Pointer al_get_fs_entry_name(ALLEGRO_FS_ENTRY e);
-	public static native byte al_update_fs_entry(ALLEGRO_FS_ENTRY e);
+	public static native String al_get_fs_entry_name(ALLEGRO_FS_ENTRY e);
+	public static native boolean al_update_fs_entry(ALLEGRO_FS_ENTRY e);
 	public static native int al_get_fs_entry_mode(ALLEGRO_FS_ENTRY e);
-	/**
-	 * <i>native declaration : include\allegro5\fshook.h:74</i><br>
-	 * Conversion Error : extern time_t (Primitive without known type for this runtime: NativeTime)
-	 */
-	/**
-	 * <i>native declaration : include\allegro5\fshook.h:75</i><br>
-	 * Conversion Error : extern time_t (Primitive without known type for this runtime: NativeTime)
-	 */
-	/**
-	 * <i>native declaration : include\allegro5\fshook.h:76</i><br>
-	 * Conversion Error : extern time_t (Primitive without known type for this runtime: NativeTime)
-	 */
-	public static native AllegroLibrary.off_t al_get_fs_entry_size(ALLEGRO_FS_ENTRY e);
-	public static native byte al_fs_entry_exists(ALLEGRO_FS_ENTRY e);
-	public static native byte al_remove_fs_entry(ALLEGRO_FS_ENTRY e);
-	public static native byte al_open_directory(ALLEGRO_FS_ENTRY e);
+	//public static native time_t al_get_fs_entry_atime(ALLEGRO_FS_ENTRY e)
+	//public static native time_t al_get_fs_entry_ctime(ALLEGRO_FS_ENTRY e)
+	//public static native time_t al_get_fs_entry_mtime(ALLEGRO_FS_ENTRY e)
+	//public static native off_t al_get_fs_entry_size(ALLEGRO_FS_ENTRY e);
+	public static native boolean al_fs_entry_exists(ALLEGRO_FS_ENTRY e);
+	public static native boolean al_remove_fs_entry(ALLEGRO_FS_ENTRY e);
+	public static native boolean al_open_directory(ALLEGRO_FS_ENTRY e);
 	public static native ALLEGRO_FS_ENTRY al_read_directory(ALLEGRO_FS_ENTRY e);
-	public static native byte al_close_directory(ALLEGRO_FS_ENTRY e);
-	@Deprecated 
-	public static native byte al_filename_exists(Pointer path);
-	public static native byte al_filename_exists(String path);
-	@Deprecated 
-	public static native byte al_remove_filename(Pointer path);
-	public static native byte al_remove_filename(String path);
+	public static native boolean al_close_directory(ALLEGRO_FS_ENTRY e);
+	public static native boolean al_filename_exists(String path);
+	public static native boolean al_remove_filename(String path);
+	/**
+	 * Returns the current directory as a string, but requires that the data is freed, so use
+	 * {@link #jalleg_get_current_directory()} to manage the memory automatically.
+	 */
 	public static native Pointer al_get_current_directory();
-	@Deprecated 
-	public static native byte al_change_directory(Pointer path);
-	public static native byte al_change_directory(String path);
-	@Deprecated 
-	public static native byte al_make_directory(Pointer path);
-	public static native byte al_make_directory(String path);
-	@Deprecated 
-	public static native PointerByReference al_open_fs_entry(ALLEGRO_FS_ENTRY e, Pointer mode);
-	public static native PointerByReference al_open_fs_entry(ALLEGRO_FS_ENTRY e, String mode);
+	/**
+	 * Calls {@link #al_get_current_directory()}, converts the returned char* to a String then {@link #al_free}s
+	 * the memory.
+	 */
+	public static String jalleg_get_current_directory() {
+		Pointer p = al_get_current_directory();
+		String ret = p.getString(0);
+		al_free(p);
+		return ret;
+	}
+	public static native boolean al_change_directory(String path);
+	public static native boolean al_make_directory(String path);
+	public static native ALLEGRO_FILE al_open_fs_entry(ALLEGRO_FS_ENTRY e, String mode);
 	public static native int al_for_each_fs_entry(ALLEGRO_FS_ENTRY dir, AllegroLibrary.al_for_each_fs_entry_callback_callback callback, Pointer extra);
 	public static native ALLEGRO_FS_INTERFACE al_get_fs_interface();
 	public static native void al_set_fs_interface(ALLEGRO_FS_INTERFACE vtable);
@@ -1758,16 +1756,6 @@ public class AllegroLibrary implements Library {
 			super(address);
 		}
 		public ALLEGRO_FILE() {
-			super();
-		}
-	}
-
-	/** Pointer to unknown (opaque) type */
-	public static class off_t extends PointerType {
-		public off_t(Pointer address) {
-			super(address);
-		}
-		public off_t() {
 			super();
 		}
 	}

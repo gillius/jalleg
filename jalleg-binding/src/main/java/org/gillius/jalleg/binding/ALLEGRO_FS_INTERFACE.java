@@ -19,6 +19,8 @@ import com.sun.jna.Callback;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 import com.sun.jna.ptr.PointerByReference;
+import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_FS_ENTRY;
+
 import java.util.Arrays;
 import java.util.List;
 /**

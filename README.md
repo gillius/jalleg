@@ -58,7 +58,9 @@ jalleg, I suggest using Java-provided features where possible.
   * Displays              - :+1: hand-tuned
   * Events                - :+1: hand-tuned
   * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)
-  * Filesystem            - auto-generated only (suggest Java native)
+  * Filesystem            - hand-tuned (not tested yet). No solution yet for time_t and off_t functions due to size
+                            differences between platforms. This also impacts the ability to
+                            use ALLEGRO_FS_INTERFACE. Use native Java functionality where possible.
   * Fixed point math      - No plans to port -- most calls are macros anyway; could be easily re-implemented in Java.
   * Fullscreen modes      - :+1: hand-tuned
   * Graphics routines     - :+1: hand-tuned

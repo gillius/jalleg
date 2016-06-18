@@ -851,14 +851,10 @@ public class AllegroLibrary implements Library {
 	
 	public static native void al_set_blender(int op, int source, int dest);
 	public static native void al_set_blend_color(ALLEGRO_COLOR color);
-	@Deprecated 
 	public static native void al_get_blender(IntByReference op, IntByReference source, IntByReference dest);
-	public static native void al_get_blender(IntBuffer op, IntBuffer source, IntBuffer dest);
 	public static native ALLEGRO_COLOR al_get_blend_color();
 	public static native void al_set_separate_blender(int op, int source, int dest, int alpha_op, int alpha_source, int alpha_dest);
-	@Deprecated 
 	public static native void al_get_separate_blender(IntByReference op, IntByReference source, IntByReference dest, IntByReference alpha_op, IntByReference alpha_src, IntByReference alpha_dest);
-	public static native void al_get_separate_blender(IntBuffer op, IntBuffer source, IntBuffer dest, IntBuffer alpha_op, IntBuffer alpha_src, IntBuffer alpha_dest);
 
 	//Event functions
 	public static class ALLEGRO_EVENT_SOURCE extends PointerType {

@@ -1188,50 +1188,26 @@ public class AllegroLibrary implements Library {
 	public static native String al_get_org_name();
 	public static native String al_get_app_name();
 	public static native byte al_inhibit_screensaver(byte inhibit);
-	public static native PointerByReference al_create_thread(AllegroLibrary.al_create_thread_proc_callback proc, Pointer arg);
-	@Deprecated 
-	public static native void al_start_thread(Pointer outer);
-	public static native void al_start_thread(PointerByReference outer);
-	@Deprecated 
-	public static native void al_join_thread(Pointer outer, PointerByReference ret_value);
-	public static native void al_join_thread(PointerByReference outer, PointerByReference ret_value);
-	@Deprecated 
-	public static native void al_set_thread_should_stop(Pointer outer);
-	public static native void al_set_thread_should_stop(PointerByReference outer);
-	@Deprecated 
-	public static native byte al_get_thread_should_stop(Pointer outer);
-	public static native byte al_get_thread_should_stop(PointerByReference outer);
-	@Deprecated 
-	public static native void al_destroy_thread(Pointer thread);
-	public static native void al_destroy_thread(PointerByReference thread);
-	public static native void al_run_detached_thread(AllegroLibrary.al_run_detached_thread_proc_callback proc, Pointer arg);
-	public static native PointerByReference al_create_mutex();
-	public static native PointerByReference al_create_mutex_recursive();
-	@Deprecated 
-	public static native void al_lock_mutex(Pointer mutex);
-	public static native void al_lock_mutex(PointerByReference mutex);
-	@Deprecated 
-	public static native void al_unlock_mutex(Pointer mutex);
-	public static native void al_unlock_mutex(PointerByReference mutex);
-	@Deprecated 
-	public static native void al_destroy_mutex(Pointer mutex);
-	public static native void al_destroy_mutex(PointerByReference mutex);
-	public static native PointerByReference al_create_cond();
-	@Deprecated 
-	public static native void al_destroy_cond(Pointer cond);
-	public static native void al_destroy_cond(PointerByReference cond);
-	@Deprecated 
-	public static native void al_wait_cond(Pointer cond, Pointer mutex);
-	public static native void al_wait_cond(PointerByReference cond, PointerByReference mutex);
-	@Deprecated 
-	public static native int al_wait_cond_until(Pointer cond, Pointer mutex, ALLEGRO_TIMEOUT timeout);
-	public static native int al_wait_cond_until(PointerByReference cond, PointerByReference mutex, ALLEGRO_TIMEOUT timeout);
-	@Deprecated 
-	public static native void al_broadcast_cond(Pointer cond);
-	public static native void al_broadcast_cond(PointerByReference cond);
-	@Deprecated 
-	public static native void al_signal_cond(Pointer cond);
-	public static native void al_signal_cond(PointerByReference cond);
+	
+	//Threads
+	public static native ALLEGRO_THREAD al_create_thread(al_create_thread_proc_callback proc, Pointer arg);
+	public static native void al_start_thread(ALLEGRO_THREAD outer);
+	public static native void al_join_thread(ALLEGRO_THREAD outer, PointerByReference ret_value);
+	public static native void al_set_thread_should_stop(ALLEGRO_THREAD outer);
+	public static native byte al_get_thread_should_stop(ALLEGRO_THREAD outer);
+	public static native void al_destroy_thread(ALLEGRO_THREAD thread);
+	public static native void al_run_detached_thread(al_run_detached_thread_proc_callback proc, Pointer arg);
+	public static native ALLEGRO_MUTEX al_create_mutex();
+	public static native ALLEGRO_MUTEX al_create_mutex_recursive();
+	public static native void al_lock_mutex(ALLEGRO_MUTEX mutex);
+	public static native void al_unlock_mutex(ALLEGRO_MUTEX mutex);
+	public static native void al_destroy_mutex(ALLEGRO_MUTEX mutex);
+	public static native ALLEGRO_COND al_create_cond();
+	public static native void al_destroy_cond(ALLEGRO_COND cond);
+	public static native void al_wait_cond(ALLEGRO_COND cond, ALLEGRO_MUTEX mutex);
+	public static native int al_wait_cond_until(ALLEGRO_COND cond, ALLEGRO_MUTEX mutex, ALLEGRO_TIMEOUT timeout);
+	public static native void al_broadcast_cond(ALLEGRO_COND cond);
+	public static native void al_signal_cond(ALLEGRO_COND cond);
 
 	//Timer functions
 	public static native ALLEGRO_TIMER al_create_timer(double speed_secs);

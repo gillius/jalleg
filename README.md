@@ -74,7 +74,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Shader                - hand-tuned (not tested yet)
   * State                 - :+1: hand-tuned
   * System routines       - :+1: hand-tuned
-  * Threads               - auto-generated only (suggest Java native)
+  * Threads               - hand-tuned (not tested yet) (**highly** suggest Java native threads)
   * Time                  - :+1: hand-tuned
   * Timer                 - :+1: hand-tuned
   * Touch input           - auto-generated only

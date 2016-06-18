@@ -78,7 +78,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Touch input           - auto-generated only
   * Transformations       - :+1: hand-tuned
   * UTF-8 string routines - auto-generated only (varargs methods missing)
-  * Miscellaneous         - auto-generated only
+  * Miscellaneous         - need to determine if al_run_main is needed
   * Platform-specific     - auto-generated only
   * Direct3D integration  - auto-generated only
   * OpenGL integration    - auto-generated only

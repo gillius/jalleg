@@ -517,7 +517,7 @@ public class AllegroLibrary implements Library {
 	public static final String ALLEGRO_SHADER_VAR_USE_TEX = (String)"al_use_tex";
 	public static final String ALLEGRO_SHADER_VAR_USE_TEX_MATRIX = (String)"al_use_tex_matrix";
 	public interface al_run_main_arg1_callback extends Callback {
-		int apply(int int1, PointerByReference charPtrPtr1);
+		int apply(int int1, Pointer charPtrPtr1);
 	}
 
 	public interface ALLEGRO_IIO_LOADER_FUNCTION extends Callback {
@@ -577,7 +577,7 @@ public class AllegroLibrary implements Library {
 	}
 
 	public static native int al_get_allegro_version();
-	public static native int al_run_main(int argc, PointerByReference argv, AllegroLibrary.al_run_main_arg1_callback arg1);
+	public static native int al_run_main(int argc, Pointer argv, AllegroLibrary.al_run_main_arg1_callback arg1);
 
 	//Time routines
 	public static native double al_get_time();

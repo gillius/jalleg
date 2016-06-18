@@ -643,85 +643,35 @@ public class AllegroLibrary implements Library {
 	public static native void al_draw_tinted_scaled_rotated_bitmap(ALLEGRO_BITMAP bitmap, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
 	public static native void al_draw_tinted_scaled_rotated_bitmap_region(ALLEGRO_BITMAP bitmap, float sx, float sy, float sw, float sh, ALLEGRO_COLOR tint, float cx, float cy, float dx, float dy, float xscale, float yscale, float angle, int flags);
 
-	@Deprecated 
-	public static native PointerByReference al_create_path(Pointer str);
-	public static native PointerByReference al_create_path(String str);
-	@Deprecated 
-	public static native PointerByReference al_create_path_for_directory(Pointer str);
-	public static native PointerByReference al_create_path_for_directory(String str);
-	@Deprecated 
-	public static native PointerByReference al_clone_path(Pointer path);
-	public static native PointerByReference al_clone_path(PointerByReference path);
-	@Deprecated 
-	public static native int al_get_path_num_components(Pointer path);
-	public static native int al_get_path_num_components(PointerByReference path);
-	@Deprecated 
-	public static native Pointer al_get_path_component(Pointer path, int i);
-	public static native Pointer al_get_path_component(PointerByReference path, int i);
-	@Deprecated 
-	public static native void al_replace_path_component(Pointer path, int i, Pointer s);
-	public static native void al_replace_path_component(PointerByReference path, int i, String s);
-	public static native void al_replace_path_component(PointerByReference path, int i, Pointer s);
-	@Deprecated 
-	public static native void al_remove_path_component(Pointer path, int i);
-	public static native void al_remove_path_component(PointerByReference path, int i);
-	@Deprecated 
-	public static native void al_insert_path_component(Pointer path, int i, Pointer s);
-	public static native void al_insert_path_component(PointerByReference path, int i, String s);
-	public static native void al_insert_path_component(PointerByReference path, int i, Pointer s);
-	@Deprecated 
-	public static native Pointer al_get_path_tail(Pointer path);
-	public static native Pointer al_get_path_tail(PointerByReference path);
-	@Deprecated 
-	public static native void al_drop_path_tail(Pointer path);
-	public static native void al_drop_path_tail(PointerByReference path);
-	@Deprecated 
-	public static native void al_append_path_component(Pointer path, Pointer s);
-	public static native void al_append_path_component(PointerByReference path, String s);
-	public static native void al_append_path_component(PointerByReference path, Pointer s);
-	@Deprecated 
-	public static native byte al_join_paths(Pointer path, Pointer tail);
-	public static native byte al_join_paths(PointerByReference path, PointerByReference tail);
-	@Deprecated 
-	public static native byte al_rebase_path(Pointer head, Pointer tail);
-	public static native byte al_rebase_path(PointerByReference head, PointerByReference tail);
-	@Deprecated 
-	public static native Pointer al_path_cstr(Pointer path, byte delim);
-	public static native Pointer al_path_cstr(PointerByReference path, byte delim);
-	@Deprecated 
-	public static native void al_destroy_path(Pointer path);
-	public static native void al_destroy_path(PointerByReference path);
-	@Deprecated 
-	public static native void al_set_path_drive(Pointer path, Pointer drive);
-	public static native void al_set_path_drive(PointerByReference path, String drive);
-	public static native void al_set_path_drive(PointerByReference path, Pointer drive);
-	@Deprecated 
-	public static native Pointer al_get_path_drive(Pointer path);
-	public static native Pointer al_get_path_drive(PointerByReference path);
-	@Deprecated 
-	public static native void al_set_path_filename(Pointer path, Pointer filename);
-	public static native void al_set_path_filename(PointerByReference path, String filename);
-	public static native void al_set_path_filename(PointerByReference path, Pointer filename);
-	@Deprecated 
-	public static native Pointer al_get_path_filename(Pointer path);
-	public static native Pointer al_get_path_filename(PointerByReference path);
-	@Deprecated 
-	public static native Pointer al_get_path_extension(Pointer path);
-	public static native Pointer al_get_path_extension(PointerByReference path);
-	@Deprecated 
-	public static native byte al_set_path_extension(Pointer path, Pointer extension);
-	public static native byte al_set_path_extension(PointerByReference path, String extension);
-	public static native byte al_set_path_extension(PointerByReference path, Pointer extension);
-	@Deprecated 
-	public static native Pointer al_get_path_basename(Pointer path);
-	public static native Pointer al_get_path_basename(PointerByReference path);
-	@Deprecated 
-	public static native byte al_make_path_canonical(Pointer path);
-	public static native byte al_make_path_canonical(PointerByReference path);
-	@Deprecated 
+	//Path structures
+	public static native ALLEGRO_PATH al_create_path(String str);
+	public static native ALLEGRO_PATH al_create_path_for_directory(String str);
+	public static native ALLEGRO_PATH al_clone_path(ALLEGRO_PATH path);
+	public static native int al_get_path_num_components(ALLEGRO_PATH path);
+	public static native String al_get_path_component(ALLEGRO_PATH path, int i);
+	public static native void al_replace_path_component(ALLEGRO_PATH path, int i, String s);
+	public static native void al_remove_path_component(ALLEGRO_PATH path, int i);
+	public static native void al_insert_path_component(ALLEGRO_PATH path, int i, String s);
+	public static native String al_get_path_tail(ALLEGRO_PATH path);
+	public static native void al_drop_path_tail(ALLEGRO_PATH path);
+	public static native void al_append_path_component(ALLEGRO_PATH path, String s);
+	public static native boolean al_join_paths(ALLEGRO_PATH path, ALLEGRO_PATH tail);
+	public static native boolean al_rebase_path(ALLEGRO_PATH head, ALLEGRO_PATH tail);
+	public static native String al_path_cstr(ALLEGRO_PATH path, byte delim);
+	public static native void al_destroy_path(ALLEGRO_PATH path);
+	public static native void al_set_path_drive(ALLEGRO_PATH path, String drive);
+	public static native String al_get_path_drive(ALLEGRO_PATH path);
+	public static native void al_set_path_filename(ALLEGRO_PATH path, String filename);
+	public static native String al_get_path_filename(ALLEGRO_PATH path);
+	public static native String al_get_path_extension(ALLEGRO_PATH path);
+	public static native boolean al_set_path_extension(ALLEGRO_PATH path, String extension);
+	public static native String al_get_path_basename(ALLEGRO_PATH path);
+	public static native boolean al_make_path_canonical(ALLEGRO_PATH path);
+
+	@Deprecated
 	public static native ALLEGRO_USTR al_ustr_new(Pointer s);
 	public static native ALLEGRO_USTR al_ustr_new(String s);
-	@Deprecated 
+	@Deprecated
 	public static native ALLEGRO_USTR al_ustr_new_from_buffer(Pointer s, size_t size);
 	public static native ALLEGRO_USTR al_ustr_new_from_buffer(String s, size_t size);
 //	@Deprecated

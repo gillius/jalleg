@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ALLEGRO_ANY_EVENT extends Structure {
 	public int type;
-	public org.gillius.jalleg.binding.ALLEGRO_EVENT_SOURCE.ByReference source;
+	public AllegroLibrary.ALLEGRO_EVENT_SOURCE source;
 	public double timestamp;
 	public ALLEGRO_ANY_EVENT() {
 		super();
@@ -34,7 +34,7 @@ public class ALLEGRO_ANY_EVENT extends Structure {
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("type", "source", "timestamp");
 	}
-	public ALLEGRO_ANY_EVENT(int type, org.gillius.jalleg.binding.ALLEGRO_EVENT_SOURCE.ByReference source, double timestamp) {
+	public ALLEGRO_ANY_EVENT(int type, AllegroLibrary.ALLEGRO_EVENT_SOURCE source, double timestamp) {
 		super();
 		this.type = type;
 		this.source = source;

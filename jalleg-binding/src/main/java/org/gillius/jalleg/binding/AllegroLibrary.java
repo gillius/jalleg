@@ -861,6 +861,10 @@ public class AllegroLibrary implements Library {
 	public static native void al_get_separate_blender(IntBuffer op, IntBuffer source, IntBuffer dest, IntBuffer alpha_op, IntBuffer alpha_src, IntBuffer alpha_dest);
 
 	//Event functions
+	public static class ALLEGRO_EVENT_SOURCE extends PointerType {
+		public ALLEGRO_EVENT_SOURCE(Pointer address) { super(address); }
+		public ALLEGRO_EVENT_SOURCE() { super(); }
+	}
 	public static native void al_init_user_event_source(ALLEGRO_EVENT_SOURCE src);
 	public static native void al_destroy_user_event_source(ALLEGRO_EVENT_SOURCE src);
 	public static native boolean al_emit_user_event(ALLEGRO_EVENT_SOURCE src, ALLEGRO_EVENT event, al_emit_user_event_dtor_callback dtor);

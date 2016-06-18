@@ -28,7 +28,7 @@ import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_USER_EVENT_DESCRIPTOR;
  */
 public class ALLEGRO_USER_EVENT extends Structure {
 	public int type;
-	public org.gillius.jalleg.binding.ALLEGRO_EVENT_SOURCE.ByReference source;
+	public AllegroLibrary.ALLEGRO_EVENT_SOURCE source;
 	public double timestamp;
 	public ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr;
 	public IntByReference data1;
@@ -41,7 +41,7 @@ public class ALLEGRO_USER_EVENT extends Structure {
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("type", "source", "timestamp", "__internal__descr", "data1", "data2", "data3", "data4");
 	}
-	public ALLEGRO_USER_EVENT(int type, org.gillius.jalleg.binding.ALLEGRO_EVENT_SOURCE.ByReference source, double timestamp, ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr, IntByReference data1, IntByReference data2, IntByReference data3, IntByReference data4) {
+	public ALLEGRO_USER_EVENT(int type, AllegroLibrary.ALLEGRO_EVENT_SOURCE source, double timestamp, ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr, IntByReference data1, IntByReference data2, IntByReference data3, IntByReference data4) {
 		super();
 		this.type = type;
 		this.source = source;

@@ -74,6 +74,7 @@ Closure pomDefinition = {
 
 boolean hasUsername() {
 	try {
+		//TODO: is there a better way to detect this is set?
 		ossrhUsername
 	} catch (Exception e) {
 		false

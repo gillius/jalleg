@@ -31,17 +31,17 @@ public class ALLEGRO_USER_EVENT extends Structure {
 	public AllegroLibrary.ALLEGRO_EVENT_SOURCE source;
 	public double timestamp;
 	public ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr;
-	public IntByReference data1;
-	public IntByReference data2;
-	public IntByReference data3;
-	public IntByReference data4;
+	public Pointer data1;
+	public Pointer data2;
+	public Pointer data3;
+	public Pointer data4;
 	public ALLEGRO_USER_EVENT() {
 		super();
 	}
 	protected List<? > getFieldOrder() {
 		return Arrays.asList("type", "source", "timestamp", "__internal__descr", "data1", "data2", "data3", "data4");
 	}
-	public ALLEGRO_USER_EVENT(int type, AllegroLibrary.ALLEGRO_EVENT_SOURCE source, double timestamp, ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr, IntByReference data1, IntByReference data2, IntByReference data3, IntByReference data4) {
+	public ALLEGRO_USER_EVENT(int type, AllegroLibrary.ALLEGRO_EVENT_SOURCE source, double timestamp, ALLEGRO_USER_EVENT_DESCRIPTOR __internal__descr, Pointer data1, Pointer data2, Pointer data3, Pointer data4) {
 		super();
 		this.type = type;
 		this.source = source;
@@ -55,10 +55,6 @@ public class ALLEGRO_USER_EVENT extends Structure {
 	public ALLEGRO_USER_EVENT(Pointer peer) {
 		super(peer);
 	}
-	public static class ByReference extends ALLEGRO_USER_EVENT implements Structure.ByReference {
-		
-	};
-	public static class ByValue extends ALLEGRO_USER_EVENT implements Structure.ByValue {
-		
-	};
+	public static class ByReference extends ALLEGRO_USER_EVENT implements Structure.ByReference {}
+	public static class ByValue extends ALLEGRO_USER_EVENT implements Structure.ByValue {}
 }

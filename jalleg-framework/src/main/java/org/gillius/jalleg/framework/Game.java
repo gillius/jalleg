@@ -33,6 +33,8 @@ public abstract class Game implements Runnable {
 	protected ALLEGRO_JOYSTICK_STATE joy1;
 	private ALLEGRO_JOYSTICK joyHandle;
 
+	private volatile boolean stopRequest = false;
+
 	public double getTargetFrameRate() {
 		return targetFrameRate;
 	}
@@ -127,7 +129,7 @@ public abstract class Game implements Runnable {
 
 		boolean run = true;
 
-		while(run) {
+		while(run && !stopRequest) {
 			event.setType(Integer.TYPE);
 			if (isCollectingStats()) statsRecorder.startLoop();
 			al_wait_for_event(eventQueue, event);
@@ -178,6 +180,10 @@ public abstract class Game implements Runnable {
 		al_destroy_event_queue(eventQueue);
 		al_destroy_display(mainDisplay);
 		AllegroSystem.INSTANCE.uninstall();
+	}
+
+	public void stop() {
+		stopRequest = true;
 	}
 
 	private void transition(GameState state) {

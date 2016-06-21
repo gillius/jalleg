@@ -1598,6 +1598,76 @@ public class AllegroLibrary implements Library {
 	public static native ALLEGRO_COLOR al_color_name(String name);
 	public static native ALLEGRO_COLOR al_color_html(String string);
 
+	//Native dialogs support
+	public static final int ALLEGRO_FILECHOOSER_FILE_MUST_EXIST = 1;
+	public static final int ALLEGRO_FILECHOOSER_SAVE = 2;
+	public static final int ALLEGRO_FILECHOOSER_FOLDER = 4;
+	public static final int ALLEGRO_FILECHOOSER_PICTURES = 8;
+	public static final int ALLEGRO_FILECHOOSER_SHOW_HIDDEN = 16;
+	public static final int ALLEGRO_FILECHOOSER_MULTIPLE = 32;
+	public static final int ALLEGRO_MESSAGEBOX_WARN = 1 << 0;
+	public static final int ALLEGRO_MESSAGEBOX_ERROR = 1 << 1;
+	public static final int ALLEGRO_MESSAGEBOX_OK_CANCEL = 1 << 2;
+	public static final int ALLEGRO_MESSAGEBOX_YES_NO = 1 << 3;
+	public static final int ALLEGRO_MESSAGEBOX_QUESTION = 1 << 4;
+	public static final int ALLEGRO_TEXTLOG_NO_CLOSE = 1 << 0;
+	public static final int ALLEGRO_TEXTLOG_MONOSPACE = 1 << 1;
+	public static final int ALLEGRO_EVENT_NATIVE_DIALOG_CLOSE = 600;
+	public static final int ALLEGRO_EVENT_MENU_CLICK = 601;
+	public static final int ALLEGRO_MENU_ITEM_ENABLED = 0;
+	public static final int ALLEGRO_MENU_ITEM_CHECKBOX = 1;
+	public static final int ALLEGRO_MENU_ITEM_CHECKED = 2;
+	public static final int ALLEGRO_MENU_ITEM_DISABLED = 4;
+	public static native int al_get_allegro_native_dialog_version();
+	public static native boolean al_init_native_dialog_addon();
+	public static native void al_shutdown_native_dialog_addon();
+	public static native ALLEGRO_MENU al_create_native_file_dialog(String initial_path, String title, String patterns, int mode);
+	public static native boolean al_show_native_file_dialog(ALLEGRO_MENU display, ALLEGRO_FILECHOOSER dialog);
+	public static native int al_get_native_file_dialog_count(ALLEGRO_FILECHOOSER dialog);
+	public static native String al_get_native_file_dialog_path(ALLEGRO_FILECHOOSER dialog, size_t index);
+	public static native void al_destroy_native_file_dialog(ALLEGRO_FILECHOOSER dialog);
+	public static native int al_show_native_message_box(ALLEGRO_DISPLAY display, String title, String heading, String text, String buttons, int flags);
+	public static native ALLEGRO_TEXTLOG al_open_native_text_log(String title, int flags);
+	public static native void al_close_native_text_log(ALLEGRO_TEXTLOG textlog);
+//	public static native void al_append_native_text_log(ALLEGRO_TEXTLOG textlog, String format, Object... varArgs1);
+	public static native ALLEGRO_EVENT_SOURCE al_get_native_text_log_event_source(ALLEGRO_TEXTLOG textlog);
+	public static native ALLEGRO_MENU al_create_menu();
+	public static native ALLEGRO_MENU al_create_popup_menu();
+//	public static native ALLEGRO_MENU al_build_menu(ALLEGRO_MENU_INFO info);
+	public static native int al_append_menu_item(ALLEGRO_MENU parent, String title, short id, int flags, ALLEGRO_BITMAP icon, ALLEGRO_MENU submenu);
+	public static native int al_insert_menu_item(ALLEGRO_MENU parent, int pos, String title, short id, int flags, ALLEGRO_BITMAP icon, ALLEGRO_MENU submenu);
+	public static native boolean al_remove_menu_item(ALLEGRO_MENU menu, int pos);
+	public static native ALLEGRO_MENU al_clone_menu(ALLEGRO_MENU menu);
+	public static native ALLEGRO_MENU al_clone_menu_for_popup(ALLEGRO_MENU menu);
+	public static native void al_destroy_menu(ALLEGRO_MENU menu);
+	public static native String al_get_menu_item_caption(ALLEGRO_MENU menu, int pos);
+	public static native void al_set_menu_item_caption(ALLEGRO_MENU menu, int pos, String caption);
+	public static native int al_get_menu_item_flags(ALLEGRO_MENU menu, int pos);
+	public static native void al_set_menu_item_flags(ALLEGRO_MENU menu, int pos, int flags);
+	public static native ALLEGRO_MENU al_get_menu_item_icon(ALLEGRO_MENU menu, int pos);
+	public static native void al_set_menu_item_icon(ALLEGRO_MENU menu, int pos, ALLEGRO_BITMAP icon);
+	public static native ALLEGRO_MENU al_find_menu(ALLEGRO_MENU haystack, short id);
+	public static native boolean al_find_menu_item(ALLEGRO_MENU haystack, short id, PointerByReference menu, IntByReference index);
+	public static native ALLEGRO_EVENT_SOURCE al_get_default_menu_event_source();
+	public static native ALLEGRO_EVENT_SOURCE al_enable_menu_event_source(ALLEGRO_MENU menu);
+	public static native void al_disable_menu_event_source(ALLEGRO_MENU menu);
+	public static native ALLEGRO_MENU al_get_display_menu(ALLEGRO_DISPLAY display);
+	public static native boolean al_set_display_menu(ALLEGRO_DISPLAY display, ALLEGRO_MENU menu);
+	public static native boolean al_popup_menu(ALLEGRO_MENU popup, ALLEGRO_DISPLAY display);
+	public static native ALLEGRO_MENU al_remove_display_menu(ALLEGRO_MENU display);
+	public static class ALLEGRO_FILECHOOSER extends PointerType {
+		public ALLEGRO_FILECHOOSER(Pointer address) { super(address); }
+		public ALLEGRO_FILECHOOSER() { super(); }
+	}
+	public static class ALLEGRO_MENU extends PointerType {
+		public ALLEGRO_MENU(Pointer address) { super(address); }
+		public ALLEGRO_MENU() { super(); }
+	}
+	public static class ALLEGRO_TEXTLOG extends PointerType {
+		public ALLEGRO_TEXTLOG(Pointer address) { super(address); }
+		public ALLEGRO_TEXTLOG() { super(); }
+	}
+
 	//Other Allegro pointer types
 
 	/** Pointer to unknown (opaque) type */

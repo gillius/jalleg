@@ -23,6 +23,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.PointerType;
 import com.sun.jna.ptr.*;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.nio.*;
 
 /**
@@ -1629,7 +1631,21 @@ public class AllegroLibrary implements Library {
 	public static native int al_show_native_message_box(ALLEGRO_DISPLAY display, String title, String heading, String text, String buttons, int flags);
 	public static native ALLEGRO_TEXTLOG al_open_native_text_log(String title, int flags);
 	public static native void al_close_native_text_log(ALLEGRO_TEXTLOG textlog);
-//	public static native void al_append_native_text_log(ALLEGRO_TEXTLOG textlog, String format, Object... varArgs1);
+	private static native void al_append_native_text_log(ALLEGRO_TEXTLOG textlog, String format, String text);
+	/**
+	 * Calls al_append_native_text_log with the formatted result using {@link String#format(String, Object...)}, and NOT
+	 * Allegro's native formatting. This works around varargs limitations in JNA direct mapping.
+	 */
+	public static void jalleg_append_native_text_log(ALLEGRO_TEXTLOG textlog, String format, Object... args) {
+		al_append_native_text_log(textlog, "%s", String.format(format, args));
+	}
+	/**
+	 * Calls al_append_native_text_log with the "%s" format and given text. This works around varargs limitations in JNA
+	 * direct mapping.
+	 */
+	public static void jalleg_append_native_text_log(ALLEGRO_TEXTLOG textlog, String text) {
+		al_append_native_text_log(textlog, "%s", text);
+	}
 	public static native ALLEGRO_EVENT_SOURCE al_get_native_text_log_event_source(ALLEGRO_TEXTLOG textlog);
 	public static native ALLEGRO_MENU al_create_menu();
 	public static native ALLEGRO_MENU al_create_popup_menu();

@@ -93,7 +93,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Image I/O addon       - :+1: hand-tuned
   * Main addon            - n/a
   * Memfile addon         - :+1: hand-tuned
-  * Native dialogs addon  - hand-tuned binding, but without al_build_menu and al_append_native_text_log (consider Java native for file chooser)
+  * Native dialogs addon  - hand-tuned binding, but without al_build_menu (consider Java native for file chooser)
   * PhysicsFS addon       - :+1: hand-tuned
   * Primitives addon      - :+1: hand-tuned
 

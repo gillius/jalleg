@@ -8,5 +8,6 @@ public enum AllegroAddon {
 	Font,
 	Audio,
 	AudioCodecs,
-	Image
+	Image,
+	NativeDialogs
 }

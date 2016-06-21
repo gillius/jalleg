@@ -69,6 +69,10 @@ public class AllegroSystem {
 					checkInstall(al_init_image_addon(), addon);
 					break;
 
+				case NativeDialogs:
+					checkInstall(al_init_native_dialog_addon(), addon);
+					break;
+
 				default:
 					throw new AssertionError("Unknown addon " + addon);
 			}
@@ -121,6 +125,10 @@ public class AllegroSystem {
 
 				case Image:
 					al_shutdown_image_addon();
+					break;
+
+				case NativeDialogs:
+					al_shutdown_native_dialog_addon();
 					break;
 
 				default:

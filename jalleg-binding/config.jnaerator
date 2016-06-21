@@ -1,6 +1,7 @@
 -library Allegro
 -o gen
 -f
+-skipDeprecated
 -noComments
 -mode Directory
 -runtime JNA
@@ -11,3 +12,4 @@ $(DIR)/include/allegro5/allegro.h
 $(DIR)/include/allegro5/allegro_primitives.h
 $(DIR)/include/allegro5/allegro_font.h
 $(DIR)/include/allegro5/allegro_audio.h
+$(DIR)/include/allegro5/allegro_color.h

@@ -88,7 +88,7 @@ jalleg, I suggest using Java-provided features where possible.
 * Addons
   * Audio addon           - :+1: hand-tuned
   * Audio codecs          - :+1: hand-tuned
-  * Color addon           - no binding yet
+  * Color addon           - :+1: hand-tuned
   * Font addons           - :+1: hand-tuned (varargs methods missing)
   * Image I/O addon       - :+1: hand-tuned
   * Main addon            - n/a

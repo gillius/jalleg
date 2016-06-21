@@ -1576,6 +1576,27 @@ public class AllegroLibrary implements Library {
 	//PhysicsFS integration addon
 	public static native void al_set_physfs_file_interface();
 	public static native int al_get_allegro_physfs_version();
+	
+	//Color addon
+	public static native int al_get_allegro_color_version();
+	public static native void al_color_hsv_to_rgb(float hue, float saturation, float value, FloatByReference red, FloatByReference green, FloatByReference blue);
+	public static native void al_color_rgb_to_hsl(float red, float green, float blue, FloatByReference hue, FloatByReference saturation, FloatByReference lightness);
+	public static native void al_color_rgb_to_hsv(float red, float green, float blue, FloatByReference hue, FloatByReference saturation, FloatByReference value);
+	public static native void al_color_hsl_to_rgb(float hue, float saturation, float lightness, FloatByReference red, FloatByReference green, FloatByReference blue);
+	public static native boolean al_color_name_to_rgb(String name, FloatByReference r, FloatByReference g, FloatByReference b);
+	public static native String al_color_rgb_to_name(float r, float g, float b);
+	public static native void al_color_cmyk_to_rgb(float cyan, float magenta, float yellow, float key, FloatByReference red, FloatByReference green, FloatByReference blue);
+	public static native void al_color_rgb_to_cmyk(float red, float green, float blue, FloatByReference cyan, FloatByReference magenta, FloatByReference yellow, FloatByReference key);
+	public static native void al_color_yuv_to_rgb(float y, float u, float v, FloatByReference red, FloatByReference green, FloatByReference blue);
+	public static native void al_color_rgb_to_yuv(float red, float green, float blue, FloatByReference y, FloatByReference u, FloatByReference v);
+	public static native void al_color_rgb_to_html(float red, float green, float blue, ByteBuffer string);
+	public static native boolean al_color_html_to_rgb(String string, FloatByReference red, FloatByReference green, FloatByReference blue);
+	public static native ALLEGRO_COLOR al_color_yuv(float y, float u, float v);
+	public static native ALLEGRO_COLOR al_color_cmyk(float c, float m, float y, float k);
+	public static native ALLEGRO_COLOR al_color_hsl(float h, float s, float l);
+	public static native ALLEGRO_COLOR al_color_hsv(float h, float s, float v);
+	public static native ALLEGRO_COLOR al_color_name(String name);
+	public static native ALLEGRO_COLOR al_color_html(String string);
 
 	//Other Allegro pointer types
 

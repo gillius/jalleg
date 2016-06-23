@@ -3,7 +3,7 @@ jalleg - JVM Binding for Allegro
 
 * Inception: May 2016
 * Current Version: 0.1.0-SNAPSHOT
-* No releases yet
+* No releases yet, but snapshots on OSSRH (see [Getting Started](#getting-started))
 
 jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by any
 [JVM language](https://en.wikipedia.org/wiki/List_of_JVM_languages)
@@ -101,15 +101,6 @@ jalleg, I suggest using Java-provided features where possible.
 Getting Started
 ---------------
 
-There is currently no pre-built distribution of jalleg. You will have to build it yourself; however, this is quite easy
-as you need only Java 7+ installed and on your path, and a connection to the Internet. The project is built with
-[Gradle](http://gradle.org/). Gradle is capable of downloading itself and all dependencies needed to build the project.
-
-Simply get the source code and run `gradlew build` in Windows or `sh gradlew build` for Unix-like shells such as BASH.
-If you've cloned from git or run `chmod u+x gradlew` then you can just use `./gradlew` in Unix-like systems. Gradle
-invocation examples from onward will use `gradlew` as example, but replace with `sh gradlew` or `./gradlew` as
-appropriate.
-
 There are 4 libraries built by the project:
 
 1. **jalleg-binding:** Contains the JNA-based bindings themselves to load and use the Allegro library.
@@ -121,6 +112,62 @@ There are 4 libraries built by the project:
 Currently since jalleg-rt is supporting Windows 64 bit only at this time, if you want to run jalleg on another OS, you
 need to have `allegro_monolith-5.2.dll` or `liballegro_monolith-5.2.so` in a location where the OS can load it (such as
 in PATH on Windows).
+
+Since there is no release version yet, you can get the latest 0.1-SNAPSHOT via the OSSRH repository:
+
+Maven:
+```xml
+<repositories>
+  <repository>
+    <id>ossrh</id>
+    <name>OSSRH Snapshots</name>
+    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+  </repository>
+</repositories>
+```
+
+Or in Gradle:
+
+```groovy
+repositories {
+    maven {
+        url "http://repo.mycompany.com/maven2"
+    }
+}
+```
+
+Then you can add dependency on the snapshot:
+
+Maven:
+```xml
+<dependency>
+  <groupId>org.gillius</groupId>
+  <artifactId>jalleg-framework</artifactId>
+  <version>0.1-SNAPSHOT</version>
+</dependency>
+```
+
+Gradle:
+```groovy
+dependencies {
+    compile 'org.gillius:jalleg-framework:0.1-SNAPSHOT'
+}
+```
+
+If you just want to see an example, download the [examples application](https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.gillius&a=jalleg-examples&v=0.1.0-SNAPSHOT&e=zip).
+Running the bat file there will run the example [described later](#examples).
+
+Building
+--------
+
+Building is quite easy as you need only Java 7+ installed and on your path, and a connection to the Internet. The
+project is built with [Gradle](http://gradle.org/). Gradle is capable of downloading itself and all dependencies needed
+to build the project.
+
+Simply get the source code and run `gradlew build` in Windows or `sh gradlew build` for Unix-like shells such as BASH.
+If you've cloned from git or run `chmod u+x gradlew` then you can just use `./gradlew` in Unix-like systems. Gradle
+invocation examples from onward will use `gradlew` as example, but replace with `sh gradlew` or `./gradlew` as
+appropriate.
 
 If you want to run the example "ball and paddle" game:
 

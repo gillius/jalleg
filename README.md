@@ -131,7 +131,7 @@ Or in Gradle:
 ```groovy
 repositories {
     maven {
-        url "http://repo.mycompany.com/maven2"
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 ```

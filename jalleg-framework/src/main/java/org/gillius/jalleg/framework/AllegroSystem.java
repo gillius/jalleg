@@ -73,6 +73,10 @@ public class AllegroSystem {
 					checkInstall(al_init_native_dialog_addon(), addon);
 					break;
 
+				case Haptic:
+					checkInstall(al_install_haptic(), addon);
+					break;
+
 				default:
 					throw new AssertionError("Unknown addon " + addon);
 			}
@@ -129,6 +133,10 @@ public class AllegroSystem {
 
 				case NativeDialogs:
 					al_shutdown_native_dialog_addon();
+					break;
+
+				case Haptic:
+					al_uninstall_haptic();
 					break;
 
 				default:

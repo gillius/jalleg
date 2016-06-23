@@ -173,6 +173,7 @@ and another
 and having some more features. The game uses A and Z to control the left player and up and down arrows to control the
 right player. In the jalleg-framework version, joystick control is supported for the right player and mouse control
 works for both players by clicking and holding where you want the paddle to be. The framework version also has sound
-effects through generating square waves.
+effects through generating square waves and rumble effects on the joystick if supported when ball collides with the
+right paddle.
 
 ![Ball and Paddle Screenshot](BallAndPaddleExample.png)

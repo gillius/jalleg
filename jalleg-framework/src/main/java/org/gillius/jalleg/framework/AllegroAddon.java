@@ -9,5 +9,6 @@ public enum AllegroAddon {
 	Audio,
 	AudioCodecs,
 	Image,
-	NativeDialogs
+	NativeDialogs,
+	Haptic
 }

@@ -32,6 +32,8 @@ public abstract class Game implements Runnable {
 
 	protected ALLEGRO_JOYSTICK_STATE joy1;
 	private ALLEGRO_JOYSTICK joyHandle;
+	private ALLEGRO_HAPTIC joyHaptic;
+	private ALLEGRO_HAPTIC_EFFECT_ID rumbleEffectId;
 
 	private volatile boolean stopRequest = false;
 
@@ -123,6 +125,11 @@ public abstract class Game implements Runnable {
 				al_get_num_joysticks() > 0) {
 			joyHandle = al_get_joystick(0);
 			joy1 = new ALLEGRO_JOYSTICK_STATE();
+		}
+
+		if (AllegroSystem.INSTANCE.isAddonInstalled(AllegroAddon.Haptic) && joyHandle != null &&
+				al_is_joystick_haptic(joyHandle)) {
+			joyHaptic = al_get_haptic_from_joystick(joyHandle);
 		}
 
 		al_start_timer(mainTimer);
@@ -297,5 +304,35 @@ public abstract class Game implements Runnable {
 		} else {
 			return false;
 		}
+	}
+
+	protected boolean isRumbleInstalled() {
+		return joyHaptic != null && rumbleEffectId != null;
+	}
+
+	protected boolean canInstallRumble() {
+		return joyHaptic != null && rumbleEffectId == null;
+	}
+
+	protected void installRumble(double intensity, double duration) {
+		if (canInstallRumble()) {
+			rumbleEffectId = new ALLEGRO_HAPTIC_EFFECT_ID();
+			if (!al_rumble_haptic(joyHaptic, intensity, duration, rumbleEffectId))
+				rumbleEffectId = null;
+			else
+				al_stop_haptic_effect(rumbleEffectId);
+		}
+	}
+
+	protected void uninstallRumble() {
+		if (rumbleEffectId != null) {
+			al_release_haptic_effect(rumbleEffectId);
+			rumbleEffectId = null;
+		}
+	}
+
+	protected void playRumble(int loop) {
+		if (isRumbleInstalled())
+			al_play_haptic_effect(rumbleEffectId, loop);
 	}
 }

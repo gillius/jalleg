@@ -50,7 +50,7 @@ public class BallAndPaddleGame extends Game {
 	@Override
 	protected void onAllegroStarted() {
 		initAddons(AllegroAddon.Primitives, AllegroAddon.Font, AllegroAddon.Keyboard, AllegroAddon.Joystick,
-		           AllegroAddon.Mouse, AllegroAddon.Audio);
+		           AllegroAddon.Mouse, AllegroAddon.Audio, AllegroAddon.Haptic);
 		al_reserve_samples(1);
 
 		white = al_map_rgb_f(1f, 1f, 1f);
@@ -101,6 +101,9 @@ public class BallAndPaddleGame extends Game {
 
 		if (ball.collidesWith(rightPlayer)) {
 			beeper.beep(200, gameTime + 0.1);
+			if (canInstallRumble())
+				installRumble(0.6, 0.25);
+			playRumble(1);
 			balldX *= -1.2f;
 		} else if (ball.collidesWith(leftPlayer)) {
 			beeper.beep(150, gameTime + 0.1);

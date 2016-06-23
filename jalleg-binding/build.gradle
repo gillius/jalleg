@@ -1,5 +1,3 @@
-import java.lang.reflect.Field
-
 /*
  * Copyright 2016 Jason Winnebeck
  *
@@ -16,88 +14,13 @@ import java.lang.reflect.Field
  * limitations under the License.
  */
 
-apply plugin: 'signing'
-
 archivesBaseName = 'jalleg-binding'
 
-task javadocJar(type: Jar) {
-	classifier = 'javadoc'
-	from javadoc
-}
-
-task sourcesJar(type: Jar) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
-}
-
-artifacts {
-	archives javadocJar, sourcesJar
-}
-
-signing {
-	required { gradle.taskGraph.hasTask("uploadArchives") }
-	sign configurations.archives
-}
-
-Closure pomDefinition = {
-	name 'jalleg binding'
-	packaging 'jar'
-	// optionally artifactId can be defined here
-	description 'Java binding for Allegro'
-	url 'https://github.com/gillius/jalleg'
-
-	scm {
-		connection 'scm:git:https://github.com/gillius/jalleg.git'
-		developerConnection 'scm:git:git@github.com:gillius/jalleg.git'
-		url 'https://github.com/gillius/jalleg'
-	}
-
-	licenses {
-		license {
-			name 'The Apache License, Version 2.0'
-			url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-			comments 'Copyright Jason Winnebeck'
-			distribution 'repo'
-		}
-	}
-
-	developers {
-		developer {
-			id 'jpw'
-			name 'Jason Winnebeck'
-			roles {
-				role 'Author'
-			}
-		}
-	}
-}
-
-boolean deployable = project.hasProperty("ossrhUsername") && project.hasProperty("ossrhPassword")
-
-if (deployable) {
-	uploadArchives {
-		repositories {
-			mavenDeployer {
-				beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-					authentication(userName: ossrhUsername, password: ossrhPassword)
-				}
-
-				snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-					authentication(userName: ossrhUsername, password: ossrhPassword)
-				}
-
-				pom.project pomDefinition
-			}
-		}
-	}
-}
-
-install {
-	repositories.mavenInstaller {
-		pom.project pomDefinition
-	}
+ext {
+	pomInfo = [
+			name: 'jalleg binding',
+			description: 'Java binding for Allegro'
+	]
 }
 
 dependencies {

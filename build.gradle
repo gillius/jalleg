@@ -17,6 +17,7 @@
 subprojects {
   apply plugin: 'java'
   apply plugin: 'maven'
+  apply plugin: 'signing'
 
   sourceCompatibility = 1.7
   version = '0.1.0-SNAPSHOT'
@@ -24,6 +25,96 @@ subprojects {
 
   repositories {
     jcenter()
+  }
+
+  task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+  }
+
+  task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+  }
+
+  artifacts {
+    archives javadocJar, sourcesJar
+  }
+
+  signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+  }
+
+  afterEvaluate { Project project ->
+    Closure pomDefinition = {
+      name project.pomInfo.name
+      packaging 'jar'
+      description project.pomInfo.description
+      url 'https://github.com/gillius/jalleg'
+
+      scm {
+        connection 'scm:git:https://github.com/gillius/jalleg.git'
+        developerConnection 'scm:git:git@github.com:gillius/jalleg.git'
+        url 'https://github.com/gillius/jalleg'
+      }
+
+      licenses {
+        license {
+          name 'The Apache License, Version 2.0'
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          comments 'Copyright Jason Winnebeck'
+          distribution 'repo'
+        }
+      }
+
+      developers {
+        developer {
+          id 'jpw'
+          name 'Jason Winnebeck'
+          roles {
+            role 'Author'
+          }
+        }
+      }
+    }
+
+    boolean deployable = project.hasProperty("ossrhUsername") && project.hasProperty("ossrhPassword")
+
+    if (deployable) {
+      uploadArchives {
+        repositories {
+          mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+              authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+              authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project pomDefinition
+          }
+        }
+      }
+    }
+
+    install {
+      repositories.mavenInstaller {
+        pom.project pomDefinition
+      }
+    }
+  }
+}
+
+//Disable warnings about missing tags like @param on every element in Java 8
+if (JavaVersion.current().isJava8Compatible()) {
+  allprojects {
+    tasks.withType(Javadoc) {
+      options.addStringOption('Xdoclint:-missing', '-quiet')
+    }
   }
 }
 

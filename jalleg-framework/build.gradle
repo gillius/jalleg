@@ -1,3 +1,12 @@
+archivesBaseName = 'jalleg-framework'
+
+ext {
+	pomInfo = [
+			name: 'jalleg framework',
+			description: 'Framework to make using jalleg-binding and Allegro easier'
+	]
+}
+
 dependencies {
 	compile project(':jalleg-binding')
 }

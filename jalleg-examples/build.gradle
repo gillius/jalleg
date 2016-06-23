@@ -16,7 +16,21 @@
 
 apply plugin: 'application'
 
+distTar.enabled = false
+configurations.archives.with {
+	artifacts.remove artifacts.find { it.hasProperty('archiveTask') && it.archiveTask.is(distTar) }
+}
+
 mainClassName = 'org.gillius.jalleg.example.BallAndPaddleGame'
+
+archivesBaseName = 'jalleg-examples'
+
+ext {
+	pomInfo = [
+			name: 'jalleg examples',
+			description: 'Examples for the jalleg-binding and jalleg-framework projects'
+	]
+}
 
 dependencies {
 	compile project(':jalleg-binding')

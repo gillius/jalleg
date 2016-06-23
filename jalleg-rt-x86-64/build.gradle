@@ -1,0 +1,8 @@
+archivesBaseName = 'jalleg-rt-x86-64'
+
+ext {
+	pomInfo = [
+			name: 'jalleg win64',
+			description: 'jalleg runtime for Windows 64 bit'
+	]
+}

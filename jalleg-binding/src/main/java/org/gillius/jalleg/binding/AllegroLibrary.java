@@ -15,17 +15,17 @@
  */
 
 package org.gillius.jalleg.binding;
-import com.sun.jna.Callback;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
-import com.sun.jna.Pointer;
-import com.sun.jna.PointerType;
-import com.sun.jna.ptr.*;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.nio.*;
+import com.sun.jna.*;
+import com.sun.jna.ptr.ByteByReference;
+import com.sun.jna.ptr.FloatByReference;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 /**
  * JNA Wrapper for library <b>Allegro</b><br>
@@ -998,6 +998,44 @@ public class AllegroLibrary implements Library {
 	public static native int al_get_num_display_modes();
 	public static native ALLEGRO_DISPLAY_MODE al_get_display_mode(int index, ALLEGRO_DISPLAY_MODE mode);
 	
+	//Haptic routines
+	public static class ALLEGRO_HAPTIC extends PointerType {
+		public ALLEGRO_HAPTIC(Pointer address) { super(address); }
+		public ALLEGRO_HAPTIC() { super(); }
+	}
+	public static native boolean al_install_haptic();
+	public static native void al_uninstall_haptic();
+	public static native boolean al_is_haptic_installed();
+	public static native boolean al_is_mouse_haptic(ALLEGRO_MOUSE dev);
+	public static native boolean al_is_joystick_haptic(ALLEGRO_JOYSTICK dev);
+	public static native boolean al_is_keyboard_haptic(ALLEGRO_KEYBOARD dev);
+	public static native boolean al_is_display_haptic(ALLEGRO_DISPLAY dev);
+	public static native boolean al_is_touch_input_haptic(ALLEGRO_TOUCH_INPUT dev);
+	public static native ALLEGRO_HAPTIC al_get_haptic_from_mouse(ALLEGRO_MOUSE dev);
+	public static native ALLEGRO_HAPTIC al_get_haptic_from_joystick(ALLEGRO_JOYSTICK dev);
+	public static native ALLEGRO_HAPTIC al_get_haptic_from_keyboard(ALLEGRO_KEYBOARD dev);
+	public static native ALLEGRO_HAPTIC al_get_haptic_from_display(ALLEGRO_DISPLAY dev);
+	public static native ALLEGRO_HAPTIC al_get_haptic_from_touch_input(ALLEGRO_TOUCH_INPUT dev);
+	public static native boolean al_release_haptic(ALLEGRO_HAPTIC haptic);
+	public static native boolean al_is_haptic_active(ALLEGRO_HAPTIC haptic);
+	public static native int al_get_haptic_capabilities(ALLEGRO_HAPTIC haptic);
+	public static native boolean al_is_haptic_capable(ALLEGRO_HAPTIC haptic, int query);
+	public static native boolean al_set_haptic_gain(ALLEGRO_HAPTIC haptic, double gain);
+	public static native double al_get_haptic_gain(ALLEGRO_HAPTIC haptic);
+	public static native boolean al_set_haptic_autocenter(ALLEGRO_HAPTIC haptic, double intensity);
+	public static native double al_get_haptic_autocenter(ALLEGRO_HAPTIC haptic);
+	public static native int al_get_max_haptic_effects(ALLEGRO_HAPTIC haptic);
+	public static native boolean al_is_haptic_effect_ok(ALLEGRO_HAPTIC haptic, ALLEGRO_HAPTIC_EFFECT effect);
+	public static native boolean al_upload_haptic_effect(ALLEGRO_HAPTIC haptic, ALLEGRO_HAPTIC_EFFECT effect, ALLEGRO_HAPTIC_EFFECT_ID id);
+	public static native boolean al_play_haptic_effect(ALLEGRO_HAPTIC_EFFECT_ID id, int loop);
+	public static native boolean al_upload_and_play_haptic_effect(ALLEGRO_HAPTIC haptic, ALLEGRO_HAPTIC_EFFECT effect, ALLEGRO_HAPTIC_EFFECT_ID id, int loop);
+	public static native boolean al_stop_haptic_effect(ALLEGRO_HAPTIC_EFFECT_ID id);
+	public static native boolean al_is_haptic_effect_playing(ALLEGRO_HAPTIC_EFFECT_ID id);
+	public static native boolean al_release_haptic_effect(ALLEGRO_HAPTIC_EFFECT_ID id);
+	public static native double al_get_haptic_effect_duration(ALLEGRO_HAPTIC_EFFECT effect);
+	public static native boolean al_rumble_haptic(ALLEGRO_HAPTIC haptic, double intensity, double duration, ALLEGRO_HAPTIC_EFFECT_ID id);
+
+
 	//Joystick routines
 	public static native boolean al_install_joystick();
 	public static native void al_uninstall_joystick();

@@ -64,7 +64,7 @@ jalleg, I suggest using Java-provided features where possible.
   * Fixed point math      - No plans to port -- most calls are macros anyway; could be easily re-implemented in Java.
   * Fullscreen modes      - :+1: hand-tuned
   * Graphics routines     - :+1: hand-tuned
-  * Haptic routines       - no binding yet (ALLEGRO_UNSTABLE API), will port on request
+  * Haptic routines       - :+1: hand-tuned (note this is an ALLEGRO_UNSTABLE API)
   * Joystick routines     - :+1: hand-tuned
   * Keyboard routines     - :+1: hand-tuned
   * Memory management     - :+1: hand-tuned

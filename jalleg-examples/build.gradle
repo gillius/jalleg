@@ -20,6 +20,6 @@ mainClassName = 'org.gillius.jalleg.example.BallAndPaddleGame'
 
 dependencies {
 	compile project(':jalleg-binding')
-	compile project(':jalleg-rt')
+	compile project(':jalleg-rt-x86-64')
 	compile project(':jalleg-framework')
 }

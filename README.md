@@ -113,7 +113,7 @@ appropriate.
 There are 4 libraries built by the project:
 
 1. **jalleg-binding:** Contains the JNA-based bindings themselves to load and use the Allegro library.
-2. **jalleg-rt:** Optional, contains within a Windows 64-bit pre-built Allegro DLL. If this JAR is included in your
+2. **jalleg-rt-x86-64:** Optional, contains within a Windows 64-bit pre-built Allegro DLL. If this JAR is included in your
    project, JNA will automatically unpack the DLL and use it when on Windows. Other OS may be added in the future.
 3. **jalleg-framework:** framework to make using the binding from Java easier and to support the examples.
 4. **jalleg-examples:** An example project using jalleg-binding and jalleg-rt.

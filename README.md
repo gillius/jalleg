@@ -181,6 +181,9 @@ Documentation
 The binding is a straight port of the Allegro library. Use the
 [official Allegro documentation](http://liballeg.org/a5docs/5.2.0/).
 
+I have started a small tutorial on using [jalleg for new Java developers](https://github.com/gillius/jalleg/wiki/Allegro-for-new-Java-developers),
+initially aimed at those who have prior programming experience (such as those using Allegro in C).
+
 Another good place to go for help is the [Allegro.cc](https://www.allegro.cc/) community, one of the most supportive
 communities I've ever seen on the Internet and a great help and inspiration to my own learning when I started many
 years ago.

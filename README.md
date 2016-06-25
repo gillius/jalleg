@@ -111,7 +111,10 @@ There are 4 libraries built by the project:
 
 Currently since jalleg-rt is supporting Windows 64 bit only at this time, if you want to run jalleg on another OS, you
 need to have `allegro_monolith-5.2.dll` or `liballegro_monolith-5.2.so` in a location where the OS can load it (such as
-in PATH on Windows).
+in PATH on Windows). Another way to specify the library is to specify the name (such as allegro_monolith-5.2) or full
+path (such as `/home/me/liballegro.so`) via the `AL_NAME` Java property (via `-D` parameter to java) or environment
+variable. If launching from gradle you can use `-P` parameter to to do the same, for example
+`gradlew run -PAL_NAME=/home/me/liballegro.so`.
 
 Since there is no release version yet, you can get the latest 0.1-SNAPSHOT via the OSSRH repository:
 

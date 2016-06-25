@@ -24,10 +24,10 @@ configurations.archives.with {
 mainClassName = 'org.gillius.jalleg.example.BallAndPaddleGame'
 
 // Pass system properties through to the run task, so -DAL_NAME on command line can come through
-println project.properties.findAll {k,v -> v == 'abc'}
-if (project.hasProperty("AL_NAME"))
-tasks.withType(JavaExec) {
-	systemProperties([AL_NAME:AL_NAME])
+if (project.hasProperty("AL_NAME")) {
+	tasks.withType(JavaExec) {
+		systemProperties([AL_NAME:AL_NAME])
+	}
 }
 
 archivesBaseName = 'jalleg-examples'

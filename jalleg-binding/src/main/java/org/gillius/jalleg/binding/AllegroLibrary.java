@@ -35,9 +35,14 @@ import java.nio.IntBuffer;
  */
 @SuppressWarnings({"unused", "WeakerAccess", "PointlessBitwiseExpression"})
 public class AllegroLibrary implements Library {
-	public static final String JNA_LIBRARY_NAME = "allegro_monolith-5.2";
-	public static final NativeLibrary JNA_NATIVE_LIB = NativeLibrary.getInstance(AllegroLibrary.JNA_LIBRARY_NAME);
+	public static final String JNA_LIBRARY_NAME;
+	public static final NativeLibrary JNA_NATIVE_LIB;
 	static {
+		String libName = System.getProperty("AL_NAME");
+		if (libName == null)
+			libName = "allegro_monolith-5.2";
+		JNA_LIBRARY_NAME = libName;
+		JNA_NATIVE_LIB = NativeLibrary.getInstance(AllegroLibrary.JNA_LIBRARY_NAME);
 		Native.register(AllegroLibrary.class, AllegroLibrary.JNA_NATIVE_LIB);
 	}
 	public interface ALLEGRO_PIXEL_FORMAT {

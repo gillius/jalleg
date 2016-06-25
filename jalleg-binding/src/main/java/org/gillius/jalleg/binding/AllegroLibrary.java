@@ -38,7 +38,15 @@ public class AllegroLibrary implements Library {
 	public static final String JNA_LIBRARY_NAME;
 	public static final NativeLibrary JNA_NATIVE_LIB;
 	static {
-		String libName = System.getProperty("AL_NAME");
+		String libName = null;
+		try {
+			libName = System.getProperty("AL_NAME");
+		} catch (SecurityException ignored) {}
+		if (libName == null) {
+			try {
+				libName = System.getenv("AL_NAME");
+			} catch (SecurityException ignored) {}
+		}
 		if (libName == null)
 			libName = "allegro_monolith-5.2";
 		JNA_LIBRARY_NAME = libName;

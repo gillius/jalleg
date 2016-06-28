@@ -2,12 +2,15 @@ package org.gillius.jalleg.framework.io;
 
 import org.gillius.jalleg.binding.AllegroLibrary;
 import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_BITMAP;
+import org.gillius.jalleg.binding.AllegroLibrary.ALLEGRO_CONFIG;
 import org.gillius.jalleg.framework.AllegroException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import static org.gillius.jalleg.binding.AllegroLibrary.al_load_bitmap_flags_f;
+import static org.gillius.jalleg.binding.AllegroLibrary.al_load_config_file_f;
 
 /**
  * Utility methods to load Allegro resources such as images from Java byte arrays, {@link InputStream}s, or classpath
@@ -49,14 +52,10 @@ public class AllegroLoader {
 	 * @throws AllegroException if al_load_bitmap_flags_f fails
 	 */
 	public static ALLEGRO_BITMAP loadBitmapFromClasspath(String path, String ident, int flags) throws IOException {
-		InputStream is = AllegroLoader.class.getResourceAsStream(path);
-		if (is == null)
-			throw new IOException("Unable to find classpath resource '" + path + "'");
-
 		if (ident == null)
 			ident = getIdentFromPath(path);
 
-		return loadBitmap(is, ident, flags);
+		return loadBitmap(getInputStream(path), ident, flags);
 	}
 
 	/**
@@ -87,5 +86,25 @@ public class AllegroLoader {
 				throw new AllegroException("Failed to load bitmap with type " + ident);
 			return ret;
 		}
+	}
+
+	public static ALLEGRO_CONFIG loadConfigFromClasspath(String path) throws IOException {
+		return loadConfig(getInputStream(path));
+	}
+
+	public static ALLEGRO_CONFIG loadConfig(InputStream is) throws IOException {
+		try (Memfile file = Memfile.from(is)) {
+			ALLEGRO_CONFIG ret = al_load_config_file_f(file.getFile());
+			if (ret == null)
+				throw new AllegroException("Failed to load configuration file");
+			return ret;
+		}
+	}
+
+	private static InputStream getInputStream(String path) throws FileNotFoundException {
+		InputStream is = AllegroLoader.class.getResourceAsStream(path);
+		if (is == null)
+			throw new FileNotFoundException("Unable to find classpath resource '" + path + "'");
+		return is;
 	}
 }

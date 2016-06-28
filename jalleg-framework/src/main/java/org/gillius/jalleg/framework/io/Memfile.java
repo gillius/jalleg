@@ -62,6 +62,14 @@ public class Memfile implements AutoCloseable {
 	}
 
 	/**
+	 * Calls {@link #getData(int)} with the value from {@link AllegroLibrary#al_ftell(ALLEGRO_FILE)}. When used after
+	 * writing, this will return only the written bytes.
+	 */
+	public byte[] getData() {
+		return getData((int) al_ftell(file));
+	}
+
+	/**
 	 * Returns a copied snapshot of the file data.
 	 *
 	 * @param length amount of data to get, equal to or less than the allocated size.

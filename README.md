@@ -36,12 +36,8 @@ Besides the direct binding, jalleg provides a framework around Allegro with the 
 
 ### How you can help
 
-The main thing I need help with is pre-built Linux "portable" (i.e. static linked) versions of Allegro to include in the
-auto-loader. It also would be nice if someone can demonstrate that jalleg can work on Android as I suspect it should.
-
-I also currently do not know how to bind to varargs methods when using the "Direct Method Optimization" mode of JNA. A
-few methods like al_draw_textf are not available. However, Java has String.format you can use to do a printf-style
-formatting and pass into al_draw_text and similar methods.
+* If you know how to build a static-link liballegro_monolith on Linux, I can make an "rt" for it.
+* It would be nice if someone can demonstrate that jalleg can work on Android as I suspect it should.
 
 ### Binding Status
 

@@ -26,6 +26,8 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JNA Wrapper for library <b>Allegro</b><br>
@@ -37,6 +39,11 @@ import java.nio.IntBuffer;
 public class AllegroLibrary implements Library {
 	public static final String JNA_LIBRARY_NAME;
 	public static final NativeLibrary JNA_NATIVE_LIB;
+	/**
+	 * Keep a strong reference to all loaded libraries, so that GC won't close them.
+     */
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	private static final List<NativeLibrary> supportingLibs = new ArrayList<>();
 	static {
 		String libName = null;
 		try {
@@ -49,9 +56,36 @@ public class AllegroLibrary implements Library {
 		}
 		if (libName == null)
 			libName = "allegro_monolith-5.2";
+		NativeLibrary mainLib;
+		try {
+			//First, try to load the monolith library
+			mainLib = NativeLibrary.getInstance(libName);
+		} catch (Throwable t) {
+			try {
+				libName = "allegro"; //only in case someone wants to observe the used JNA_LIBRARY_NAME
+				//Next, try to load all of the individual libraries:
+				supportingLibs.add(NativeLibrary.getInstance("allegro"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_video"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_ttf"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_primitives"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_physfs"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_memfile"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_image"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_font"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_dialog"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_color"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_audio"));
+				supportingLibs.add(NativeLibrary.getInstance("allegro_acodec"));
+				mainLib = NativeLibrary.getProcess();
+			} catch (Throwable t2) {
+				supportingLibs.clear();
+				throw t;
+			}
+		}
+
 		JNA_LIBRARY_NAME = libName;
-		JNA_NATIVE_LIB = NativeLibrary.getInstance(AllegroLibrary.JNA_LIBRARY_NAME);
-		Native.register(AllegroLibrary.class, AllegroLibrary.JNA_NATIVE_LIB);
+		JNA_NATIVE_LIB = mainLib;
+		Native.register(AllegroLibrary.class, JNA_NATIVE_LIB);
 	}
 	public interface ALLEGRO_PIXEL_FORMAT {
 		int ALLEGRO_PIXEL_FORMAT_ANY = 0;

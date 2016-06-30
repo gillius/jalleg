@@ -110,7 +110,7 @@ There are 4 libraries built by the project:
 4. **jalleg-examples:** An example project using jalleg-binding and jalleg-rt.
 
 jalleg comes with a pre-built runtime for Java 64 bit on Windows. If you want to run jalleg on Ubuntu, the easiest way
-is to [install from the PPA](https://wiki.allegro.cc/index.php?title=Install_Allegro_from_Ubuntu_PPAs). JAlleg will
+is to [install from the PPA](https://wiki.allegro.cc/index.php?title=Install_Allegro_from_Ubuntu_PPAs). Jalleg will
 search for liballegro.so automatically on the normal ldpaths. If you build
 Allegro yourself (use WANT_MONOLITH), set AL_NAME environment variable, an example being:
 `export AL_NAME=/home/me/allegro/build/lib/liballegro_monolith.so.5.2`, then run jalleg as normal. You can also pass in

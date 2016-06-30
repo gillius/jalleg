@@ -109,12 +109,12 @@ There are 4 libraries built by the project:
 3. **jalleg-framework:** framework to make using the binding from Java easier and to support the examples.
 4. **jalleg-examples:** An example project using jalleg-binding and jalleg-rt.
 
-Currently since jalleg-rt is supporting Windows 64 bit only at this time, if you want to run jalleg on another OS, you
-need to have `allegro_monolith-5.2.dll` or `liballegro_monolith-5.2.so` in a location where the OS can load it (such as
-in PATH on Windows). Another way to specify the library is to specify the name (such as allegro_monolith-5.2) or full
-path (such as `/home/me/liballegro.so`) via the `AL_NAME` Java property (via `-D` parameter to java) or environment
-variable. If launching from gradle you can use `-P` parameter to to do the same, for example
-`gradlew run -PAL_NAME=/home/me/liballegro.so`.
+jalleg comes with a pre-built runtime for Java 64 bit on Windows. If you want to run jalleg on Ubuntu, the easiest way
+is to [install from the PPA](https://wiki.allegro.cc/index.php?title=Install_Allegro_from_Ubuntu_PPAs). JAlleg will
+search for liballegro.so automatically on the normal ldpaths. If you build
+Allegro yourself (use WANT_MONOLITH), set AL_NAME environment variable, an example being:
+`export AL_NAME=/home/me/allegro/build/lib/liballegro_monolith.so.5.2`, then run jalleg as normal. You can also pass in
+AL_NAME like `java -DAL_NAME=the_path MyProgram` or `./gradlew -PAL_NAME=the_path`
 
 Since there is no release version yet, you can get the latest 0.1-SNAPSHOT via the OSSRH repository:
 

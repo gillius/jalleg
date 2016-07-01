@@ -9,15 +9,19 @@ jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by an
 [JVM language](https://en.wikipedia.org/wiki/List_of_JVM_languages)
 (Java obviously, but also other languages such as Groovy, Kotlin, JavaScript, Scala, Jython, JRuby, and Clojure).
 
+From the Allegro site: Allegro is a cross-platform library mainly aimed at video game and multimedia programming. It
+handles common, low-level tasks such as creating windows, accepting user input, loading data, drawing images, playing
+sounds, etc.
+
 (Note: JavaScript on JVM does not mean it can run in a browser. If you want a true JS port of Allegro, check out
 [Allegro.js](http://allegrojs.net/))
 
 This project was inspired to build a modern version of a very old project,
 [JAllegro](https://sourceforge.net/projects/jallegro/) by Kazzmir.
 
-The binding is based on the [JNA library](https://github.com/java-native-access/jna) to bind to the pre-built Allegro
-DLL/so library. The bindings were generated in part from the [JNAerator](http://jnaerator.googlecode.com/) project, then
-manipulated to fit the needs and style for jalleg.
+The binding uses the [JNA library](https://github.com/java-native-access/jna) to call the native code. The bindings were
+generated in part from the [JNAerator](http://jnaerator.googlecode.com/) project, then manipulated to fit the needs and
+style for jalleg.
 
 Allegro was a library I originally worked with a lot when I was learning C/C++ development in DOS in the late 1990s, and
 has always had a special meaning to me. Allegro 5 is a modern, cross-platform variation of the library supporting hardware
@@ -37,61 +41,57 @@ Besides the direct binding, jalleg provides a framework around Allegro with the 
 ### How you can help
 
 * If you know how to build a static-link liballegro_monolith on Linux, I can make an "rt" for it.
+* Test jalleg on OS X
 * It would be nice if someone can demonstrate that jalleg can work on Android as I suspect it should.
+* Contribute examples for the bindings not yet tested.
 
 ### Binding Status
 
-I first started out auto-generating all of the core API. The auto-generation works but does not pick the most ideal Java
-types for use and in some cases just uses "Pointer" type instead of String or ALLEGRO_BITMAP for example. So I've been
-going through and fixing up the API. Anything not marked as "hand-tuned" is definitely subject to change.
-
-The priority will be on APIs that don't already exist in Java. For example in Java there is not much use for a Unicode
-strings API since that is already native to Java. Likewise for files, path handling, threads, etc. If developing with
-jalleg, I suggest using Java-provided features where possible.
+Almost all of the Allegro API is mapped. Some of the API is mapped but hasn't been tested yet.
 
 * Core API
-  * Configuration files   - :+1: hand-tuned (plus convenience API in framework)
-  * Displays              - :+1: hand-tuned
-  * Events                - :+1: hand-tuned
-  * File I/O              - :+1: hand-tuned (but missing *fprintf due to varargs)
-  * Filesystem            - hand-tuned (not tested yet). No solution yet for time_t and off_t functions due to size
+  * Configuration files   - :+1: (plus convenience API in framework)
+  * Displays              - :+1:
+  * Events                - :+1:
+  * File I/O              - :+1: (but missing *fprintf due to varargs)
+  * Filesystem            - (not tested yet). No solution yet for time_t and off_t functions due to size
                             differences between platforms. This also impacts the ability to
                             use ALLEGRO_FS_INTERFACE. Use native Java functionality where possible.
   * Fixed point math      - No plans to port -- most calls are macros anyway; could be easily re-implemented in Java.
-  * Fullscreen modes      - :+1: hand-tuned
-  * Graphics routines     - :+1: hand-tuned
-  * Haptic routines       - :+1: hand-tuned (note this is an ALLEGRO_UNSTABLE API)
-  * Joystick routines     - :+1: hand-tuned
-  * Keyboard routines     - :+1: hand-tuned
-  * Memory management     - :+1: hand-tuned
-  * Monitors              - :+1: hand-tuned
-  * Mouse routines        - :+1: hand-tuned
-  * Path structures       - hand-tuned (not tested yet) (suggest Java native)
-  * Shader                - hand-tuned (not tested yet)
-  * State                 - :+1: hand-tuned
-  * System routines       - :+1: hand-tuned
-  * Threads               - hand-tuned (not tested yet) (**highly** suggest Java native threads)
-  * Time                  - :+1: hand-tuned
-  * Timer                 - :+1: hand-tuned
-  * Touch input           - hand-tuned (not tested yet)
-  * Transformations       - :+1: hand-tuned
-  * UTF-8 string routines - hand-tuned (not tested yet) (varargs methods missing) (**highly** suggest Java String)
+  * Fullscreen modes      - :+1:
+  * Graphics routines     - :+1:
+  * Haptic routines       - :+1: (note this is an ALLEGRO_UNSTABLE API)
+  * Joystick routines     - :+1:
+  * Keyboard routines     - :+1:
+  * Memory management     - :+1:
+  * Monitors              - :+1:
+  * Mouse routines        - :+1:
+  * Path structures       - (not tested yet) (suggest Java native)
+  * Shader                - (not tested yet)
+  * State                 - :+1:
+  * System routines       - :+1:
+  * Threads               - (not tested yet) (**highly** suggest Java native threads)
+  * Time                  - :+1:
+  * Timer                 - :+1:
+  * Touch input           - (not tested yet)
+  * Transformations       - :+1:
+  * UTF-8 string routines - (not tested yet) (varargs methods missing) (**highly** suggest Java String)
   * Miscellaneous         - need to determine if al_run_main is needed
   * Platform-specific     - cannot implement these yet, may find workaround for Android methods if someone tries jalleg there
   * Direct3D integration  - no current plan to implement unless a D3D Java binding is found and use case
   * OpenGL integration    - no current plan to implement unless there is a use case
 
 * Addons
-  * Audio addon           - :+1: hand-tuned
-  * Audio codecs          - :+1: hand-tuned
-  * Color addon           - :+1: hand-tuned
-  * Font addons           - :+1: hand-tuned (varargs methods missing)
-  * Image I/O addon       - :+1: hand-tuned
+  * Audio addon           - :+1:
+  * Audio codecs          - :+1:
+  * Color addon           - :+1:
+  * Font addons           - :+1: (varargs methods missing)
+  * Image I/O addon       - :+1:
   * Main addon            - n/a
-  * Memfile addon         - :+1: hand-tuned
-  * Native dialogs addon  - hand-tuned binding, but without al_build_menu (consider Java native for file chooser)
-  * PhysicsFS addon       - :+1: hand-tuned
-  * Primitives addon      - :+1: hand-tuned
+  * Memfile addon         - :+1:
+  * Native dialogs addon  - binding, but without al_build_menu (consider Java native for file chooser)
+  * PhysicsFS addon       - :+1:
+  * Primitives addon      - :+1:
 
 
 Getting Started
@@ -163,10 +163,7 @@ Building is quite easy as you need only Java 7+ installed and on your path, and 
 project is built with [Gradle](http://gradle.org/). Gradle is capable of downloading itself and all dependencies needed
 to build the project.
 
-Simply get the source code and run `gradlew build` in Windows or `sh gradlew build` for Unix-like shells such as BASH.
-If you've cloned from git or run `chmod u+x gradlew` then you can just use `./gradlew` in Unix-like systems. Gradle
-invocation examples from onward will use `gradlew` as example, but replace with `sh gradlew` or `./gradlew` as
-appropriate.
+Simply get the source code and run `gradlew build` in Windows or `./gradlew build` for Unix-like shells such as BASH.
 
 If you want to run the example "ball and paddle" game:
 

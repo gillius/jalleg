@@ -2,7 +2,9 @@ jalleg - JVM Binding for Allegro
 ================================
 
 * Inception: May 2016
-* Current Release: 0.1
+* Current Release: 0.1, javadocs:
+  [jalleg-binding](http://gillius.github.io/jalleg/docs/jalleg-binding/0.1/),
+  [jalleg-framework](http://gillius.github.io/jalleg/docs/jalleg-framework/0.1/)
 * Development Version: 0.2-SNAPSHOT on OSSRH (see [Getting Started](#using-snapshots))
 
 jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by any
@@ -188,6 +190,10 @@ initially aimed at those who have prior programming experience (such as those us
 Another good place to go for help is the [Allegro.cc](https://www.allegro.cc/) community, one of the most supportive
 communities I've ever seen on the Internet and a great help and inspiration to my own learning when I started many
 years ago.
+
+The Javadoc references are also available:
+[jalleg-binding 0.1](http://gillius.github.io/jalleg/docs/jalleg-binding/0.1/),
+[jalleg-framework 0.1](http://gillius.github.io/jalleg/docs/jalleg-framework/0.1/)
 
 Examples
 --------

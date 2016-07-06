@@ -3,7 +3,7 @@ jalleg - JVM Binding for Allegro
 
 * Inception: May 2016
 * Current Release: 0.1
-* Development Version: 0.2.0-SNAPSHOT on OSSRH (see [Getting Started](#using-snapshots))
+* Development Version: 0.2-SNAPSHOT on OSSRH (see [Getting Started](#using-snapshots))
 
 jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by any
 [JVM language](https://en.wikipedia.org/wiki/List_of_JVM_languages)

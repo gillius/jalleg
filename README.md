@@ -2,8 +2,8 @@ jalleg - JVM Binding for Allegro
 ================================
 
 * Inception: May 2016
-* Current Version: 0.1.0-SNAPSHOT
-* No releases yet, but snapshots on OSSRH (see [Getting Started](#getting-started))
+* Current Release: 0.1
+* Development Version: 0.1.0-SNAPSHOT on OSSRH (see [Getting Started](#using-snapshots))
 
 jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by any
 [JVM language](https://en.wikipedia.org/wiki/List_of_JVM_languages)
@@ -114,6 +114,29 @@ AL_NAME like `java -DAL_NAME=the_path MyProgram` or `./gradlew -PAL_NAME=the_pat
 
 Since there is no release version yet, you can get the latest 0.1-SNAPSHOT via the OSSRH repository:
 
+Then you can add dependency on the snapshot:
+
+Maven:
+```xml
+<dependency>
+  <groupId>org.gillius</groupId>
+  <artifactId>jalleg-framework</artifactId>
+  <version>0.1</version>
+</dependency>
+```
+
+Gradle:
+```groovy
+dependencies {
+    compile 'org.gillius:jalleg-framework:0.1'
+}
+```
+
+### Using Snapshots
+
+If you want to use the latest snapshot, add the snapshot repositories and change the version you depend upon to the
+latest SNAPSHOT version.
+
 Maven:
 ```xml
 <repositories>
@@ -125,31 +148,13 @@ Maven:
 </repositories>
 ```
 
-Or in Gradle:
+Gradle:
 
 ```groovy
 repositories {
     maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
-}
-```
-
-Then you can add dependency on the snapshot:
-
-Maven:
-```xml
-<dependency>
-  <groupId>org.gillius</groupId>
-  <artifactId>jalleg-framework</artifactId>
-  <version>0.1-SNAPSHOT</version>
-</dependency>
-```
-
-Gradle:
-```groovy
-dependencies {
-    compile 'org.gillius:jalleg-framework:0.1-SNAPSHOT'
 }
 ```
 

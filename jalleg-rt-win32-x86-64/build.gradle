@@ -1,4 +1,4 @@
-archivesBaseName = 'jalleg-rt-x86-64'
+archivesBaseName = 'jalleg-rt-win32-x86-64'
 
 ext {
 	pomInfo = [

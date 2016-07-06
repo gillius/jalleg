@@ -61,25 +61,42 @@ public class AllegroLibrary implements Library {
 			//First, try to load the monolith library
 			mainLib = NativeLibrary.getInstance(libName);
 		} catch (Throwable t) {
+			String lastLib = null;
 			try {
-				libName = "allegro"; //only in case someone wants to observe the used JNA_LIBRARY_NAME
 				//Next, try to load all of the individual libraries:
-				supportingLibs.add(NativeLibrary.getInstance("allegro"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_video"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_ttf"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_primitives"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_physfs"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_memfile"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_image"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_font"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_dialog"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_color"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_audio"));
-				supportingLibs.add(NativeLibrary.getInstance("allegro_acodec"));
+				lastLib = "allegro";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_video";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_ttf";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_primitives";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_physfs";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_memfile";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_image";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_font";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_dialog";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_color";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_audio";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
+				lastLib = "allegro_acodec";
+				supportingLibs.add(NativeLibrary.getInstance(lastLib));
 				mainLib = NativeLibrary.getProcess();
+				libName = "allegro"; //only in case someone wants to observe the used JNA_LIBRARY_NAME
 			} catch (Throwable t2) {
 				supportingLibs.clear();
-				throw t;
+				throw new AllegroError("Unable to load " + libName + ", or Allegro parts (" +
+				                       lastLib + "). Ensure Allegro is installed on library loading path, see " +
+				                       "https://github.com/gillius/jalleg/wiki/Troubleshooting",
+				                       new AllegroError(t2.getMessage(),
+				                                        t));
 			}
 		}
 

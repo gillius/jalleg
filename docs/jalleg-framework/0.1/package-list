@@ -1,0 +1,5 @@
+org.gillius.jalleg.framework
+org.gillius.jalleg.framework.audio
+org.gillius.jalleg.framework.io
+org.gillius.jalleg.framework.math
+org.gillius.jalleg.framework.stats

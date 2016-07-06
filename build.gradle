@@ -20,7 +20,7 @@ subprojects {
   apply plugin: 'signing'
 
   sourceCompatibility = 1.7
-  version = '0.1.0-SNAPSHOT'
+  version = '0.1'
   group = 'org.gillius'
 
   repositories {

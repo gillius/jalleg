@@ -99,24 +99,18 @@ Almost all of the Allegro API is mapped. Some of the API is mapped but hasn't be
 Getting Started
 ---------------
 
-There are 4 libraries built by the project:
+There are 3 libraries built by the project:
 
 1. **jalleg-binding:** Contains the JNA-based bindings themselves to load and use the Allegro library.
-2. **jalleg-rt-win32-x86-64:** Optional, contains within a Windows 64-bit pre-built Allegro DLL. If this JAR is included in your
-   project, JNA will automatically unpack the DLL and use it when on Windows. Other OS may be added in the future.
 3. **jalleg-framework:** framework to make using the binding from Java easier and to support the examples.
 4. **jalleg-examples:** An example project using jalleg-binding and jalleg-rt.
 
-jalleg comes with a pre-built runtime for Java 64 bit on Windows. If you want to run jalleg on Ubuntu, the easiest way
+A companion project, [jalleg-rt](https://github.com/gillius/jalleg-rt), provides a pre-built runtime for Java 64 bit on Windows. If you want to run jalleg on Ubuntu, the easiest way
 is to [install from the PPA](https://wiki.allegro.cc/index.php?title=Install_Allegro_from_Ubuntu_PPAs). Jalleg will
 search for liballegro.so automatically on the normal ldpaths. If you build
 Allegro yourself (use WANT_MONOLITH), set AL_NAME environment variable, an example being:
 `export AL_NAME=/home/me/allegro/build/lib/liballegro_monolith.so.5.2`, then run jalleg as normal. You can also pass in
 AL_NAME like `java -DAL_NAME=the_path MyProgram` or `./gradlew -PAL_NAME=the_path`
-
-Since there is no release version yet, you can get the latest 0.1-SNAPSHOT via the OSSRH repository:
-
-Then you can add dependency on the snapshot:
 
 Maven:
 ```xml

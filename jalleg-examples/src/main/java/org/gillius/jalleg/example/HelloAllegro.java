@@ -25,6 +25,13 @@ public class HelloAllegro {
 	public static void main(String[] args) throws Exception {
 		al_install_system(ALLEGRO_VERSION_INT, null);
 
+		int version = al_get_allegro_version();
+		int major = version >>> 24;
+		int minor = (version >>> 16) & 255;
+		int revision = (version >>> 8) & 255;
+		int release = version & 255;
+		System.out.println("Loaded Allegro version " + major + "." + minor + "." + revision + " release " + release);
+
 		ALLEGRO_DISPLAY display = al_create_display(640, 480);
 
 		al_clear_to_color(al_map_rgb_f(1f, 0f, 0f));

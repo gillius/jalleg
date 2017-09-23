@@ -110,8 +110,9 @@ repositories {
 }
 ```
 
-If you just want to see an example, download the [examples application](https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.gillius&a=jalleg-examples&v=0.1.0-SNAPSHOT&e=zip).
-Running the bat file there will run the example [described later](#examples).
+If you just want to see an example, download the [examples application](https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.gillius&a=jalleg-examples&v=0.1.0-SNAPSHOT&e=zip)
+([view sources online](https://github.com/gillius/jalleg/tree/master/jalleg-examples)).
+Running the bat file there will run the example described in the [examples section](#examples).
 
 Building
 --------

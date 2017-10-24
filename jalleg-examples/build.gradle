@@ -41,6 +41,6 @@ ext {
 
 dependencies {
 	compile project(':jalleg-binding')
-	compile 'org.gillius:jalleg-rt-win32-x86-64:5.2.1'
+	compile 'org.gillius:jalleg-rt-win32-x86-64:5.2.3'
 	compile project(':jalleg-framework')
 }

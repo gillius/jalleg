@@ -20,6 +20,7 @@ subprojects {
   apply plugin: 'signing'
 
   sourceCompatibility = 1.7
+  targetCompatibility = 1.7
   version = '0.2-SNAPSHOT'
   group = 'org.gillius'
 
@@ -119,5 +120,5 @@ if (JavaVersion.current().isJava8Compatible()) {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '4.2.1'
+  gradleVersion = '4.10.2'
 }

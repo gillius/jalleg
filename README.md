@@ -9,7 +9,9 @@ jalleg - JVM Binding for Allegro
 
 jalleg is a JVM binding for [Allegro](http://liballeg.org/) 5.2 to be used by any
 [JVM language](https://en.wikipedia.org/wiki/List_of_JVM_languages)
-(Java obviously, but also other languages such as Groovy, Kotlin, JavaScript, Scala, Jython, JRuby, and Clojure).
+(Java obviously, but also other languages such as Groovy, Kotlin, JavaScript, Scala, Jython, JRuby, and Clojure). Java
+7 and higher (up to Java 11 tested) are supported; however, the jalleg-framework will be updated to require Java 8 if a
+situation calls for lambdas.
 
 From the Allegro site: Allegro is a cross-platform library mainly aimed at video game and multimedia programming. It
 handles common, low-level tasks such as creating windows, accepting user input, loading data, drawing images, playing

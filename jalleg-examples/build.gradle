@@ -16,8 +16,13 @@
 
 apply plugin: 'application'
 
+//TODO: signing doesn't work because tar doesn't get removed from artifacts
+signArchives.enabled=false
+uploadArchives.enabled=false
+
 distTar.enabled = false
 configurations.archives.with {
+	//TODO: this doesn't work in Gradle 4.10.2; maybe use new maven-publish?
 	artifacts.remove artifacts.find { it.hasProperty('archiveTask') && it.archiveTask.is(distTar) }
 }
 
